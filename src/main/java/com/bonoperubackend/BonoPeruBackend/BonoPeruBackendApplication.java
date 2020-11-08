@@ -1,4 +1,4 @@
-package com.Bono.Peru.Backend;
+package com.bonoperubackend.BonoPeruBackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
