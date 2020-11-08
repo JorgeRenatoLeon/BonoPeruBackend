@@ -1,4 +1,4 @@
-package com.Bono.Peru.Backend;
+package com.bonoperubackend.BonoPeruBackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
