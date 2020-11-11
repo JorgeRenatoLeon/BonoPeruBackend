@@ -1,6 +1,5 @@
 package com.bonoperubackend.BonoPeruBackend.Seguridad.Servicios;
 
-import com.bonoperubackend.BonoPeruBackend.Modelos.User;
 import com.bonoperubackend.BonoPeruBackend.Modelos.Usuario;
 import com.bonoperubackend.BonoPeruBackend.Repositorios.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

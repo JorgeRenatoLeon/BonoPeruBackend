@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.bonoperubackend.BonoPeruBackend.Modelos.User;
 import com.bonoperubackend.BonoPeruBackend.Modelos.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
