@@ -1,10 +1,35 @@
 package com.bonoperubackend.BonoPeruBackend.AlgoritmoGenético;
 
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+
 import javax.persistence.criteria.CriteriaBuilder;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Random;
 
 public class genético {
+
+    public ArrayList<Individual> init_population(int pop_size, int chromosome_size, ArrayList<Item> items, Hashtable lugares) {
+        //Inicializa una poblacion de pop_size individuos, cada cromosoma de individuo de tamaño chromosome_size.
+        ArrayList<Individual> population=new ArrayList<Individual>();
+        Random rn=new Random();
+        for (int i=0; i<pop_size; i++){
+            ArrayList<Integer> new_chromosome=new ArrayList<Integer>();
+            Hashtable capacidadU=new Hashtable();
+            capacidadU.putAll(lugares);
+            int j=0;
+            while (j<chromosome_size){
+                int p=rn.nextInt(lugares.size());
+                String k=lugares.keySet().toArray()[p].toString();
+
+            }
+
+
+        }
+        return new ArrayList<Individual>();
+    }
 
     public ArrayList<Integer> get_fitness(ArrayList<Integer> chromosome, ArrayList<Item> items, Hashtable lugares){
         int i=0;
@@ -20,7 +45,49 @@ public class genético {
             }
         }
     }
+    public ArrayList<Individual> build_offspring_population(ArrayList<Individual> population, String crossover, String mutation, float pmut, Hashtable lugares) {
+        /*
+        Construye una poblacion hija con los operadores de cruzamiento y mutacion pasados
+        crossover:  operador de cruzamiento
+        mutation:   operador de mutacion
+        pmut:       taza de mutacion
+        */
+        Random r = new Random();
+        int pop_size = population.size();
 
+        //Selecciona parejas de individuos (mating_pool) para cruzamiento con el metodo de la ruleta
+        ArrayList< ArrayList<Individual> > mating_pool = new ArrayList<>();
+        for (int i=0; i < pop_size/2; i++){
+            //Escoje dos individuos diferentes aleatoriamente de la poblacion
+            int p1=r.nextInt(pop_size);
+            int p2=r.nextInt(pop_size);
+            ArrayList<Individual> pair = new ArrayList<>();
+            pair.add(population.get(p1));
+            pair.add(population.get(p2));
+            mating_pool.add(pair);
+        }
+
+        //Crea la poblacion descendencia cruzando las parejas del mating pool
+        ArrayList<Individual> offspring_population = new ArrayList<>();
+        for (int i=0; i < mating_pool.size(); i++){
+            if (crossover=="onepoint"){
+                offspring_population.addAll(mating_pool.get(i).get(0).crossover_onepoint(mating_pool.get(i).get(1)));
+            }else if(crossover=="uniform"){
+                offspring_population.addAll(mating_pool.get(i).get(0).crossover_uniform(mating_pool.get(i).get(1)));
+            }
+        }
+
+        // Aplica el operador de mutacion con probabilidad pmut en cada hijo generado
+        for (int i=0; i<offspring_population.size(); i++){
+            double uniform=r.nextDouble();
+            if (uniform<pmut) {
+                if (mutation == "flip") {
+                    offspring_population.set(i, offspring_population.get(i).mutation_flip(lugares));
+                }
+            }
+        }
+        return offspring_population;
+    }
     public static float[] get_crowding_distances(float[][] fitnesses){
         //La distancia crowding de un individuo es la diferencia del fitness mas proximo hacia arriba menos el fitness mas proximo
         //hacia abajo. El valor crowding total es la suma de todas las distancias crowdings para todos los fitness
