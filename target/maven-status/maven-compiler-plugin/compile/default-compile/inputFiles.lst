@@ -1,22 +1,23 @@
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Servicios\UserDetailsServiceImpl.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\ERole.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Rol.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Controladores\PersonaControlador.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Role.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Response\MessageResponse.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Response\JwtResponse.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\RoleRepository.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Persona.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\UserRepository.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\AuthTokenFilter.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\BonoPeruBackendApplication.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Controladores\TestController.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\WebSecurityConfig.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\AuthEntryPointJwt.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Controladores\AuthController.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\JwtUtils.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\User.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Request\LoginRequest.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Request\SignupRequest.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Usuario.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Servicios\UserDetailsImpl.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Persona.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Controladores\TestController.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Request\SignupRequest.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\AuthTokenFilter.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\RoleRepository.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Valores.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Controladores\PersonaControlador.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\AuthEntryPointJwt.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Servicios\UserDetailsImpl.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Response\JwtResponse.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\JwtUtils.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Usuario.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\UserRepository.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Request\LoginRequest.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\ValoresRepository.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\WebSecurityConfig.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\ERole.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Rol.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Servicios\UserDetailsServiceImpl.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Response\MessageResponse.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Controladores\ValoresController.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\BonoPeruBackendApplication.java
+C:\Users\Carolina\Documents\Clases2020-2\Desarrollo de programas 1\TRABAJO\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Controladores\AuthController.java
