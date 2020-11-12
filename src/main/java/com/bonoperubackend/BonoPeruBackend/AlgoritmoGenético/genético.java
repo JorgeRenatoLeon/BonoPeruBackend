@@ -45,6 +45,7 @@ public class genético {
             }
         }
     }
+
     public ArrayList<Individual> build_offspring_population(ArrayList<Individual> population, String crossover, String mutation, float pmut, Hashtable lugares) {
         /*
         Construye una poblacion hija con los operadores de cruzamiento y mutacion pasados
@@ -88,13 +89,15 @@ public class genético {
         }
         return offspring_population;
     }
-    public static float[] get_crowding_distances(float[][] fitnesses){
+
+    public static ArrayList<Integer> get_crowding_distances(ArrayList<ArrayList<Integer>> fitnesses){
+
         //La distancia crowding de un individuo es la diferencia del fitness mas proximo hacia arriba menos el fitness mas proximo
         //hacia abajo. El valor crowding total es la suma de todas las distancias crowdings para todos los fitness
-        int pop_size = fitnesses.length;
-        int num_objectives = fitnesses[0].length;
+        int pop_size = fitnesses.size();
+        int num_objectives = fitnesses.get(0).size();
         //crea matriz crowding. Filas representan individuos, columnas representan objectives
-        float[][] crowding_matrix = new float [pop_size][num_objectives];
+        int[][] crowding_matrix = new int [pop_size][num_objectives];
         //normalisa los fitnesses entre 0 y 1 (ptp es max - min)
         for (int x=0; x < crowding_matrix.length; x++) {
             for (int y=0; y < crowding_matrix[x].length; y++) {
@@ -102,37 +105,37 @@ public class genético {
             }
         }
         //
-        float[][] matrizMa=new float[1][fitnesses[0].length];
-        float[][] matrizMi=new float[1][fitnesses[0].length];
-        for (float[] fitnesse : fitnesses) {
-            for (int j = 0; j < fitnesse.length; j++) {
-                if (fitnesse[j] > matrizMa[1][j]) {
-                    matrizMa[1][j] = fitnesse[j];
+        int[][] matrizMa=new int[1][fitnesses.get(0).size()];
+        int[][] matrizMi=new int[1][fitnesses.get(0).size()];
+        for (ArrayList<Integer> fitnesse : fitnesses) {
+            for (int j = 0; j < fitnesse.size(); j++) {
+                if (fitnesse.get(j) > matrizMa[1][j]) {
+                    matrizMa[1][j] = fitnesse.get(j);
                 }
-                if (fitnesse[j] < matrizMi[1][j]) {
-                    matrizMi[1][j] = fitnesse[j];
+                if (fitnesse.get(j) < matrizMi[1][j]) {
+                    matrizMi[1][j] = fitnesse.get(j);
                 }
             }
         }
-        float[] matrizDiv=new float[fitnesses[0].length];
+        int[] matrizDiv=new int[fitnesses.get(0).size()];
         for (int j = 0; j < matrizDiv.length; j++) {
             matrizDiv[j]=matrizMa[1][j]-matrizMi[1][j];
         }
-        float[][] normalized_fitnesses = new float[fitnesses.length][fitnesses[0].length];
+        int[][] normalized_fitnesses = new int[fitnesses.size()][fitnesses.get(0).size()];
         //normalized_fitnesses=(fitnesses-matrizMi)/ matrizDiv;
-        for(int i=0;i<fitnesses.length;i++){
-            for(int j=0;j<fitnesses[0].length;j++){
-                normalized_fitnesses[i][j]=fitnesses[i][j]-matrizMi[1][j];
+        for(int i=0;i<fitnesses.size();i++){
+            for(int j = 0; j< fitnesses.get(0).size(); j++){
+                normalized_fitnesses[i][j]= fitnesses.get(i).get(j) -matrizMi[1][j];
                 normalized_fitnesses[i][j]=normalized_fitnesses[i][j]/matrizDiv[j];
             }
         }
         //
-        float[] crowding= new float[pop_size];
-        float[] sorted_fitnesses = new float[pop_size];
-        float[] sorted_fitnesses_index = new float[pop_size];
-        float[] re_sort_order = new float[pop_size];
-        float aux=0;
-        float[] sorted_crowding= new float[pop_size];
+        int[] crowding= new int[pop_size];
+        int[] sorted_fitnesses = new int[pop_size];
+        int[] sorted_fitnesses_index = new int[pop_size];
+        int[] re_sort_order = new int[pop_size];
+        int aux=0;
+        int[] sorted_crowding= new int[pop_size];
         for(int col = 0; col < num_objectives; col++){ //Por cada objective
             for (int y=0; y < pop_size; y++) {
                 crowding[y]=0;
@@ -181,36 +184,35 @@ public class genético {
             }
         }
         //Obtiene las distancias crowding finales sumando las distancias crowding de cada objetivo
-        float suma=0;
-        float[] crowding_distances= new float[num_objectives];
+        int suma=0;
+        ArrayList<Integer> crowding_distances= new ArrayList<Integer>(num_objectives);
         for(int i =0;i<num_objectives;i++){
             for(int j=0;j<pop_size;j++){
-                suma=suma+crowding_matrix[j][i];
+                suma = suma + crowding_matrix[j][i];
             }
-            crowding_distances[i]=suma;
+            crowding_distances.set(i, suma);
         }
         return crowding_distances;
     }
     //ESTA FUNCIÓN FALTA ARREGLARLA
-    /*public static float[] select_by_crowding(float[] population, int num_individuals){
+    private ArrayList<Individual> select_by_crowding(ArrayList<Individual> paretofront_population, int num_individuals) {
         //    Selecciona una poblacion de individuos basado en torneos de pares de individuos: dos individuos se escoge al azar
         //    y se selecciona el mejor segun la distancia crowding. Se repite hasta obtener num_individuals individuos
-        float[] population1 = new float[population.length];
-        for(int i=0;i<population.length;i++){
-            population1[i]=population[i];
+        ArrayList<Individual>  population1 = new ArrayList<Individual>();
+        for(int i=0;i<paretofront_population.size();i++){
+            population1.set(i, paretofront_population.get(i));
         }
-        int pop_size = population1.length;
-        int num_objectives = (population1[0].fitness).length;
+        int pop_size = population1.size();
+        int num_objectives = (population1.get(0).getFitness()).size();
         //extrae los fitness de la poblacion en la matriz fitnesses
-        float[][] fitnesses=new float[pop_size][num_objectives];
+        ArrayList<ArrayList<Integer>> fitnesses= new ArrayList<ArrayList<Integer>>();
+        //float[][] fitnesses=new float[pop_size][num_objectives];
         for(int i=0;i<pop_size;i++){
-            for(int j=0;j<num_objectives;j++){
-                fitnesses[i][j]=population1[i].fitness;
-            }
+            fitnesses.add(population1.get(i).getFitness());
         }
         //obtiene las  distancias  crowding
-        float[] crowding_distances = get_crowding_distances(fitnesses);
-        float[]population_selected = null;//poblacion escogida
+        ArrayList<Integer> crowding_distances = get_crowding_distances(fitnesses);
+        ArrayList<Individual> population_selected=new ArrayList<>();//poblacion escogida
         int[] permut=new int[pop_size];
         for(int i=0;i<num_individuals;i++){// por cada individuo a seleccionar
             //escoje dos individuos aleatoriamente de la poblacion no escogida aun
@@ -226,22 +228,19 @@ public class genético {
             int ind1_id = permut[0];
             int ind2_id = permut[1];
             //Si ind1_id es el mejor
-            if (crowding_distances[ind1_id] >= crowding_distances[ind2_id]){
+            if (crowding_distances.get(ind1_id) >= crowding_distances.get(ind2_id)){
                 //traslada el individuo ind1 de population a la lista de individuos seleccionados
-                population_selected.append( population1.pop(ind1_id) );
+                population_selected.add( population1.remove(ind1_id) );
                 //remueve la distancia crowding del individuo seleccionado
-                crowding_distances = np.delete(crowding_distances, ind1_id, axis=0);
+                crowding_distances.remove(ind1_id);
             }else{//Si ind2_id es el mejor
                 //traslada el individuo ind2 de population a la lista de individuos seleccionados
-                population_selected.append( population1.pop(ind2_id) );
+                population_selected.add( population1.remove(ind2_id) );
                 //remueve la distancia crowding del individuo seleccionado
-                crowding_distances = np.delete(crowding_distances, ind2_id, axis=0);
+                crowding_distances.remove(ind2_id);
             }
         }
         return population_selected;
-    }*/
-    private ArrayList<Individual> select_by_crowding(ArrayList<Individual> paretofront_population, int num_individuals) {
-        return new ArrayList<Individual>();
     }
 
     private ArrayList<Individual> get_paretofront_population(ArrayList<Individual> populationC) {
