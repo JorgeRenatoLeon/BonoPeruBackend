@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "VALORES")
+@Table(name = "valores")
 public class Valores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,6 @@ public class Valores {
 
     @Size(max = 500)
     private String DESCRIPCION;
-
-    private int USUARIO_CREACION;
-
-    private int USUARIO_ACTUALIZACION;
 
     public Valores(Integer ID_VALORES, String TABLA, String ABREVIATURA, String NOMBRE, String DESCRIPCION) {
         this.ID_VALORES = ID_VALORES;
@@ -78,21 +74,5 @@ public class Valores {
 
     public void setDESCRIPCION(String DESCRIPCION) {
         this.DESCRIPCION = DESCRIPCION;
-    }
-
-    public int getUSUARIO_CREACION() {
-        return USUARIO_CREACION;
-    }
-
-    public void setUSUARIO_CREACION(int USUARIO_CREACION) {
-        this.USUARIO_CREACION = USUARIO_CREACION;
-    }
-
-    public int getUSUARIO_ACTUALIZACION() {
-        return USUARIO_ACTUALIZACION;
-    }
-
-    public void setUSUARIO_ACTUALIZACION(int USUARIO_ACTUALIZACION) {
-        this.USUARIO_ACTUALIZACION = USUARIO_ACTUALIZACION;
     }
 }
