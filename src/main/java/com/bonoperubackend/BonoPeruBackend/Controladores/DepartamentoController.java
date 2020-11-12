@@ -1,13 +1,12 @@
 package com.bonoperubackend.BonoPeruBackend.Controladores;
 
 import com.bonoperubackend.BonoPeruBackend.Modelos.Departamento;
+import com.bonoperubackend.BonoPeruBackend.Payload.Request.SignupRequest;
 import com.bonoperubackend.BonoPeruBackend.Repositorios.DepartamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +19,14 @@ public class DepartamentoController {
     DepartamentoRepository departamentoRepository;
     @PostMapping("/listar")
     public List<Departamento> listarDepartamentos() {
-        List<Departamento> val= new ArrayList<>();
-        departamentoRepository.findAll().forEach(val::add);
+        List<Departamento> val;
+        val = departamentoRepository.findAll();
         return val;
     }
     @PostMapping("/insertar")
-    public String insertarDepartamento(Departamento dep) {
-        //departamentoRepository.save(dep);
+    public String insertarDepartamento(@Valid @RequestBody SignupRequest signUpRequest) {
+        Departamento dep = new Departamento(signUpRequest.getUsername(),signUpRequest.getZona(),signUpRequest.getPassword());
+        departamentoRepository.save(dep);
         return dep.getESTADO();
     }
 }

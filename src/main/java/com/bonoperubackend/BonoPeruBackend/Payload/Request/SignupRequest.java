@@ -18,10 +18,12 @@ public class SignupRequest {
     @Size(min = 3,max = 3)
     private String ESTADO;
 
+    private Integer zona;
+
     private Set<String> role;
 
     @NotBlank
-    @Size(min = 6, max = 40)
+    @Size(min = 3, max = 40)
     private String password;
 
     public String getUsername() {
@@ -70,5 +72,13 @@ public class SignupRequest {
 
     public String getNombres() {
         return nombres;
+    }
+
+    public Integer getZona() {
+        return zona;
+    }
+
+    public void setZona(Integer zona) {
+        this.zona = zona;
     }
 }

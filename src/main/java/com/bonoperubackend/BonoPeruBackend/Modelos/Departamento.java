@@ -2,6 +2,7 @@ package com.bonoperubackend.BonoPeruBackend.Modelos;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -15,18 +16,18 @@ public class Departamento {
     @Size(max = 100)
     private String NOMBRE;
 
-    @NotBlank
     private Integer ZONA_RIESGO;
 
     @NotBlank
     @Size(max = 3)
     private String ESTADO;
 
-    private int USUARIO_CREACION;
+    private Integer USUARIO_CREACION;
 
-    private int USUARIO_ACTUALIZACION;
+    @Null
+    private Integer USUARIO_ACTUALIZACION;
 
-    public Departamento(@NotBlank @Size(max = 100) String NOMBRE, @NotBlank Integer ZONA_RIESGO, @NotBlank @Size(max = 3) String ESTADO) {
+    public Departamento(@NotBlank @Size(max = 100) String NOMBRE, Integer ZONA_RIESGO, @NotBlank @Size(max = 3) String ESTADO) {
         this.NOMBRE = NOMBRE;
         this.ZONA_RIESGO = ZONA_RIESGO;
         this.ESTADO = ESTADO;
