@@ -17,6 +17,7 @@ com\bonoperubackend\BonoPeruBackend\Controladores\PersonaControlador.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Persona.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\RoleRepository.class
 com\bonoperubackend\BonoPeruBackend\Seguridad\Servicios\UserDetailsServiceImpl.class
+com\bonoperubackend\BonoPeruBackend\Seguridad\JWT\JwtUtils.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Usuario.class
 com\bonoperubackend\BonoPeruBackend\Payload\Response\JwtResponse.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Rol.class
