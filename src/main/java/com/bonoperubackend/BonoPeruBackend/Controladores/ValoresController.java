@@ -20,7 +20,6 @@ public class ValoresController {
     public List<Valores> listarValores() {
         List<Valores> val= new ArrayList<>();
         valoresRepository.findAll().forEach(val::add);
-        int valor=1;
         return val;
     }
 }
