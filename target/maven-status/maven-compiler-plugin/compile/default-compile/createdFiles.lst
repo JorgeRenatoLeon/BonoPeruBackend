@@ -4,7 +4,6 @@ com\bonoperubackend\BonoPeruBackend\BonoPeruBackendApplication.class
 com\bonoperubackend\BonoPeruBackend\Controladores\AuthController.class
 com\bonoperubackend\BonoPeruBackend\Payload\Request\SignupRequest.class
 com\bonoperubackend\BonoPeruBackend\Payload\Response\MessageResponse.class
-com\bonoperubackend\BonoPeruBackend\Modelos\User.class
 com\bonoperubackend\BonoPeruBackend\Controladores\TestController.class
 com\bonoperubackend\BonoPeruBackend\Payload\Request\LoginRequest.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\UserRepository.class
@@ -15,6 +14,5 @@ com\bonoperubackend\BonoPeruBackend\Controladores\PersonaControlador.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Persona.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\RoleRepository.class
 com\bonoperubackend\BonoPeruBackend\Seguridad\Servicios\UserDetailsServiceImpl.class
-com\bonoperubackend\BonoPeruBackend\Modelos\Role.class
 com\bonoperubackend\BonoPeruBackend\Seguridad\JWT\JwtUtils.class
 com\bonoperubackend\BonoPeruBackend\Payload\Response\JwtResponse.class
