@@ -10,10 +10,10 @@ public class SignupRequest {
     private String username;
 
     @Size(min=2, max = 200)
-    private String NOMBRES;
+    private String nombres;
 
     @Size(min=2, max = 200)
-    private String APELLIDOS;
+    private String apellidos;
 
     @Size(min = 3,max = 3)
     private String ESTADO;
@@ -56,19 +56,19 @@ public class SignupRequest {
         this.ESTADO = ESTADO;
     }
 
-    public String getAPELLIDOS() {
-        return APELLIDOS;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setAPELLIDOS(String APELLIDOS) {
-        this.APELLIDOS = APELLIDOS;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public void setNOMBRES(String NOMBRES) {
-        this.NOMBRES = NOMBRES;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getNOMBRES() {
-        return NOMBRES;
+    public String getNombres() {
+        return nombres;
     }
 }
