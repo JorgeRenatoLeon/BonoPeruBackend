@@ -1,6 +1,25 @@
 package com.bonoperubackend.BonoPeruBackend.AlgoritmoGenético;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 public class genético {
+
+    public ArrayList<Integer> get_fitness(ArrayList<Integer> chromosome, ArrayList<Item> items, Hashtable lugares){
+        int i=0;
+        return  new ArrayList<Integer>();
+    }
+
+    public void evaluate_population(ArrayList<Individual> population, ArrayList<Item> items, Hashtable lugares) {
+        //Evalua una poblacion de individuos con la funcion get_fitness
+        int pop_size = population.size();
+        for (int i=0; i< pop_size; i++){
+            if(population.get(i).getFitness().isEmpty()){
+                population.get(i).setFitness(get_fitness(population.get(i).getChromosome(), items, lugares));
+            }
+        }
+    }
+
     public static float[] get_crowding_distances(float[][] fitnesses){
         //La distancia crowding de un individuo es la diferencia del fitness mas proximo hacia arriba menos el fitness mas proximo
         //hacia abajo. El valor crowding total es la suma de todas las distancias crowdings para todos los fitness
