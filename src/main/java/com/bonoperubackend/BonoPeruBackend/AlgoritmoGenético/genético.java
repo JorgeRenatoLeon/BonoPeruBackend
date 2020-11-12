@@ -1,5 +1,6 @@
 package com.bonoperubackend.BonoPeruBackend.AlgoritmoGenético;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -172,4 +173,60 @@ public class genético {
         }
         return population_selected;
     }*/
+    private ArrayList<Individual> select_by_crowding(ArrayList<Individual> paretofront_population, int num_individuals) {
+        return new ArrayList<Individual>();
+    }
+
+    private ArrayList<Individual> get_paretofront_population(ArrayList<Individual> populationC) {
+        return new ArrayList<Individual>();
+    }
+
+    public ArrayList<Individual> build_next_population(ArrayList<Individual> population, int min_pop_size, int max_pop_size) {
+    /*
+    Construye la poblacion de la siguiente generacion añadiendo sucesivas fronteras de Pareto hasta
+    tener una poblacion de al menos min_pop_size individuos. Reduce la frontera de Pareto con el metodo de
+    crowding distance si al agregar la frontera excede el tamaño maximo de la poblacion (max_pop_size)
+    */
+        ArrayList<Individual> populationC=new ArrayList<>();
+        population.addAll(population);
+
+        ArrayList<Individual> pareto_front = new ArrayList<>();
+        ArrayList<Individual> next_population = new ArrayList<>();
+        ArrayList<Individual> paretofront_population = new ArrayList<>();
+
+        int combined_population_size=0;
+
+        while(next_population.size() < min_pop_size){
+            // Se obtiene la poblacion frontera de Pareto actual
+            paretofront_population = get_paretofront_population(populationC);
+
+            // Si poblacion actual + paretofront excede el maximo permitido -> reduce paretofront con el metodo de crowding
+            combined_population_size = next_population.size() + paretofront_population.size();
+            if  (combined_population_size > max_pop_size)
+                paretofront_population = select_by_crowding( paretofront_population, max_pop_size-next_population.size() ) ;
+
+            // Adiciona la frontera de Pareto (original o reducida) a la poblacion en construccion
+            next_population.addAll(paretofront_population);
+
+            // remueve de population los individuos que fueron agregados a next_population
+            for (int i=0; i < paretofront_population.size(); i++){
+                for (int j=0; j < populationC.size(); j++){
+                    int iguales=1;
+                    if (paretofront_population.get(i).getChromosome().equals(populationC.get(j).getChromosome())){
+                        //Si son iguales, elimino el cromosoma del cromosoma copia
+                        //No estoy segura que sea de la copia, para qué haría eso?
+                        //para que el cromosoma se quede en paretofront_population
+                        //y sea utilizado en la siguiente generación
+                        populationC.remove(j);
+                    }
+                }
+            }
+        }
+        return next_population;
+
+    }
+
+
+
+
 }
