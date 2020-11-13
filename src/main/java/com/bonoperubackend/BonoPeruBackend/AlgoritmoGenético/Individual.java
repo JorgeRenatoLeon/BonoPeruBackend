@@ -2,6 +2,7 @@ package com.bonoperubackend.BonoPeruBackend.AlgoritmoGenético;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Random;
 
 public class Individual {
     private ArrayList<Integer> fitness=new ArrayList<>();
@@ -41,27 +42,29 @@ public class Individual {
         return new ArrayList<Individual>();
     }
 
-    public ArrayList<Individual>  crossover_uniform(Individual individual) {
-        /*
-        chromosome1 = []
-        chromosome2 = []
-        "Retorna dos nuevos individuos del cruzamiento uniforme entre self y other "
-        for i in range(len(self.chromosome)):
-            if uniform(0, 1) < 0.5:
-                chromosome1.append(self.chromosome[i])
-                chromosome2.append(other.chromosome[i])
-            else:
-                chromosome1.append(other.chromosome[i])
-                chromosome2.append(self.chromosome[i])
-        ind1 = Individual(chromosome1)
-        ind2 = Individual(chromosome2)
-        return [ind1, ind2]
-         */
+    public ArrayList<Individual>  crossover_uniform(Individual other) {
 
+        ArrayList<String> chromosome1 =new ArrayList<>();
+        ArrayList<String> chromosome2 =new ArrayList<>();
+        int n= this.chromosome.size();
+        Random uniform = new Random();
+        for (int i=0;i<n;i++){
+            if (uniform.nextFloat()<0.5 ) { //NextFloat es un número entre 0 y 1
+                chromosome1.add(this.getChromosome().get(i));
+                chromosome2.add(other.getChromosome().get(i));
+            } else {
+                chromosome1.add(other.getChromosome().get(i));
+                chromosome2.add(this.getChromosome().get(i));
+            }
+        }
+        Individual ind1= new Individual(chromosome1);
+        Individual ind2= new Individual(chromosome2);
 
-
-
-        return new ArrayList<Individual>();
+        ArrayList<Individual> individuals=new ArrayList<>();
+        individuals.add(ind1);
+        individuals.add(ind2);
+        /* ///////////Devuelvo una lista o dos? */
+        return individuals;
     }
 
     public Individual mutation_flip(Hashtable lugares) {
