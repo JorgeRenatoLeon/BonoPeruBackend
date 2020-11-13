@@ -11,27 +11,37 @@ import java.util.Random;
 
 public class genético {
 
-    public ArrayList<Individual> init_population(int pop_size, int chromosome_size, ArrayList<Item> items, Hashtable lugares) {
+    public ArrayList<Individual> init_population(int pop_size, int chromosome_size, ArrayList<Item> items, Hashtable<String,ArrayList<Integer>> lugares) {
         //Inicializa una poblacion de pop_size individuos, cada cromosoma de individuo de tamaño chromosome_size.
         ArrayList<Individual> population=new ArrayList<Individual>();
         Random rn=new Random();
         for (int i=0; i<pop_size; i++){
-            ArrayList<Integer> new_chromosome=new ArrayList<Integer>();
-            Hashtable capacidadU=new Hashtable();
+            //Creamos un cromosoma
+            ArrayList<String> new_chromosome=new ArrayList<String>();
+            Hashtable<String,ArrayList<Integer>> capacidadU=new Hashtable();
             capacidadU.putAll(lugares);
             int j=0;
             while (j<chromosome_size){
                 int p=rn.nextInt(lugares.size());
+                //Asignamos un lugar de entrega a un beneficiario
                 String k=lugares.keySet().toArray()[p].toString();
-
+                if(capacidadU.get(k).get(0)>0 && items.get(j).getUbigeo1()==lugares.get(k).get(1)){
+                    capacidadU.get(k).set(0,capacidadU.get(k).get(0)-1);
+                    new_chromosome.add(k);
+                }else if(capacidadU.get(k).get(0)>0){
+                    j-=1;
+                }else{
+                    new_chromosome.add("0");
+                }
+                j+=1;
             }
-
+            population.add( new Individual(new_chromosome));
 
         }
-        return new ArrayList<Individual>();
+        return population;
     }
 
-    public ArrayList<Integer> get_fitness(ArrayList<Integer> chromosome, ArrayList<Item> items, Hashtable lugares){
+    public ArrayList<Integer> get_fitness(ArrayList<String> chromosome, ArrayList<Item> items, Hashtable lugares){
         int i=0;
         return  new ArrayList<Integer>();
     }
