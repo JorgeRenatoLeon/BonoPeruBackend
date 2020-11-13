@@ -2,84 +2,107 @@ package com.bonoperubackend.BonoPeruBackend.Modelos;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "departamento")
 public class Departamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID_DEPARTAMENTO;
+    private Integer id_departamento;
 
     @NotBlank
     @Size(max = 100)
-    private String NOMBRE;
+    private String nombre;
 
-    private Integer ZONA_RIESGO;
+    private Integer zona_riesgo;
 
     @NotBlank
     @Size(max = 3)
-    private String ESTADO;
+    private String estado;
 
-    private Integer USUARIO_CREACION;
+    private Integer usuario_creacion;
 
     @Null
-    private Integer USUARIO_ACTUALIZACION;
+    private Integer usuario_actualizacion;
 
-    public Departamento(@NotBlank @Size(max = 100) String NOMBRE, Integer ZONA_RIESGO, @NotBlank @Size(max = 3) String ESTADO) {
-        this.NOMBRE = NOMBRE;
-        this.ZONA_RIESGO = ZONA_RIESGO;
-        this.ESTADO = ESTADO;
+    private Timestamp fecha_creacion;
+
+    private Timestamp fecha_actualizacion;
+
+    public Departamento(@NotBlank @Size(max = 100) String nombre, @NotBlank Integer zona_riesgo, @NotBlank @Size(max = 3) String estado, Integer usuario_creacion) {
+        this.nombre = nombre;
+        this.zona_riesgo = zona_riesgo;
+        this.estado = estado;
+        this.usuario_creacion = usuario_creacion;
     }
 
     public Departamento(){}
 
-    public Integer getID_DEPARTAMENTO() {
-        return ID_DEPARTAMENTO;
+    public Integer getId_departamento() {
+        return id_departamento;
     }
 
-    public void setID_DEPARTAMENTO(Integer ID_DEPARTAMENTO) {
-        this.ID_DEPARTAMENTO = ID_DEPARTAMENTO;
+    public void setId_departamento(Integer id_departamento) {
+        this.id_departamento = id_departamento;
     }
 
-    public String getNOMBRE() {
-        return NOMBRE;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNOMBRE(String NOMBRE) {
-        this.NOMBRE = NOMBRE;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Integer getZONA_RIESGO() {
-        return ZONA_RIESGO;
+    public Integer getZona_riesgo() {
+        return zona_riesgo;
     }
 
-    public void setZONA_RIESGO(Integer ZONA_RIESGO) {
-        this.ZONA_RIESGO = ZONA_RIESGO;
+    public void setZona_riesgo(Integer zona_riesgo) {
+        this.zona_riesgo = zona_riesgo;
     }
 
-    public String getESTADO() {
-        return ESTADO;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setESTADO(String ESTADO) {
-        this.ESTADO = ESTADO;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public int getUSUARIO_CREACION() {
-        return USUARIO_CREACION;
+    public Integer getUsuario_creacion() {
+        return usuario_creacion;
     }
 
-    public void setUSUARIO_CREACION(int USUARIO_CREACION) {
-        this.USUARIO_CREACION = USUARIO_CREACION;
+    public void setUsuario_creacion(Integer usuario_creacion) {
+        this.usuario_creacion = usuario_creacion;
     }
 
-    public int getUSUARIO_ACTUALIZACION() {
-        return USUARIO_ACTUALIZACION;
+    public Integer getUsuario_actualizacion() {
+        return usuario_actualizacion;
     }
 
-    public void setUSUARIO_ACTUALIZACION(int USUARIO_ACTUALIZACION) {
-        this.USUARIO_ACTUALIZACION = USUARIO_ACTUALIZACION;
+    public void setUsuario_actualizacion(Integer usuario_actualizacion) {
+        this.usuario_actualizacion = usuario_actualizacion;
+    }
+
+    public Timestamp getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public void setFecha_creacion(Timestamp fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    public Timestamp getFecha_actualizacion() {
+        return fecha_actualizacion;
+    }
+
+    public void setFecha_actualizacion(Timestamp fecha_actualizacion) {
+        this.fecha_actualizacion = fecha_actualizacion;
     }
 }
