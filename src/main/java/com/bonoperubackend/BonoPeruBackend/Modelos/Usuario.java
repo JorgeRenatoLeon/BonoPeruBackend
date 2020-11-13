@@ -12,33 +12,33 @@ import java.util.Set;
 @Entity
 @Table(	name = "usuario",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "USUARIO")
+                @UniqueConstraint(columnNames = "usuario")
         })
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID_USUARIO;
+    private Integer id_usuario;
 
     @NotBlank
     @Size(max = 50)
-    private String USUARIO;
+    private String usuario;
 
     @NotBlank
     @Size(max = 120)
-    private String CONTRASEÑA;
+    private String contrasena;
 
     @Size(max = 200)
-    private String NOMBRES;
+    private String nombres;
 
     @Size(max = 200)
-    private String APELLIDOS;
+    private String apellidos;
 
     @Size(max = 3)
-    private String ESTADO;
+    private String estado;
 
-    private int USUARIO_CREACION;
+    private int usuario_creacion;
 
-    private int USUARIO_ACTUALIZACION;
+    private int usuario_actualizacion;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "usuario_rol",
@@ -49,76 +49,76 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String USUARIO, String CONTRASEÑA, String NOMBRES, String APELLIDOS, String ESTADO) {
-        this.USUARIO = USUARIO;
-        this.CONTRASEÑA = CONTRASEÑA;
-        this.APELLIDOS = APELLIDOS;
-        this.NOMBRES = NOMBRES;
-        this.ESTADO = ESTADO;
+    public Usuario(String usuario, String contrasena, String nombres, String apellidos, String estado) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.apellidos = apellidos;
+        this.nombres = nombres;
+        this.estado = estado;
     }
 
     public Integer getId() {
-        return ID_USUARIO;
+        return id_usuario;
     }
 
-    public void setId(Integer ID_USUARIO) {
-        this.ID_USUARIO = ID_USUARIO;
+    public void setId(Integer id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getUsername() {
-        return USUARIO;
+        return usuario;
     }
 
-    public void setUsername(String USUARIO) {
-        this.USUARIO = USUARIO;
+    public void setUsername(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getPassword() {
-        return CONTRASEÑA;
+        return contrasena;
     }
 
-    public void setPassword(String CONTRASEÑA) {
-        this.CONTRASEÑA = CONTRASEÑA;
+    public void setPassword(String contrasena) {
+        this.contrasena = contrasena;
     }
 
-    public String getNOMBRES() {
-        return NOMBRES;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNOMBRES(String NOMBRES) {
-        this.NOMBRES = NOMBRES;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getAPELLIDOS() {
-        return APELLIDOS;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setAPELLIDOS(String APELLIDOS) {
-        this.APELLIDOS = APELLIDOS;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public String getESTADO() {
-        return ESTADO;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setESTADO(String ESTADO) {
-        this.ESTADO = ESTADO;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public int getUSUARIO_ACTUALIZACION() {
-        return USUARIO_ACTUALIZACION;
+    public int getUsuarioActualizacion() {
+        return usuario_actualizacion;
     }
 
-    public void setUSUARIO_ACTUALIZACION(int USUARIO_ACTUALIZACION) {
-        this.USUARIO_ACTUALIZACION = USUARIO_ACTUALIZACION;
+    public void setUsuarioActualizacion(int usuario_actualizacion) {
+        this.usuario_actualizacion = usuario_actualizacion;
     }
 
-    public int getUSUARIO_CREACION() {
-        return USUARIO_CREACION;
+    public int getUsuarioCreacion() {
+        return usuario_creacion;
     }
 
-    public void setUSUARIO_CREACION(int USUARIO_CREACION) {
-        this.USUARIO_CREACION = USUARIO_CREACION;
+    public void setUsuarioCreacion(int usuario_creacion) {
+        this.usuario_creacion = usuario_creacion;
     }
 
     public Set<Rol> getRoles() {

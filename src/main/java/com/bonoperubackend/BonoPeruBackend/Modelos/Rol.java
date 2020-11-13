@@ -7,33 +7,33 @@ import javax.persistence.*;
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID_ROL;
+    private Integer id_rol;
 
     @Enumerated(EnumType.STRING)
     @Column
-    private ERole NOMBRE;
+    private ERole nombre;
 
     public Rol() {
 
     }
 
-    public Rol(ERole NOMBRE) {
-        this.NOMBRE = NOMBRE;
+    public Rol(ERole nombre) {
+        this.nombre = nombre;
     }
 
     public Integer getId() {
-        return ID_ROL;
+        return id_rol;
     }
 
-    public void setId(Integer ID_ROL) {
-        this.ID_ROL = ID_ROL;
+    public void setId(Integer id_rol) {
+        this.id_rol = id_rol;
     }
 
     public ERole getName() {
-        return NOMBRE;
+        return nombre;
     }
 
-    public void setName(ERole NOMBRE) {
-        this.NOMBRE = NOMBRE;
+    public void setName(ERole nombre) {
+        this.nombre = nombre;
     }
 }

@@ -16,7 +16,7 @@ public class SignupRequest {
     private String apellidos;
 
     @Size(min = 3,max = 3)
-    private String ESTADO;
+    private String estado;
 
     private Integer zona;
 
@@ -50,12 +50,12 @@ public class SignupRequest {
         this.role = role;
     }
 
-    public String getESTADO() {
-        return ESTADO;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setESTADO(String ESTADO) {
-        this.ESTADO = ESTADO;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getApellidos() {
