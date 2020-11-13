@@ -70,7 +70,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUSUARIO(signUpRequest.getUsername())) {
+        if (userRepository.existsByUsuario(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
@@ -81,32 +81,32 @@ public class AuthController {
                 encoder.encode(signUpRequest.getPassword()),
                 signUpRequest.getNombres(),
                 signUpRequest.getApellidos(),
-                signUpRequest.getESTADO());
+                signUpRequest.getEstado());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Rol> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Rol userRole = roleRepository.findByNOMBRE(ERole.ROLE_TRABAJADOR)
+            Rol userRole = roleRepository.findByNombre(ERole.ROLE_TRABAJADOR)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
-                        Rol adminRole = roleRepository.findByNOMBRE(ERole.ROLE_ADMIN)
+                        Rol adminRole = roleRepository.findByNombre(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
 
                         break;
                     case "mod":
-                        Rol modRole = roleRepository.findByNOMBRE(ERole.ROLE_REPRESENTANTE)
+                        Rol modRole = roleRepository.findByNombre(ERole.ROLE_REPRESENTANTE)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
 
                         break;
                     default:
-                        Rol userRole = roleRepository.findByNOMBRE(ERole.ROLE_TRABAJADOR)
+                        Rol userRole = roleRepository.findByNombre(ERole.ROLE_TRABAJADOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
                 }
