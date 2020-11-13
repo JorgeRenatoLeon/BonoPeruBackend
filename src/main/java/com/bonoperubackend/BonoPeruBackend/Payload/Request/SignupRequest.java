@@ -10,18 +10,20 @@ public class SignupRequest {
     private String username;
 
     @Size(min=2, max = 200)
-    private String NOMBRES;
+    private String nombres;
 
     @Size(min=2, max = 200)
-    private String APELLIDOS;
+    private String apellidos;
 
     @Size(min = 3,max = 3)
-    private String ESTADO;
+    private String estado;
+
+    private Integer zona;
 
     private Set<String> role;
 
     @NotBlank
-    @Size(min = 6, max = 40)
+    @Size(min = 3, max = 40)
     private String password;
 
     public String getUsername() {
@@ -48,27 +50,35 @@ public class SignupRequest {
         this.role = role;
     }
 
-    public String getESTADO() {
-        return ESTADO;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setESTADO(String ESTADO) {
-        this.ESTADO = ESTADO;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public String getAPELLIDOS() {
-        return APELLIDOS;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setAPELLIDOS(String APELLIDOS) {
-        this.APELLIDOS = APELLIDOS;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public void setNOMBRES(String NOMBRES) {
-        this.NOMBRES = NOMBRES;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getNOMBRES() {
-        return NOMBRES;
+    public String getNombres() {
+        return nombres;
+    }
+
+    public Integer getZona() {
+        return zona;
+    }
+
+    public void setZona(Integer zona) {
+        this.zona = zona;
     }
 }

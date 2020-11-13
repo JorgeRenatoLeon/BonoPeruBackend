@@ -2,6 +2,7 @@ package com.bonoperubackend.BonoPeruBackend.Modelos;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
@@ -25,6 +26,7 @@ public class Departamento {
 
     private Integer usuario_creacion;
 
+    @Null
     private Integer usuario_actualizacion;
 
     private Timestamp fecha_creacion;
