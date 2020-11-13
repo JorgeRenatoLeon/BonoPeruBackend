@@ -125,7 +125,7 @@ public class genético {
 
     }
 
-    public void evaluate_population(ArrayList<Individual> population, ArrayList<Item> items, Hashtable lugares) {
+    public void evaluate_population(ArrayList<Individual> population, ArrayList<Item> items, Hashtable<String,ArrayList<Integer>> lugares) {
         //Evalua una poblacion de individuos con la funcion get_fitness
         int pop_size = population.size();
         for (int i=0; i< pop_size; i++){
@@ -135,7 +135,7 @@ public class genético {
         }
     }
 
-    public ArrayList<Individual> build_offspring_population(ArrayList<Individual> population, String crossover, String mutation, float pmut, Hashtable lugares) {
+    public ArrayList<Individual> build_offspring_population(ArrayList<Individual> population, String crossover, String mutation, float pmut, Hashtable<String,ArrayList<Integer>> lugares) {
         /*
         Construye una poblacion hija con los operadores de cruzamiento y mutacion pasados
         crossover:  operador de cruzamiento
