@@ -1,15 +1,18 @@
 package com.bonoperubackend.BonoPeruBackend.AlgoritmoGenético;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Hashtable;
 
 public class Individual {
-   // Implementa el individuo del AG. Un individuo tiene un cromosoma que es una lista de NUM_ITEMS elementos (genes),
-   //  cada gen i puede asumir dos posibles alelos: 0 o 1 (no incluir/incluir en la mochila el item i del pool) """
-    private ArrayList<Integer> fitness=new ArrayList<>(); //inicializa
-    private ArrayList<Integer> chromosome;
-    //Constructor con el mismo nombre de la clase
+    private ArrayList<Integer> fitness=new ArrayList<>();
+    private ArrayList<String> chromosome;
+
+    public Individual(ArrayList<String> chromosome) {
+        this.chromosome = chromosome;
+    }
+
+    public Individual() {
+    }
 
     public ArrayList<Integer> getFitness() {
 
@@ -20,11 +23,11 @@ public class Individual {
         this.fitness = fitness;
     }
 
-    public ArrayList<Integer> getChromosome() {
+    public ArrayList<String> getChromosome() {
         return chromosome;
     }
 
-    public void setChromosome(ArrayList<Integer> chromosome) {
+    public void setChromosome(ArrayList<String> chromosome) {
         this.chromosome = chromosome;
     }
 

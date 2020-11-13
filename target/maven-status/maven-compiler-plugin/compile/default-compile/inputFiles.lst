@@ -1,4 +1,4 @@
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\AlgoritmoGenético\Individual.java
+D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\AlgoritmoGenï¿½tico\Individual.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Servicios\UserDetailsServiceImpl.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Rol.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Controladores\PersonaControlador.java
@@ -15,7 +15,7 @@ D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bono
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Request\LoginRequest.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Departamento.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Usuario.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\AlgoritmoGenético\genético.java
+D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\AlgoritmoGenï¿½tico\genï¿½tico.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\DepartamentoRepository.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Distrito.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\ERole.java
@@ -30,7 +30,7 @@ D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bono
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\DistritoRepository.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Controladores\ProvinciaController.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\JwtUtils.java
-D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\AlgoritmoGenético\Item.java
+D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\AlgoritmoGenï¿½tico\Item.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Controladores\DepartamentoController.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\ValoresRepository.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\Bono-Peru-Backend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Request\SignupRequest.java

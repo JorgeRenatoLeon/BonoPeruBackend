@@ -1,80 +1,108 @@
 package com.bonoperubackend.BonoPeruBackend.Modelos;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "preguntasfrecuentes")
 public class PreguntasFrecuentes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID_PREGUNTASFRECUENTES;
+    private Integer id_preguntasfrecuentes;
+
     @NotBlank
     @Size(max = 500)
-    private String PREGUNTA;
+    private String pregunta;
+
     @NotBlank
     @Size(max = 500)
-    private String RESPUESTA;
+    private String respuesta;
+
     @NotBlank
     @Size(max = 3)
-    private String ESTADO;
-    private int USUARIO_CREACION;
-    private int USUARIO_ACTUALIZACION;
+    private String estado;
 
-    public PreguntasFrecuentes(Integer ID_PREGUNTASFRECUENTES, @NotBlank @Size(max = 500) String PREGUNTA, @NotBlank @Size(max = 500) String RESPUESTA, @NotBlank @Size(max = 3) String ESTADO) {
-        this.ID_PREGUNTASFRECUENTES = ID_PREGUNTASFRECUENTES;
-        this.PREGUNTA = PREGUNTA;
-        this.RESPUESTA = RESPUESTA;
-        this.ESTADO = ESTADO;
+    private Integer usuario_creacion;
+
+    @Null
+    private Integer usuario_actualizacion;
+
+    private Timestamp fecha_creacion;
+
+    private Timestamp fecha_actualizacion;
+
+    public PreguntasFrecuentes(@NotBlank @Size(max = 500) String pregunta, @NotBlank @Size(max = 500) String respuesta, @NotBlank @Size(max = 3) String estado, Integer usuario_creacion) {
+        this.pregunta = pregunta;
+        this.respuesta = respuesta;
+        this.estado = estado;
+        this.usuario_creacion = usuario_creacion;
     }
 
     public PreguntasFrecuentes(){}
 
-    public Integer getID_PREGUNTASFRECUENTES() {
-        return ID_PREGUNTASFRECUENTES;
+    public Integer getId_preguntasfrecuentes() {
+        return id_preguntasfrecuentes;
     }
 
-    public void setID_PREGUNTASFRECUENTES(Integer ID_PREGUNTASFRECUENTES) {
-        this.ID_PREGUNTASFRECUENTES = ID_PREGUNTASFRECUENTES;
+    public void setId_preguntasfrecuentes(Integer id_preguntasfrecuentes) {
+        this.id_preguntasfrecuentes = id_preguntasfrecuentes;
     }
 
-    public String getPREGUNTA() {
-        return PREGUNTA;
+    public String getPregunta() {
+        return pregunta;
     }
 
-    public void setPREGUNTA(String PREGUNTA) {
-        this.PREGUNTA = PREGUNTA;
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
     }
 
-    public String getRESPUESTA() {
-        return RESPUESTA;
+    public String getRespuesta() {
+        return respuesta;
     }
 
-    public void setRESPUESTA(String RESPUESTA) {
-        this.RESPUESTA = RESPUESTA;
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
     }
 
-    public String getESTADO() {
-        return ESTADO;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setESTADO(String ESTADO) {
-        this.ESTADO = ESTADO;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public int getUSUARIO_CREACION() {
-        return USUARIO_CREACION;
+    public Integer getUsuario_creacion() {
+        return usuario_creacion;
     }
 
-    public void setUSUARIO_CREACION(int USUARIO_CREACION) {
-        this.USUARIO_CREACION = USUARIO_CREACION;
+    public void setUsuario_creacion(Integer usuario_creacion) {
+        this.usuario_creacion = usuario_creacion;
     }
 
-    public int getUSUARIO_ACTUALIZACION() {
-        return USUARIO_ACTUALIZACION;
+    public Integer getUsuario_actualizacion() {
+        return usuario_actualizacion;
     }
 
-    public void setUSUARIO_ACTUALIZACION(int USUARIO_ACTUALIZACION) {
-        this.USUARIO_ACTUALIZACION = USUARIO_ACTUALIZACION;
+    public void setUsuario_actualizacion(Integer usuario_actualizacion) {
+        this.usuario_actualizacion = usuario_actualizacion;
+    }
+
+    public Timestamp getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public void setFecha_creacion(Timestamp fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    public Timestamp getFecha_actualizacion() {
+        return fecha_actualizacion;
+    }
+
+    public void setFecha_actualizacion(Timestamp fecha_actualizacion) {
+        this.fecha_actualizacion = fecha_actualizacion;
     }
 }
