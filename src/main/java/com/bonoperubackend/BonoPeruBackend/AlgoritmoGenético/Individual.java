@@ -1,12 +1,18 @@
 package com.bonoperubackend.BonoPeruBackend.AlgoritmoGenético;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Hashtable;
 
 public class Individual {
     private ArrayList<Integer> fitness=new ArrayList<>();
-    private ArrayList<Integer> chromosome;
+    private ArrayList<String> chromosome;
+
+    public Individual(ArrayList<String> chromosome) {
+        this.chromosome = chromosome;
+    }
+
+    public Individual() {
+    }
 
     public ArrayList<Integer> getFitness() {
         return fitness;
@@ -16,11 +22,11 @@ public class Individual {
         this.fitness = fitness;
     }
 
-    public ArrayList<Integer> getChromosome() {
+    public ArrayList<String> getChromosome() {
         return chromosome;
     }
 
-    public void setChromosome(ArrayList<Integer> chromosome) {
+    public void setChromosome(ArrayList<String> chromosome) {
         this.chromosome = chromosome;
     }
 
