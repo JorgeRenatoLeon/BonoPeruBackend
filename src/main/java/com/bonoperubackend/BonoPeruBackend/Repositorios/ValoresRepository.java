@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ValoresRepository extends JpaRepository<Valores,Long> {
+public interface ValoresRepository extends JpaRepository<Valores,Integer> {
 
 }
