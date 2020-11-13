@@ -3,21 +3,31 @@ package com.bonoperubackend.BonoPeruBackend.Modelos;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "departamento")
-public class Departamento {
+@Table(name = "beneficiario")
+public class Beneficiario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_departamento;
+    private Integer id_beneficiario;
 
     @NotBlank
-    @Size(max = 100)
-    private String nombre;
+    private Integer fid_distrito;
+
+    @Size(max = 10)
+    private String codigo_familia;
+
+    @Size(max = 1)
+    private String genero;
 
     @NotBlank
-    private Integer zona_riesgo;
+    private Boolean es_discapacitado;
+
+    private float puntuacion;
+
+    private float penalidad;
 
     @NotBlank
     @Size(max = 3)
@@ -30,5 +40,7 @@ public class Departamento {
     private Timestamp fecha_creacion;
 
     private Timestamp fecha_actualizacion;
+
+
 
 }

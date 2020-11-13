@@ -25,8 +25,7 @@ public class DepartamentoController {
         return val;
     }
     @PostMapping("/insertar")
-    public String insertarDepartamento(Departamento dep) {
-        //departamentoRepository.save(dep);
-        return dep.getESTADO();
+    public void insertarDepartamento(Departamento dep) {
+        departamentoRepository.save(dep);
     }
 }
