@@ -4,10 +4,7 @@ import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Random;
+import java.util.*;
 
 public class genético {
 
@@ -19,6 +16,7 @@ public class genético {
             //Creamos un cromosoma
             ArrayList<String> new_chromosome=new ArrayList<String>();
             Hashtable<String,ArrayList<Integer>> capacidadU=new Hashtable();
+            //Ver si modifica el original
             capacidadU.putAll(lugares);
             int j=0;
             while (j<chromosome_size){
@@ -41,9 +39,90 @@ public class genético {
         return population;
     }
 
-    public ArrayList<Integer> get_fitness(ArrayList<String> chromosome, ArrayList<Item> items, Hashtable lugares){
-        int i=0;
-        return  new ArrayList<Integer>();
+    public ArrayList<Integer> get_fitness(ArrayList<String> chromosome, ArrayList<Item> items, Hashtable<String,ArrayList<Integer>> lugares){
+        /*
+        Retorna el fitness del cromosoma pasado. Fitness es el valor total de los items incluidos en el cromosoma
+        Si el peso total es mayor que max_sexo -> el fitness es 1
+        */
+        //Objetivos
+        ArrayList<Integer> fitness = new ArrayList<Integer>(Collections.nCopies(3, 0));
+
+        Hashtable<String,ArrayList<Integer>> locales_copia=new Hashtable();
+        //Ver si modifica el original
+        locales_copia.putAll(lugares);
+
+
+        int sum_abue = 0, sum_man=0, sum_woman=0, sum_diferente=0, sum_penalidad=0, sum_ubicacion=0;
+        int cant_personas=0;
+
+        //Recorremos todos los items
+        for (int i=0; i<items.size(); i++){
+            //Verificamos si el beneficio va a recoger el bono
+            if(chromosome.get(i)!="0"){
+                cant_personas+=100;
+                //Acumular la suma de si es abuelo o no
+                sum_abue+=items.get(i).getEsAbuelo();
+
+                //Cantidad de hombres
+                if(items.get(i).getSexo()==1){
+                    //locales_copia.get(chromosome.get(i)).set(4,locales_copia.get(chromosome.get(i)).get(4)+1);
+                    sum_man+=1;
+                }
+                //Cantidad de mujeres
+                if(items.get(i).getSexo()==2){
+                    //locales_copia.get(chromosome.get(i)).set(5,locales_copia.get(chromosome.get(i)).get(5)+1);
+                    sum_woman+=1;
+                }
+                //acumular la penalidad
+                sum_penalidad+=items.get(i).getPenalidad();
+
+                //se verificar si se sobrepasa la capacidad del lugar
+                locales_copia.get(chromosome.get(i)).set(0, locales_copia.get(chromosome.get(i)).get(0)+1);
+                //si se paso de la capacidad del lugar retorna 1 como fitness
+                if(locales_copia.get(chromosome.get(i)).get(0) > lugares.get(chromosome.get(i)).get(0)){
+                    fitness.set(0,-10000000);
+                    fitness.set(1,0);
+                    fitness.set(2,0);
+                    return fitness;
+                }
+                //acumular la ubicación
+
+                if (items.get(i).getUbigeo1() == lugares.get(chromosome.get(i)).get(1) &&
+                        items.get(i).getUbigeo2() == lugares.get(chromosome.get(i)).get(2) &&
+                        items.get(i).getUbigeo3() == lugares.get(chromosome.get(i)).get(3) ){
+                    sum_ubicacion+=4000;
+                }else if(items.get(i).getUbigeo1() == lugares.get(chromosome.get(i)).get(1) &&
+                        items.get(i).getUbigeo2() == lugares.get(chromosome.get(i)).get(2)){
+                    sum_ubicacion+=2000/Math.abs(items.get(i).getUbigeo3() - lugares.get(chromosome.get(i)).get(3));
+                    if(Math.abs(items.get(i).getUbigeo3() - lugares.get(chromosome.get(i)).get(3)) > 3){
+                        sum_diferente+=10;
+                    }
+                }else if(items.get(i).getUbigeo1() == lugares.get(chromosome.get(i)).get(1)){
+                    sum_ubicacion+=80/Math.abs(items.get(i).getUbigeo2() - lugares.get(chromosome.get(i)).get(2));
+                    if (Math.abs(items.get(i).getUbigeo2() - lugares.get(chromosome.get(i)).get(2)) > 2){
+                        sum_diferente+=100;
+                    }
+                }else {
+                    fitness.set(0,-10000000);
+                    fitness.set(1,0);
+                    fitness.set(2,0);
+                    return fitness;
+                }
+            }
+        }
+        //priorizar a discapacitados y mujeres -> maximizar
+        fitness.set(0,sum_abue*100 + sum_woman*50 + sum_man*10 - sum_penalidad);
+        //maximizar inversa de penalidad -> minimizar el penalidad (penalidad)
+        if (sum_diferente!=0){
+            fitness.set(1,1/sum_diferente);
+        }else{
+            fitness.set(0,0);
+        }
+        //maximizar la ubicación
+        fitness.set(2,sum_ubicacion);
+
+        return fitness;
+
     }
 
     public void evaluate_population(ArrayList<Individual> population, ArrayList<Item> items, Hashtable lugares) {
