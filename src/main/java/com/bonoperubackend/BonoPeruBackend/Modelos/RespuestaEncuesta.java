@@ -6,17 +6,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 @Entity(name="respuestaencuesta")
+@Table(	name = "respuestaencuesta",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "id_respuestaencuesta")
+        })
 public class RespuestaEncuesta implements Serializable {
 
     /** Primary key. */
@@ -50,7 +46,7 @@ public class RespuestaEncuesta implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_respuestaencuesta", unique=true, nullable=false, precision=10)
-    private int idRespuestaencuesta;
+    private Integer idRespuestaencuesta;
     @Column(nullable=false, length=3)
     private String estado;
     @Column(name="fecha_creacion")
@@ -76,7 +72,7 @@ public class RespuestaEncuesta implements Serializable {
      *
      * @return the current value of idRespuestaencuesta
      */
-    public int getIdRespuestaencuesta() {
+    public Integer getIdRespuestaencuesta() {
         return idRespuestaencuesta;
     }
 
@@ -85,7 +81,7 @@ public class RespuestaEncuesta implements Serializable {
      *
      * @param aIdRespuestaencuesta the new value for idRespuestaencuesta
      */
-    public void setIdRespuestaencuesta(int aIdRespuestaencuesta) {
+    public void setIdRespuestaencuesta(Integer aIdRespuestaencuesta) {
         idRespuestaencuesta = aIdRespuestaencuesta;
     }
 
