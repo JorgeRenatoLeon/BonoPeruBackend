@@ -22,4 +22,13 @@ public class BeneficiarioController {
         ben = beneficiarioRepository.findAll();
         return ben;
     }
+    //EL beneficiario consulta su cod de familia para saber su cronograma
+    @PostMapping("/consultarHorario")
+    public List<Beneficiario> buscarXCodFam() {
+        List<Beneficiario> ben;
+        ben = beneficiarioRepository.findAll();
+        return ben;
+    }
+
+
 }
