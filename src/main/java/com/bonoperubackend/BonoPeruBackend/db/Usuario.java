@@ -68,8 +68,6 @@ public class Usuario implements Serializable {
     private LocalDateTime fechaCreacion;
     @Column(name="fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
-    @OneToOne(mappedBy="usuario")
-    private UsuarioRol usuarioRol;
 
     /** Default constructor. */
     public Usuario() {
@@ -254,24 +252,6 @@ public class Usuario implements Serializable {
      */
     public void setFechaActualizacion(LocalDateTime aFechaActualizacion) {
         fechaActualizacion = aFechaActualizacion;
-    }
-
-    /**
-     * Access method for usuarioRol.
-     *
-     * @return the current value of usuarioRol
-     */
-    public UsuarioRol getUsuarioRol() {
-        return usuarioRol;
-    }
-
-    /**
-     * Setter method for usuarioRol.
-     *
-     * @param aUsuarioRol the new value for usuarioRol
-     */
-    public void setUsuarioRol(UsuarioRol aUsuarioRol) {
-        usuarioRol = aUsuarioRol;
     }
 
     /**

@@ -18,31 +18,6 @@ public class Pregunta implements Serializable {
     /** Primary key. */
     protected static final String PK = "idPregunta";
 
-    /**
-     * The optimistic lock. Available via standard bean get/set operations.
-     */
-    @Version
-    @Column(name="LOCK_FLAG")
-    private Integer lockFlag;
-
-    /**
-     * Access method for the lockFlag property.
-     *
-     * @return the current value of the lockFlag property
-     */
-    public Integer getLockFlag() {
-        return lockFlag;
-    }
-
-    /**
-     * Sets the value of the lockFlag property.
-     *
-     * @param aLockFlag the new value of the lockFlag property
-     */
-    public void setLockFlag(Integer aLockFlag) {
-        lockFlag = aLockFlag;
-    }
-
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_pregunta", unique=true, nullable=false, precision=10)
@@ -52,15 +27,15 @@ public class Pregunta implements Serializable {
     @Column(nullable=false, length=3)
     private String estado;
     @Column(name="usuario_creacion", precision=10)
-    private int usuarioCreacion;
+    private Integer usuarioCreacion;
     @Column(name="usuario_actualizacion", precision=10)
-    private int usuarioActualizacion;
+    private Integer usuarioActualizacion;
     @Column(name="fecha_creacion")
     private LocalDateTime fechaCreacion;
     @Column(name="fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
-    @OneToMany(mappedBy="pregunta")
-    private Set<RespuestaIndividual> respuestaindividual;
+//    @OneToMany(mappedBy="pregunta")
+//    private Set<RespuestaIndividual> respuestaindividual;
 
     /** Default constructor. */
     public Pregunta() {
@@ -126,7 +101,7 @@ public class Pregunta implements Serializable {
      *
      * @return the current value of usuarioCreacion
      */
-    public int getUsuarioCreacion() {
+    public Integer getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
@@ -135,7 +110,7 @@ public class Pregunta implements Serializable {
      *
      * @param aUsuarioCreacion the new value for usuarioCreacion
      */
-    public void setUsuarioCreacion(int aUsuarioCreacion) {
+    public void setUsuarioCreacion(Integer aUsuarioCreacion) {
         usuarioCreacion = aUsuarioCreacion;
     }
 
@@ -144,7 +119,7 @@ public class Pregunta implements Serializable {
      *
      * @return the current value of usuarioActualizacion
      */
-    public int getUsuarioActualizacion() {
+    public Integer getUsuarioActualizacion() {
         return usuarioActualizacion;
     }
 
@@ -153,7 +128,7 @@ public class Pregunta implements Serializable {
      *
      * @param aUsuarioActualizacion the new value for usuarioActualizacion
      */
-    public void setUsuarioActualizacion(int aUsuarioActualizacion) {
+    public void setUsuarioActualizacion(Integer aUsuarioActualizacion) {
         usuarioActualizacion = aUsuarioActualizacion;
     }
 
@@ -198,18 +173,18 @@ public class Pregunta implements Serializable {
      *
      * @return the current value of respuestaindividual
      */
-    public Set<RespuestaIndividual> getRespuestaindividual() {
-        return respuestaindividual;
-    }
-
-    /**
-     * Setter method for respuestaindividual.
-     *
-     * @param aRespuestaIndividual the new value for respuestaindividual
-     */
-    public void setRespuestaindividual(Set<RespuestaIndividual> aRespuestaIndividual) {
-        respuestaindividual = aRespuestaIndividual;
-    }
+//    public Set<RespuestaIndividual> getRespuestaindividual() {
+//        return respuestaindividual;
+//    }
+//
+//    /**
+//     * Setter method for respuestaindividual.
+//     *
+//     * @param aRespuestaIndividual the new value for respuestaindividual
+//     */
+//    public void setRespuestaindividual(Set<RespuestaIndividual> aRespuestaIndividual) {
+//        respuestaindividual = aRespuestaIndividual;
+//    }
 
     /**
      * Compares the key for this instance with another Pregunta.

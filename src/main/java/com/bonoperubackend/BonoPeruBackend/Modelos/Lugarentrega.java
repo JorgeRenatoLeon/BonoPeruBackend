@@ -1,6 +1,6 @@
 // Generated with g9.
 
-package com.bonoperubackend.BonoPeruBackend.db;
+package com.bonoperubackend.BonoPeruBackend.Modelos;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -8,46 +8,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 @Entity(name="lugarentrega")
+@Table(name = "lugarentrega")
 public class Lugarentrega implements Serializable {
 
     /** Primary key. */
     protected static final String PK = "idLugarentrega";
-
-    /**
-     * The optimistic lock. Available via standard bean get/set operations.
-     */
-    @Version
-    @Column(name="LOCK_FLAG")
-    private Integer lockFlag;
-
-    /**
-     * Access method for the lockFlag property.
-     *
-     * @return the current value of the lockFlag property
-     */
-    public Integer getLockFlag() {
-        return lockFlag;
-    }
-
-    /**
-     * Sets the value of the lockFlag property.
-     *
-     * @param aLockFlag the new value of the lockFlag property
-     */
-    public void setLockFlag(Integer aLockFlag) {
-        lockFlag = aLockFlag;
-    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -66,22 +34,22 @@ public class Lugarentrega implements Serializable {
     @Column(nullable=false, length=3)
     private String estado;
     @Column(name="usuario_creacion", precision=10)
-    private int usuarioCreacion;
+    private Integer usuarioCreacion;
     @Column(name="usuario_actualizacion", precision=10)
-    private int usuarioActualizacion;
+    private Integer usuarioActualizacion;
     @Column(name="fecha_creacion")
     private LocalDateTime fechaCreacion;
     @Column(name="fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
-    @OneToMany(mappedBy="lugarentrega")
-    private Set<Horariolugarentrega> horariolugarentrega;
-    @OneToMany(mappedBy="lugarentrega")
-    private Set<Incidente> incidente;
+//    @OneToMany(mappedBy="lugarentrega")
+//    private Set<Horariolugarentrega> horariolugarentrega;
+//    @OneToMany(mappedBy="lugarentrega")
+//    private Set<Incidente> incidente;
     @ManyToOne(optional=false)
     @JoinColumn(name="fid_distrito", nullable=false)
     private Distrito distrito;
-    @OneToMany(mappedBy="lugarentrega")
-    private Set<Quejas> quejas;
+//    @OneToMany(mappedBy="lugarentrega")
+//    private Set<Quejas> quejas;
 
     /** Default constructor. */
     public Lugarentrega() {
@@ -219,7 +187,7 @@ public class Lugarentrega implements Serializable {
      *
      * @return the current value of usuarioCreacion
      */
-    public int getUsuarioCreacion() {
+    public Integer getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
@@ -228,7 +196,7 @@ public class Lugarentrega implements Serializable {
      *
      * @param aUsuarioCreacion the new value for usuarioCreacion
      */
-    public void setUsuarioCreacion(int aUsuarioCreacion) {
+    public void setUsuarioCreacion(Integer aUsuarioCreacion) {
         usuarioCreacion = aUsuarioCreacion;
     }
 
@@ -237,7 +205,7 @@ public class Lugarentrega implements Serializable {
      *
      * @return the current value of usuarioActualizacion
      */
-    public int getUsuarioActualizacion() {
+    public Integer getUsuarioActualizacion() {
         return usuarioActualizacion;
     }
 
@@ -246,7 +214,7 @@ public class Lugarentrega implements Serializable {
      *
      * @param aUsuarioActualizacion the new value for usuarioActualizacion
      */
-    public void setUsuarioActualizacion(int aUsuarioActualizacion) {
+    public void setUsuarioActualizacion(Integer aUsuarioActualizacion) {
         usuarioActualizacion = aUsuarioActualizacion;
     }
 
@@ -291,36 +259,36 @@ public class Lugarentrega implements Serializable {
      *
      * @return the current value of horariolugarentrega
      */
-    public Set<Horariolugarentrega> getHorariolugarentrega() {
-        return horariolugarentrega;
-    }
-
-    /**
-     * Setter method for horariolugarentrega.
-     *
-     * @param aHorariolugarentrega the new value for horariolugarentrega
-     */
-    public void setHorariolugarentrega(Set<Horariolugarentrega> aHorariolugarentrega) {
-        horariolugarentrega = aHorariolugarentrega;
-    }
+//    public Set<Horariolugarentrega> getHorariolugarentrega() {
+//        return horariolugarentrega;
+//    }
+//
+//    /**
+//     * Setter method for horariolugarentrega.
+//     *
+//     * @param aHorariolugarentrega the new value for horariolugarentrega
+//     */
+//    public void setHorariolugarentrega(Set<Horariolugarentrega> aHorariolugarentrega) {
+//        horariolugarentrega = aHorariolugarentrega;
+//    }
 
     /**
      * Access method for incidente.
      *
      * @return the current value of incidente
      */
-    public Set<Incidente> getIncidente() {
-        return incidente;
-    }
-
-    /**
-     * Setter method for incidente.
-     *
-     * @param aIncidente the new value for incidente
-     */
-    public void setIncidente(Set<Incidente> aIncidente) {
-        incidente = aIncidente;
-    }
+//    public Set<Incidente> getIncidente() {
+//        return incidente;
+//    }
+//
+//    /**
+//     * Setter method for incidente.
+//     *
+//     * @param aIncidente the new value for incidente
+//     */
+//    public void setIncidente(Set<Incidente> aIncidente) {
+//        incidente = aIncidente;
+//    }
 
     /**
      * Access method for distrito.
@@ -345,18 +313,18 @@ public class Lugarentrega implements Serializable {
      *
      * @return the current value of quejas
      */
-    public Set<Quejas> getQuejas() {
-        return quejas;
-    }
-
-    /**
-     * Setter method for quejas.
-     *
-     * @param aQuejas the new value for quejas
-     */
-    public void setQuejas(Set<Quejas> aQuejas) {
-        quejas = aQuejas;
-    }
+//    public Set<Quejas> getQuejas() {
+//        return quejas;
+//    }
+//
+//    /**
+//     * Setter method for quejas.
+//     *
+//     * @param aQuejas the new value for quejas
+//     */
+//    public void setQuejas(Set<Quejas> aQuejas) {
+//        quejas = aQuejas;
+//    }
 
     /**
      * Compares the key for this instance with another Lugarentrega.

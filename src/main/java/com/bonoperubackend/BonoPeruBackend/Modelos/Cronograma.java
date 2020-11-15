@@ -1,90 +1,67 @@
 // Generated with g9.
 
-package com.bonoperubackend.BonoPeruBackend.db;
+package com.bonoperubackend.BonoPeruBackend.Modelos;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Version;
+import javax.persistence.*;
 
-@Entity(name="rol")
-public class Rol implements Serializable {
+@Entity(name="cronograma")
+@Table(name = "cronograma")
+public class Cronograma implements Serializable {
 
     /** Primary key. */
-    protected static final String PK = "idRol";
-
-    /**
-     * The optimistic lock. Available via standard bean get/set operations.
-     */
-    @Version
-    @Column(name="LOCK_FLAG")
-    private Integer lockFlag;
-
-    /**
-     * Access method for the lockFlag property.
-     *
-     * @return the current value of the lockFlag property
-     */
-    public Integer getLockFlag() {
-        return lockFlag;
-    }
-
-    /**
-     * Sets the value of the lockFlag property.
-     *
-     * @param aLockFlag the new value of the lockFlag property
-     */
-    public void setLockFlag(Integer aLockFlag) {
-        lockFlag = aLockFlag;
-    }
+    protected static final String PK = "idCronograma";
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_rol", unique=true, nullable=false, precision=10)
-    private int idRol;
-    @Column(nullable=false, length=100)
+    @Column(name="id_cronograma", unique=true, nullable=false, precision=10)
+    private Integer idCronograma;
+    @Column(length=100)
     private String nombre;
+    @Column(name="fecha_inicio", nullable=false)
+    private LocalDate fechaInicio;
+    @Column(name="fecha_fin", nullable=false)
+    private LocalDate fechaFin;
     @Column(nullable=false, length=3)
     private String estado;
     @Column(name="usuario_creacion", precision=10)
-    private int usuarioCreacion;
+    private Integer usuarioCreacion;
     @Column(name="usuario_actualizacion", precision=10)
-    private int usuarioActualizacion;
+    private Integer usuarioActualizacion;
     @Column(name="fecha_creacion")
     private LocalDateTime fechaCreacion;
     @Column(name="fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
+//    @OneToMany(mappedBy="cronograma")
+//    private Set<Horario> horario;
 
     /** Default constructor. */
-    public Rol() {
+    public Cronograma() {
         super();
     }
 
     /**
-     * Access method for idRol.
+     * Access method for idCronograma.
      *
-     * @return the current value of idRol
+     * @return the current value of idCronograma
      */
-    public int getIdRol() {
-        return idRol;
+    public Integer getIdCronograma() {
+        return idCronograma;
     }
 
     /**
-     * Setter method for idRol.
+     * Setter method for idCronograma.
      *
-     * @param aIdRol the new value for idRol
+     * @param aIdCronograma the new value for idCronograma
      */
-    public void setIdRol(int aIdRol) {
-        idRol = aIdRol;
+    public void setIdCronograma(Integer aIdCronograma) {
+        idCronograma = aIdCronograma;
     }
 
     /**
@@ -103,6 +80,42 @@ public class Rol implements Serializable {
      */
     public void setNombre(String aNombre) {
         nombre = aNombre;
+    }
+
+    /**
+     * Access method for fechaInicio.
+     *
+     * @return the current value of fechaInicio
+     */
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    /**
+     * Setter method for fechaInicio.
+     *
+     * @param aFechaInicio the new value for fechaInicio
+     */
+    public void setFechaInicio(LocalDate aFechaInicio) {
+        fechaInicio = aFechaInicio;
+    }
+
+    /**
+     * Access method for fechaFin.
+     *
+     * @return the current value of fechaFin
+     */
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
+    /**
+     * Setter method for fechaFin.
+     *
+     * @param aFechaFin the new value for fechaFin
+     */
+    public void setFechaFin(LocalDate aFechaFin) {
+        fechaFin = aFechaFin;
     }
 
     /**
@@ -128,7 +141,7 @@ public class Rol implements Serializable {
      *
      * @return the current value of usuarioCreacion
      */
-    public int getUsuarioCreacion() {
+    public Integer getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
@@ -137,7 +150,7 @@ public class Rol implements Serializable {
      *
      * @param aUsuarioCreacion the new value for usuarioCreacion
      */
-    public void setUsuarioCreacion(int aUsuarioCreacion) {
+    public void setUsuarioCreacion(Integer aUsuarioCreacion) {
         usuarioCreacion = aUsuarioCreacion;
     }
 
@@ -146,7 +159,7 @@ public class Rol implements Serializable {
      *
      * @return the current value of usuarioActualizacion
      */
-    public int getUsuarioActualizacion() {
+    public Integer getUsuarioActualizacion() {
         return usuarioActualizacion;
     }
 
@@ -155,7 +168,7 @@ public class Rol implements Serializable {
      *
      * @param aUsuarioActualizacion the new value for usuarioActualizacion
      */
-    public void setUsuarioActualizacion(int aUsuarioActualizacion) {
+    public void setUsuarioActualizacion(Integer aUsuarioActualizacion) {
         usuarioActualizacion = aUsuarioActualizacion;
     }
 
@@ -196,35 +209,53 @@ public class Rol implements Serializable {
     }
 
     /**
-     * Compares the key for this instance with another Rol.
+     * Access method for horario.
+     *
+     * @return the current value of horario
+     */
+//    public Set<Horario> getHorario() {
+//        return horario;
+//    }
+//
+//    /**
+//     * Setter method for horario.
+//     *
+//     * @param aHorario the new value for horario
+//     */
+//    public void setHorario(Set<Horario> aHorario) {
+//        horario = aHorario;
+//    }
+
+    /**
+     * Compares the key for this instance with another Cronograma.
      *
      * @param other The object to compare to
-     * @return True if other object is instance of class Rol and the key objects are equal
+     * @return True if other object is instance of class Cronograma and the key objects are equal
      */
     private boolean equalKeys(Object other) {
         if (this==other) {
             return true;
         }
-        if (!(other instanceof Rol)) {
+        if (!(other instanceof Cronograma)) {
             return false;
         }
-        Rol that = (Rol) other;
-        if (this.getIdRol() != that.getIdRol()) {
+        Cronograma that = (Cronograma) other;
+        if (this.getIdCronograma() != that.getIdCronograma()) {
             return false;
         }
         return true;
     }
 
     /**
-     * Compares this instance with another Rol.
+     * Compares this instance with another Cronograma.
      *
      * @param other The object to compare to
      * @return True if the objects are the same
      */
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Rol)) return false;
-        return this.equalKeys(other) && ((Rol)other).equalKeys(this);
+        if (!(other instanceof Cronograma)) return false;
+        return this.equalKeys(other) && ((Cronograma)other).equalKeys(this);
     }
 
     /**
@@ -234,9 +265,9 @@ public class Rol implements Serializable {
      */
     @Override
     public int hashCode() {
-        int i;
-        int result = 17;
-        i = getIdRol();
+        Integer i;
+        Integer result = 17;
+        i = getIdCronograma();
         result = 37*result + i;
         return result;
     }
@@ -248,8 +279,8 @@ public class Rol implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("[Rol |");
-        sb.append(" idRol=").append(getIdRol());
+        StringBuffer sb = new StringBuffer("[Cronograma |");
+        sb.append(" idCronograma=").append(getIdCronograma());
         sb.append("]");
         return sb.toString();
     }
@@ -261,7 +292,7 @@ public class Rol implements Serializable {
      */
     public Map<String, Object> getPrimaryKey() {
         Map<String, Object> ret = new LinkedHashMap<String, Object>(6);
-        ret.put("idRol", Integer.valueOf(getIdRol()));
+        ret.put("idCronograma", Integer.valueOf(getIdCronograma()));
         return ret;
     }
 

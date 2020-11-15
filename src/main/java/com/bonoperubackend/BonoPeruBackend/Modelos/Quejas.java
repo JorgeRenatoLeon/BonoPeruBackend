@@ -1,9 +1,8 @@
 // Generated with g9.
 
-package com.bonoperubackend.BonoPeruBackend.db;
+package com.bonoperubackend.BonoPeruBackend.Modelos;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,51 +16,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
-@Entity(name="incidente")
-public class Incidente implements Serializable {
+@Entity(name="quejas")
+public class Quejas implements Serializable {
 
     /** Primary key. */
-    protected static final String PK = "idIncidente";
-
-    /**
-     * The optimistic lock. Available via standard bean get/set operations.
-     */
-    @Version
-    @Column(name="LOCK_FLAG")
-    private Integer lockFlag;
-
-    /**
-     * Access method for the lockFlag property.
-     *
-     * @return the current value of the lockFlag property
-     */
-    public Integer getLockFlag() {
-        return lockFlag;
-    }
-
-    /**
-     * Sets the value of the lockFlag property.
-     *
-     * @param aLockFlag the new value of the lockFlag property
-     */
-    public void setLockFlag(Integer aLockFlag) {
-        lockFlag = aLockFlag;
-    }
+    protected static final String PK = "idQuejas";
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_incidente", unique=true, nullable=false, precision=10)
-    private int idIncidente;
-    @Column(nullable=false)
-    private LocalDate fecha;
-    @Column(name="tipo_incidente", nullable=false, length=30)
-    private String tipoIncidente;
+    @Column(name="id_quejas", unique=true, nullable=false, precision=10)
+    private int idQuejas;
+    @Column(nullable=false, length=500)
+    private String descripcion;
+    @Column(name="tipo_queja", nullable=false, length=30)
+    private String tipoQueja;
     @Column(nullable=false, length=3)
     private String estado;
-    @Column(name="usuario_creacion", precision=10)
-    private int usuarioCreacion;
-    @Column(name="usuario_actualizacion", precision=10)
-    private int usuarioActualizacion;
     @Column(name="fecha_creacion")
     private LocalDateTime fechaCreacion;
     @Column(name="fecha_actualizacion")
@@ -70,66 +40,69 @@ public class Incidente implements Serializable {
     @JoinColumn(name="fid_beneficiario", nullable=false)
     private Beneficiario beneficiario;
     @ManyToOne(optional=false)
+    @JoinColumn(name="fid_horario", nullable=false)
+    private Horario horario;
+    @ManyToOne(optional=false)
     @JoinColumn(name="fid_lugarentrega", nullable=false)
     private Lugarentrega lugarentrega;
 
     /** Default constructor. */
-    public Incidente() {
+    public Quejas() {
         super();
     }
 
     /**
-     * Access method for idIncidente.
+     * Access method for idQuejas.
      *
-     * @return the current value of idIncidente
+     * @return the current value of idQuejas
      */
-    public int getIdIncidente() {
-        return idIncidente;
+    public int getIdQuejas() {
+        return idQuejas;
     }
 
     /**
-     * Setter method for idIncidente.
+     * Setter method for idQuejas.
      *
-     * @param aIdIncidente the new value for idIncidente
+     * @param aIdQuejas the new value for idQuejas
      */
-    public void setIdIncidente(int aIdIncidente) {
-        idIncidente = aIdIncidente;
+    public void setIdQuejas(int aIdQuejas) {
+        idQuejas = aIdQuejas;
     }
 
     /**
-     * Access method for fecha.
+     * Access method for descripcion.
      *
-     * @return the current value of fecha
+     * @return the current value of descripcion
      */
-    public LocalDate getFecha() {
-        return fecha;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
-     * Setter method for fecha.
+     * Setter method for descripcion.
      *
-     * @param aFecha the new value for fecha
+     * @param aDescripcion the new value for descripcion
      */
-    public void setFecha(LocalDate aFecha) {
-        fecha = aFecha;
+    public void setDescripcion(String aDescripcion) {
+        descripcion = aDescripcion;
     }
 
     /**
-     * Access method for tipoIncidente.
+     * Access method for tipoQueja.
      *
-     * @return the current value of tipoIncidente
+     * @return the current value of tipoQueja
      */
-    public String getTipoIncidente() {
-        return tipoIncidente;
+    public String getTipoQueja() {
+        return tipoQueja;
     }
 
     /**
-     * Setter method for tipoIncidente.
+     * Setter method for tipoQueja.
      *
-     * @param aTipoIncidente the new value for tipoIncidente
+     * @param aTipoQueja the new value for tipoQueja
      */
-    public void setTipoIncidente(String aTipoIncidente) {
-        tipoIncidente = aTipoIncidente;
+    public void setTipoQueja(String aTipoQueja) {
+        tipoQueja = aTipoQueja;
     }
 
     /**
@@ -148,42 +121,6 @@ public class Incidente implements Serializable {
      */
     public void setEstado(String aEstado) {
         estado = aEstado;
-    }
-
-    /**
-     * Access method for usuarioCreacion.
-     *
-     * @return the current value of usuarioCreacion
-     */
-    public int getUsuarioCreacion() {
-        return usuarioCreacion;
-    }
-
-    /**
-     * Setter method for usuarioCreacion.
-     *
-     * @param aUsuarioCreacion the new value for usuarioCreacion
-     */
-    public void setUsuarioCreacion(int aUsuarioCreacion) {
-        usuarioCreacion = aUsuarioCreacion;
-    }
-
-    /**
-     * Access method for usuarioActualizacion.
-     *
-     * @return the current value of usuarioActualizacion
-     */
-    public int getUsuarioActualizacion() {
-        return usuarioActualizacion;
-    }
-
-    /**
-     * Setter method for usuarioActualizacion.
-     *
-     * @param aUsuarioActualizacion the new value for usuarioActualizacion
-     */
-    public void setUsuarioActualizacion(int aUsuarioActualizacion) {
-        usuarioActualizacion = aUsuarioActualizacion;
     }
 
     /**
@@ -241,6 +178,24 @@ public class Incidente implements Serializable {
     }
 
     /**
+     * Access method for horario.
+     *
+     * @return the current value of horario
+     */
+    public Horario getHorario() {
+        return horario;
+    }
+
+    /**
+     * Setter method for horario.
+     *
+     * @param aHorario the new value for horario
+     */
+    public void setHorario(Horario aHorario) {
+        horario = aHorario;
+    }
+
+    /**
      * Access method for lugarentrega.
      *
      * @return the current value of lugarentrega
@@ -259,35 +214,35 @@ public class Incidente implements Serializable {
     }
 
     /**
-     * Compares the key for this instance with another Incidente.
+     * Compares the key for this instance with another Quejas.
      *
      * @param other The object to compare to
-     * @return True if other object is instance of class Incidente and the key objects are equal
+     * @return True if other object is instance of class Quejas and the key objects are equal
      */
     private boolean equalKeys(Object other) {
         if (this==other) {
             return true;
         }
-        if (!(other instanceof Incidente)) {
+        if (!(other instanceof Quejas)) {
             return false;
         }
-        Incidente that = (Incidente) other;
-        if (this.getIdIncidente() != that.getIdIncidente()) {
+        Quejas that = (Quejas) other;
+        if (this.getIdQuejas() != that.getIdQuejas()) {
             return false;
         }
         return true;
     }
 
     /**
-     * Compares this instance with another Incidente.
+     * Compares this instance with another Quejas.
      *
      * @param other The object to compare to
      * @return True if the objects are the same
      */
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Incidente)) return false;
-        return this.equalKeys(other) && ((Incidente)other).equalKeys(this);
+        if (!(other instanceof Quejas)) return false;
+        return this.equalKeys(other) && ((Quejas)other).equalKeys(this);
     }
 
     /**
@@ -299,7 +254,7 @@ public class Incidente implements Serializable {
     public int hashCode() {
         int i;
         int result = 17;
-        i = getIdIncidente();
+        i = getIdQuejas();
         result = 37*result + i;
         return result;
     }
@@ -311,8 +266,8 @@ public class Incidente implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("[Incidente |");
-        sb.append(" idIncidente=").append(getIdIncidente());
+        StringBuffer sb = new StringBuffer("[Quejas |");
+        sb.append(" idQuejas=").append(getIdQuejas());
         sb.append("]");
         return sb.toString();
     }
@@ -324,7 +279,7 @@ public class Incidente implements Serializable {
      */
     public Map<String, Object> getPrimaryKey() {
         Map<String, Object> ret = new LinkedHashMap<String, Object>(6);
-        ret.put("idIncidente", Integer.valueOf(getIdIncidente()));
+        ret.put("idQuejas", Integer.valueOf(getIdQuejas()));
         return ret;
     }
 

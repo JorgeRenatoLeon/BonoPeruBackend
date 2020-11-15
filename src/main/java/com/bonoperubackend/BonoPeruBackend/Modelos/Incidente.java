@@ -1,153 +1,109 @@
 // Generated with g9.
 
-package com.bonoperubackend.BonoPeruBackend.db;
-
-import com.bonoperubackend.BonoPeruBackend.Modelos.Horario;
+package com.bonoperubackend.BonoPeruBackend.Modelos;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Version;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-@Entity(name="cronograma")
-public class Cronograma implements Serializable {
+@Entity(name="incidente")
+public class Incidente implements Serializable {
 
     /** Primary key. */
-    protected static final String PK = "idCronograma";
-
-    /**
-     * The optimistic lock. Available via standard bean get/set operations.
-     */
-    @Version
-    @Column(name="LOCK_FLAG")
-    private Integer lockFlag;
-
-    /**
-     * Access method for the lockFlag property.
-     *
-     * @return the current value of the lockFlag property
-     */
-    public Integer getLockFlag() {
-        return lockFlag;
-    }
-
-    /**
-     * Sets the value of the lockFlag property.
-     *
-     * @param aLockFlag the new value of the lockFlag property
-     */
-    public void setLockFlag(Integer aLockFlag) {
-        lockFlag = aLockFlag;
-    }
+    protected static final String PK = "idIncidente";
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_cronograma", unique=true, nullable=false, precision=10)
-    private int idCronograma;
-    @Column(length=100)
-    private String nombre;
-    @Column(name="fecha_inicio", nullable=false)
-    private LocalDate fechaInicio;
-    @Column(name="fecha_fin", nullable=false)
-    private LocalDate fechaFin;
+    @Column(name="id_incidente", unique=true, nullable=false, precision=10)
+    private int idIncidente;
+    @Column(nullable=false)
+    private LocalDate fecha;
+    @Column(name="tipo_incidente", nullable=false, length=30)
+    private String tipoIncidente;
     @Column(nullable=false, length=3)
     private String estado;
     @Column(name="usuario_creacion", precision=10)
-    private int usuarioCreacion;
+    private Integer usuarioCreacion;
     @Column(name="usuario_actualizacion", precision=10)
-    private int usuarioActualizacion;
+    private Integer usuarioActualizacion;
     @Column(name="fecha_creacion")
     private LocalDateTime fechaCreacion;
     @Column(name="fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
-    @OneToMany(mappedBy="cronograma")
-    private Set<Horario> horario;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="fid_beneficiario", nullable=false)
+    private Beneficiario beneficiario;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="fid_lugarentrega", nullable=false)
+    private Lugarentrega lugarentrega;
 
     /** Default constructor. */
-    public Cronograma() {
+    public Incidente() {
         super();
     }
 
     /**
-     * Access method for idCronograma.
+     * Access method for idIncidente.
      *
-     * @return the current value of idCronograma
+     * @return the current value of idIncidente
      */
-    public int getIdCronograma() {
-        return idCronograma;
+    public int getIdIncidente() {
+        return idIncidente;
     }
 
     /**
-     * Setter method for idCronograma.
+     * Setter method for idIncidente.
      *
-     * @param aIdCronograma the new value for idCronograma
+     * @param aIdIncidente the new value for idIncidente
      */
-    public void setIdCronograma(int aIdCronograma) {
-        idCronograma = aIdCronograma;
+    public void setIdIncidente(int aIdIncidente) {
+        idIncidente = aIdIncidente;
     }
 
     /**
-     * Access method for nombre.
+     * Access method for fecha.
      *
-     * @return the current value of nombre
+     * @return the current value of fecha
      */
-    public String getNombre() {
-        return nombre;
+    public LocalDate getFecha() {
+        return fecha;
     }
 
     /**
-     * Setter method for nombre.
+     * Setter method for fecha.
      *
-     * @param aNombre the new value for nombre
+     * @param aFecha the new value for fecha
      */
-    public void setNombre(String aNombre) {
-        nombre = aNombre;
+    public void setFecha(LocalDate aFecha) {
+        fecha = aFecha;
     }
 
     /**
-     * Access method for fechaInicio.
+     * Access method for tipoIncidente.
      *
-     * @return the current value of fechaInicio
+     * @return the current value of tipoIncidente
      */
-    public LocalDate getFechaInicio() {
-        return fechaInicio;
+    public String getTipoIncidente() {
+        return tipoIncidente;
     }
 
     /**
-     * Setter method for fechaInicio.
+     * Setter method for tipoIncidente.
      *
-     * @param aFechaInicio the new value for fechaInicio
+     * @param aTipoIncidente the new value for tipoIncidente
      */
-    public void setFechaInicio(LocalDate aFechaInicio) {
-        fechaInicio = aFechaInicio;
-    }
-
-    /**
-     * Access method for fechaFin.
-     *
-     * @return the current value of fechaFin
-     */
-    public LocalDate getFechaFin() {
-        return fechaFin;
-    }
-
-    /**
-     * Setter method for fechaFin.
-     *
-     * @param aFechaFin the new value for fechaFin
-     */
-    public void setFechaFin(LocalDate aFechaFin) {
-        fechaFin = aFechaFin;
+    public void setTipoIncidente(String aTipoIncidente) {
+        tipoIncidente = aTipoIncidente;
     }
 
     /**
@@ -173,7 +129,7 @@ public class Cronograma implements Serializable {
      *
      * @return the current value of usuarioCreacion
      */
-    public int getUsuarioCreacion() {
+    public Integer getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
@@ -182,7 +138,7 @@ public class Cronograma implements Serializable {
      *
      * @param aUsuarioCreacion the new value for usuarioCreacion
      */
-    public void setUsuarioCreacion(int aUsuarioCreacion) {
+    public void setUsuarioCreacion(Integer aUsuarioCreacion) {
         usuarioCreacion = aUsuarioCreacion;
     }
 
@@ -191,7 +147,7 @@ public class Cronograma implements Serializable {
      *
      * @return the current value of usuarioActualizacion
      */
-    public int getUsuarioActualizacion() {
+    public Integer getUsuarioActualizacion() {
         return usuarioActualizacion;
     }
 
@@ -200,7 +156,7 @@ public class Cronograma implements Serializable {
      *
      * @param aUsuarioActualizacion the new value for usuarioActualizacion
      */
-    public void setUsuarioActualizacion(int aUsuarioActualizacion) {
+    public void setUsuarioActualizacion(Integer aUsuarioActualizacion) {
         usuarioActualizacion = aUsuarioActualizacion;
     }
 
@@ -241,53 +197,71 @@ public class Cronograma implements Serializable {
     }
 
     /**
-     * Access method for horario.
+     * Access method for beneficiario.
      *
-     * @return the current value of horario
+     * @return the current value of beneficiario
      */
-    public Set<Horario> getHorario() {
-        return horario;
+    public Beneficiario getBeneficiario() {
+        return beneficiario;
     }
 
     /**
-     * Setter method for horario.
+     * Setter method for beneficiario.
      *
-     * @param aHorario the new value for horario
+     * @param aBeneficiario the new value for beneficiario
      */
-    public void setHorario(Set<Horario> aHorario) {
-        horario = aHorario;
+    public void setBeneficiario(Beneficiario aBeneficiario) {
+        beneficiario = aBeneficiario;
     }
 
     /**
-     * Compares the key for this instance with another Cronograma.
+     * Access method for lugarentrega.
+     *
+     * @return the current value of lugarentrega
+     */
+    public Lugarentrega getLugarentrega() {
+        return lugarentrega;
+    }
+
+    /**
+     * Setter method for lugarentrega.
+     *
+     * @param aLugarentrega the new value for lugarentrega
+     */
+    public void setLugarentrega(Lugarentrega aLugarentrega) {
+        lugarentrega = aLugarentrega;
+    }
+
+    /**
+     * Compares the key for this instance with another Incidente.
      *
      * @param other The object to compare to
-     * @return True if other object is instance of class Cronograma and the key objects are equal
+     * @return True if other object is instance of class Incidente and the key objects are equal
      */
     private boolean equalKeys(Object other) {
         if (this==other) {
             return true;
         }
-        if (!(other instanceof Cronograma)) {
+        if (!(other instanceof Incidente)) {
             return false;
         }
-        Cronograma that = (Cronograma) other;
-        if (this.getIdCronograma() != that.getIdCronograma()) {
+        Incidente that = (Incidente) other;
+        if (this.getIdIncidente() != that.getIdIncidente()) {
             return false;
         }
         return true;
     }
 
     /**
-     * Compares this instance with another Cronograma.
+     * Compares this instance with another Incidente.
      *
      * @param other The object to compare to
      * @return True if the objects are the same
      */
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Cronograma)) return false;
-        return this.equalKeys(other) && ((Cronograma)other).equalKeys(this);
+        if (!(other instanceof Incidente)) return false;
+        return this.equalKeys(other) && ((Incidente)other).equalKeys(this);
     }
 
     /**
@@ -299,7 +273,7 @@ public class Cronograma implements Serializable {
     public int hashCode() {
         int i;
         int result = 17;
-        i = getIdCronograma();
+        i = getIdIncidente();
         result = 37*result + i;
         return result;
     }
@@ -311,8 +285,8 @@ public class Cronograma implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("[Cronograma |");
-        sb.append(" idCronograma=").append(getIdCronograma());
+        StringBuffer sb = new StringBuffer("[Incidente |");
+        sb.append(" idIncidente=").append(getIdIncidente());
         sb.append("]");
         return sb.toString();
     }
@@ -324,7 +298,7 @@ public class Cronograma implements Serializable {
      */
     public Map<String, Object> getPrimaryKey() {
         Map<String, Object> ret = new LinkedHashMap<String, Object>(6);
-        ret.put("idCronograma", Integer.valueOf(getIdCronograma()));
+        ret.put("idIncidente", Integer.valueOf(getIdIncidente()));
         return ret;
     }
 

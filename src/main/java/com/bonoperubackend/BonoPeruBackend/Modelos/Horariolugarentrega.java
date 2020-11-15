@@ -1,8 +1,6 @@
 // Generated with g9.
 
-package com.bonoperubackend.BonoPeruBackend.db;
-
-import com.bonoperubackend.BonoPeruBackend.Modelos.Horario;
+package com.bonoperubackend.BonoPeruBackend.Modelos;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,46 +10,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 @Entity(name="horariolugarentrega")
+@Table(name = "horariolugarentrega")
 public class Horariolugarentrega implements Serializable {
 
     /** Primary key. */
     protected static final String PK = "idHorariolugarentrega";
-
-    /**
-     * The optimistic lock. Available via standard bean get/set operations.
-     */
-    @Version
-    @Column(name="LOCK_FLAG")
-    private Integer lockFlag;
-
-    /**
-     * Access method for the lockFlag property.
-     *
-     * @return the current value of the lockFlag property
-     */
-    public Integer getLockFlag() {
-        return lockFlag;
-    }
-
-    /**
-     * Sets the value of the lockFlag property.
-     *
-     * @param aLockFlag the new value of the lockFlag property
-     */
-    public void setLockFlag(Integer aLockFlag) {
-        lockFlag = aLockFlag;
-    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -70,15 +36,15 @@ public class Horariolugarentrega implements Serializable {
     @Column(nullable=false, length=3)
     private String estado;
     @Column(name="usuario_creacion", precision=10)
-    private int usuarioCreacion;
+    private Integer usuarioCreacion;
     @Column(name="usuario_actualizacion", precision=10)
-    private int usuarioActualizacion;
+    private Integer usuarioActualizacion;
     @Column(name="fecha_creacion")
     private LocalDateTime fechaCreacion;
     @Column(name="fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
-    @OneToMany(mappedBy="horariolugarentrega")
-    private Set<Horario> horario;
+//    @OneToMany(mappedBy="horariolugarentrega")
+//    private Set<Horario> horario;
     @ManyToOne(optional=false)
     @JoinColumn(name="fid_lugarentrega", nullable=false)
     private Lugarentrega lugarentrega;
@@ -219,7 +185,7 @@ public class Horariolugarentrega implements Serializable {
      *
      * @return the current value of usuarioCreacion
      */
-    public int getUsuarioCreacion() {
+    public Integer getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
@@ -228,7 +194,7 @@ public class Horariolugarentrega implements Serializable {
      *
      * @param aUsuarioCreacion the new value for usuarioCreacion
      */
-    public void setUsuarioCreacion(int aUsuarioCreacion) {
+    public void setUsuarioCreacion(Integer aUsuarioCreacion) {
         usuarioCreacion = aUsuarioCreacion;
     }
 
@@ -237,7 +203,7 @@ public class Horariolugarentrega implements Serializable {
      *
      * @return the current value of usuarioActualizacion
      */
-    public int getUsuarioActualizacion() {
+    public Integer getUsuarioActualizacion() {
         return usuarioActualizacion;
     }
 
@@ -246,7 +212,7 @@ public class Horariolugarentrega implements Serializable {
      *
      * @param aUsuarioActualizacion the new value for usuarioActualizacion
      */
-    public void setUsuarioActualizacion(int aUsuarioActualizacion) {
+    public void setUsuarioActualizacion(Integer aUsuarioActualizacion) {
         usuarioActualizacion = aUsuarioActualizacion;
     }
 
@@ -291,18 +257,18 @@ public class Horariolugarentrega implements Serializable {
      *
      * @return the current value of horario
      */
-    public Set<Horario> getHorario() {
-        return horario;
-    }
-
-    /**
-     * Setter method for horario.
-     *
-     * @param aHorario the new value for horario
-     */
-    public void setHorario(Set<Horario> aHorario) {
-        horario = aHorario;
-    }
+//    public Set<Horario> getHorario() {
+//        return horario;
+//    }
+//
+//    /**
+//     * Setter method for horario.
+//     *
+//     * @param aHorario the new value for horario
+//     */
+//    public void setHorario(Set<Horario> aHorario) {
+//        horario = aHorario;
+//    }
 
     /**
      * Access method for lugarentrega.

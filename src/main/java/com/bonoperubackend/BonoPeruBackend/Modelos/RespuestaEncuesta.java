@@ -1,7 +1,9 @@
 package com.bonoperubackend.BonoPeruBackend.Modelos;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -17,31 +19,6 @@ public class RespuestaEncuesta implements Serializable {
 
     /** Primary key. */
     protected static final String PK = "idRespuestaencuesta";
-
-    /**
-     * The optimistic lock. Available via standard bean get/set operations.
-     */
-    @Version
-    @Column(name="LOCK_FLAG")
-    private Integer lockFlag;
-
-    /**
-     * Access method for the lockFlag property.
-     *
-     * @return the current value of the lockFlag property
-     */
-    public Integer getLockFlag() {
-        return lockFlag;
-    }
-
-    /**
-     * Sets the value of the lockFlag property.
-     *
-     * @param aLockFlag the new value of the lockFlag property
-     */
-    public void setLockFlag(Integer aLockFlag) {
-        lockFlag = aLockFlag;
-    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -59,8 +36,8 @@ public class RespuestaEncuesta implements Serializable {
     @ManyToOne(optional=false)
     @JoinColumn(name="fid_horario", nullable=false)
     private Horario horario;
-    @OneToMany(mappedBy="respuestaencuesta")
-    private Set<RespuestaIndividual> respuestaindividual;
+//    @OneToMany(mappedBy="respuestaencuesta")
+//    private ArrayList<RespuestaIndividual> respuestaindividual;
 
     /** Default constructor. */
     public RespuestaEncuesta() {
@@ -180,18 +157,18 @@ public class RespuestaEncuesta implements Serializable {
      *
      * @return the current value of respuestaindividual
      */
-    public Set<RespuestaIndividual> getRespuestaindividual() {
-        return respuestaindividual;
-    }
-
-    /**
-     * Setter method for respuestaindividual.
-     *
-     * @param aRespuestaIndividual the new value for respuestaindividual
-     */
-    public void setRespuestaindividual(Set<RespuestaIndividual> aRespuestaIndividual) {
-        respuestaindividual = aRespuestaIndividual;
-    }
+//    public ArrayList<RespuestaIndividual> getRespuestaindividual() {
+//        return respuestaindividual;
+//    }
+//
+//    /**
+//     * Setter method for respuestaindividual.
+//     *
+//     * @param aRespuestaIndividual the new value for respuestaindividual
+//     */
+//    public void setRespuestaindividual(ArrayList<RespuestaIndividual> aRespuestaIndividual) {
+//        respuestaindividual = aRespuestaIndividual;
+//    }
 
     /**
      * Compares the key for this instance with another Respuestaencuesta.

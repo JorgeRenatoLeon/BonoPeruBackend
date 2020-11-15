@@ -2,10 +2,6 @@
 
 package com.bonoperubackend.BonoPeruBackend.Modelos;
 
-import com.bonoperubackend.BonoPeruBackend.db.Cronograma;
-import com.bonoperubackend.BonoPeruBackend.db.Horariolugarentrega;
-import com.bonoperubackend.BonoPeruBackend.db.Quejas;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,46 +10,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 @Entity(name="horario")
+@Table(name = "horario")
 public class Horario implements Serializable {
 
     /** Primary key. */
     protected static final String PK = "idHorario";
-
-    /**
-     * The optimistic lock. Available via standard bean get/set operations.
-     */
-    @Version
-    @Column(name="LOCK_FLAG")
-    private Integer lockFlag;
-
-    /**
-     * Access method for the lockFlag property.
-     *
-     * @return the current value of the lockFlag property
-     */
-    public Integer getLockFlag() {
-        return lockFlag;
-    }
-
-    /**
-     * Sets the value of the lockFlag property.
-     *
-     * @param aLockFlag the new value of the lockFlag property
-     */
-    public void setLockFlag(Integer aLockFlag) {
-        lockFlag = aLockFlag;
-    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -68,9 +32,9 @@ public class Horario implements Serializable {
     @Column(nullable=false, length=3)
     private String estado;
     @Column(name="usuario_creacion", precision=10)
-    private int usuarioCreacion;
+    private Integer usuarioCreacion;
     @Column(name="usuario_actualizacion", precision=10)
-    private int usuarioActualizacion;
+    private Integer usuarioActualizacion;
     @Column(name="fecha_creacion")
     private LocalDateTime fechaCreacion;
     @Column(name="fecha_actualizacion")
@@ -84,10 +48,10 @@ public class Horario implements Serializable {
     @ManyToOne(optional=false)
     @JoinColumn(name="fid_horariolugarentrega", nullable=false)
     private Horariolugarentrega horariolugarentrega;
-    @OneToMany(mappedBy="horario")
-    private Set<Quejas> quejas;
-    @OneToMany(mappedBy="horario")
-    private Set<RespuestaEncuesta> respuestaencuesta;
+//    @OneToMany(mappedBy="horario")
+//    private Set<Quejas> quejas;
+//    @OneToMany(mappedBy="horario")
+//    private Set<RespuestaEncuesta> respuestaencuesta;
 
     /** Default constructor. */
     public Horario() {
@@ -189,7 +153,7 @@ public class Horario implements Serializable {
      *
      * @return the current value of usuarioCreacion
      */
-    public int getUsuarioCreacion() {
+    public Integer getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
@@ -198,7 +162,7 @@ public class Horario implements Serializable {
      *
      * @param aUsuarioCreacion the new value for usuarioCreacion
      */
-    public void setUsuarioCreacion(int aUsuarioCreacion) {
+    public void setUsuarioCreacion(Integer aUsuarioCreacion) {
         usuarioCreacion = aUsuarioCreacion;
     }
 
@@ -207,7 +171,7 @@ public class Horario implements Serializable {
      *
      * @return the current value of usuarioActualizacion
      */
-    public int getUsuarioActualizacion() {
+    public Integer getUsuarioActualizacion() {
         return usuarioActualizacion;
     }
 
@@ -216,7 +180,7 @@ public class Horario implements Serializable {
      *
      * @param aUsuarioActualizacion the new value for usuarioActualizacion
      */
-    public void setUsuarioActualizacion(int aUsuarioActualizacion) {
+    public void setUsuarioActualizacion(Integer aUsuarioActualizacion) {
         usuarioActualizacion = aUsuarioActualizacion;
     }
 
@@ -315,36 +279,36 @@ public class Horario implements Serializable {
      *
      * @return the current value of quejas
      */
-    public Set<Quejas> getQuejas() {
-        return quejas;
-    }
-
-    /**
-     * Setter method for quejas.
-     *
-     * @param aQuejas the new value for quejas
-     */
-    public void setQuejas(Set<Quejas> aQuejas) {
-        quejas = aQuejas;
-    }
-
-    /**
-     * Access method for respuestaencuesta.
-     *
-     * @return the current value of respuestaencuesta
-     */
-    public Set<RespuestaEncuesta> getRespuestaencuesta() {
-        return respuestaencuesta;
-    }
-
-    /**
-     * Setter method for respuestaencuesta.
-     *
-     * @param aRespuestaencuesta the new value for respuestaencuesta
-     */
-    public void setRespuestaencuesta(Set<RespuestaEncuesta> aRespuestaencuesta) {
-        respuestaencuesta = aRespuestaencuesta;
-    }
+//    public Set<Quejas> getQuejas() {
+//        return quejas;
+//    }
+//
+//    /**
+//     * Setter method for quejas.
+//     *
+//     * @param aQuejas the new value for quejas
+//     */
+//    public void setQuejas(Set<Quejas> aQuejas) {
+//        quejas = aQuejas;
+//    }
+//
+//    /**
+//     * Access method for respuestaencuesta.
+//     *
+//     * @return the current value of respuestaencuesta
+//     */
+//    public Set<RespuestaEncuesta> getRespuestaencuesta() {
+//        return respuestaencuesta;
+//    }
+//
+//    /**
+//     * Setter method for respuestaencuesta.
+//     *
+//     * @param aRespuestaencuesta the new value for respuestaencuesta
+//     */
+//    public void setRespuestaencuesta(Set<RespuestaEncuesta> aRespuestaencuesta) {
+//        respuestaencuesta = aRespuestaencuesta;
+//    }
 
     /**
      * Compares the key for this instance with another Horario.

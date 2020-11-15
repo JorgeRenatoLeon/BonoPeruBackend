@@ -3,6 +3,8 @@
 package com.bonoperubackend.BonoPeruBackend.db;
 
 import com.bonoperubackend.BonoPeruBackend.Modelos.Horario;
+import com.bonoperubackend.BonoPeruBackend.Modelos.Incidente;
+import com.bonoperubackend.BonoPeruBackend.Modelos.Quejas;
 import com.bonoperubackend.BonoPeruBackend.Modelos.RespuestaEncuesta;
 
 import java.io.Serializable;

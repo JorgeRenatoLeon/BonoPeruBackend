@@ -2,6 +2,8 @@
 
 package com.bonoperubackend.BonoPeruBackend.db;
 
+import com.bonoperubackend.BonoPeruBackend.Modelos.Lugarentrega;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
