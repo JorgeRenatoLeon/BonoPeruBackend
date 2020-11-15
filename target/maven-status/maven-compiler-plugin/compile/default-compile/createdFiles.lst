@@ -23,6 +23,7 @@ com\bonoperubackend\BonoPeruBackend\Controladores\ValoresController.class
 com\bonoperubackend\BonoPeruBackend\db\Distrito.class
 com\bonoperubackend\BonoPeruBackend\Payload\Request\LoginRequest.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\UserRepository.class
+com\bonoperubackend\BonoPeruBackend\Controladores\LugarEntregaController$Lugares.class
 com\bonoperubackend\BonoPeruBackend\Seguridad\Servicios\UserDetailsImpl.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Horario.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Persona.class

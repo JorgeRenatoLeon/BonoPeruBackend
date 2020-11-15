@@ -13,7 +13,7 @@ public class Provincia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_provincia;
 
-    private Integer fid_departamento;
+    private Integer fiddepartamento;
 
     @NotBlank
     @Size(max = 100)
@@ -34,15 +34,15 @@ public class Provincia {
 
     private Timestamp fecha_actualizacion;
 
-    public Provincia(Integer fid_departamento, @NotBlank @Size(max = 100) String nombre, Integer zona_riesgo, @NotBlank @Size(max = 3) String estado, Integer usuario_creacion) {
-        this.fid_departamento = fid_departamento;
+    public Provincia(Integer fiddepartamento, @NotBlank @Size(max = 100) String nombre, Integer zona_riesgo, @NotBlank @Size(max = 3) String estado, Integer usuario_creacion) {
+        this.fiddepartamento = fiddepartamento;
         this.nombre = nombre;
         this.zona_riesgo = zona_riesgo;
         this.estado = estado;
         this.usuario_creacion = usuario_creacion;
     }
 
-    public Provincia(){};
+    public Provincia(){}
 
     public Integer getId_provincia() {
         return id_provincia;
@@ -52,12 +52,12 @@ public class Provincia {
         this.id_provincia = id_provincia;
     }
 
-    public Integer getFid_departamento() {
-        return fid_departamento;
+    public Integer getFiddepartamento() {
+        return fiddepartamento;
     }
 
-    public void setFid_departamento(Integer fid_departamento) {
-        this.fid_departamento = fid_departamento;
+    public void setFiddepartamento(Integer fiddepartamento) {
+        this.fiddepartamento = fiddepartamento;
     }
 
     public String getNombre() {
