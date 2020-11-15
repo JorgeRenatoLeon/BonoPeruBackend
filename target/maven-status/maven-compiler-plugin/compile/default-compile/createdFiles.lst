@@ -2,11 +2,13 @@ com\bonoperubackend\BonoPeruBackend\db\Provincia.class
 com\bonoperubackend\BonoPeruBackend\db\Rol.class
 com\bonoperubackend\BonoPeruBackend\Controladores\ProvinciaController.class
 com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\AuthTokenFilter.class
+com\bonoperubackend\BonoPeruBackend\Repositorios\HorarioLugarEntregaRepository.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\RoleRepository.class
 com\bonoperubackend\BonoPeruBackend\Controladores\PreguntasFrecuentesController.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\RespuestaEncuestaRepository.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Horariolugarentrega.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Usuario.class
+com\bonoperubackend\BonoPeruBackend\Controladores\LugarEntregaController.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Provincia.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Beneficiario.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Pregunta.class
@@ -16,6 +18,7 @@ com\bonoperubackend\BonoPeruBackend\Seguridad\WebSecurityConfig.class
 com\bonoperubackend\BonoPeruBackend\db\Valores.class
 com\bonoperubackend\BonoPeruBackend\Payload\Response\MessageResponse.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Incidente.class
+com\bonoperubackend\BonoPeruBackend\Repositorios\LugarEntregaRepository.class
 com\bonoperubackend\BonoPeruBackend\Controladores\ValoresController.class
 com\bonoperubackend\BonoPeruBackend\db\Distrito.class
 com\bonoperubackend\BonoPeruBackend\Payload\Request\LoginRequest.class
@@ -59,4 +62,5 @@ com\bonoperubackend\BonoPeruBackend\Controladores\DistritoController.class
 com\bonoperubackend\BonoPeruBackend\Modelos\PreguntasFrecuentes.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Departamento.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\RespuestaIndividualRepository.class
+com\bonoperubackend\BonoPeruBackend\Repositorios\HorarioRepository.class
 com\bonoperubackend\BonoPeruBackend\Modelos\RespuestaIndividual.class
