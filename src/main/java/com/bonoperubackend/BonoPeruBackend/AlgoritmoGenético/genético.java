@@ -333,7 +333,46 @@ public class genético {
     }
 
     private ArrayList<Individual> get_paretofront_population(ArrayList<Individual> populationC) {
-        return new ArrayList<Individual>();
+        ArrayList<Individual> population = (ArrayList<Individual>) populationC.clone();
+        int pop_size = population.size();
+
+        //todos los individuos son inicialmente asumidos como la frontera de Pareto
+        ArrayList<Integer> pareto_front = new ArrayList<Integer>(Collections.nCopies(pop_size, 1));
+
+        //for i in range(pop_size): # Compara cada individuo contra todos los demas
+        for (int i=0;i<pop_size;i++){
+            for (int j=0;j<pop_size;j++){
+                // Chequea si individuo 'i' es dominado por individuo 'j'
+                boolean mayorIgual = true;
+                boolean mayor = true;
+                ArrayList<Integer> populationJ = population.get(j).getFitness();
+                ArrayList<Integer> populationI = population.get(i).getFitness();
+                for (int k=0; k<populationJ.size();k++) {
+                    if(!populationJ.get(k).equals(populationI.get(k))){
+                        mayorIgual = false;
+                        break;
+                    }
+                    if(populationJ.get(k)>populationI.get(k)){
+                        mayor = false;
+                        break;
+                    }
+                }
+                if(mayor && mayorIgual){
+                    // j domina i -> señaliza que individuo 'i' como no siendo parte de la frontera de Pareto
+                    pareto_front.set(i,0);
+                    break; // Para la busqueda para 'i' (no es necesario hacer mas comparaciones)
+                }
+            }
+
+        }
+
+
+        ArrayList<Individual> paretofront_population = new ArrayList<Individual>();
+        for (int i=0;i<pop_size;i++){ // Construye la lista de individuos de la frontera de Pareto
+            if(pareto_front.get(i)==1) paretofront_population.add(population.get(i));
+        }
+
+        return paretofront_population;
     }
 
     public ArrayList<Individual> build_next_population(ArrayList<Individual> population, int min_pop_size, int max_pop_size) {

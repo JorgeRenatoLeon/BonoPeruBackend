@@ -57,7 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**","/api/departamento/**"
-                ,"/api/provincia/**","/api/distrito/**","/api/preguntasfrecuentes/**","/api/valores/**").permitAll()
+                ,"/api/provincia/**","/api/distrito/**","/api/preguntasfrecuentes/**","/api/valores/**"
+                ,"/api/encuesta/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
 
