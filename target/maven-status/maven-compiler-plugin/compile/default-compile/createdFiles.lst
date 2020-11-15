@@ -3,6 +3,7 @@ com\bonoperubackend\BonoPeruBackend\BonoPeruBackendApplication.class
 com\bonoperubackend\BonoPeruBackend\AlgoritmoGenético\Individual.class
 com\bonoperubackend\BonoPeruBackend\Controladores\ProvinciaController.class
 com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\AuthTokenFilter.class
+com\bonoperubackend\BonoPeruBackend\AlgoritmoGenético\main.class
 com\bonoperubackend\BonoPeruBackend\Controladores\TestController.class
 com\bonoperubackend\BonoPeruBackend\Modelos\ERole.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Valores.class
