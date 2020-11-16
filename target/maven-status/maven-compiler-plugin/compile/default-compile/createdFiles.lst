@@ -1,6 +1,7 @@
 com\bonoperubackend\BonoPeruBackend\db\Provincia.class
 com\bonoperubackend\BonoPeruBackend\db\Rol.class
 com\bonoperubackend\BonoPeruBackend\Controladores\ProvinciaController.class
+com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\AuthTokenFilter.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\RoleRepository.class
 com\bonoperubackend\BonoPeruBackend\Controladores\PreguntasFrecuentesController.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\RespuestaEncuestaRepository.class
@@ -10,7 +11,7 @@ com\bonoperubackend\BonoPeruBackend\Modelos\Provincia.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Beneficiario.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Pregunta.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\ProvinciaRepository.class
-com\bonoperubackend\BonoPeruBackend\Seguridad\JWT\AuthTokenFilter.class
+com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\AuthEntryPointJwt.class
 com\bonoperubackend\BonoPeruBackend\Seguridad\WebSecurityConfig.class
 com\bonoperubackend\BonoPeruBackend\db\Valores.class
 com\bonoperubackend\BonoPeruBackend\Payload\Response\MessageResponse.class
@@ -27,17 +28,16 @@ com\bonoperubackend\BonoPeruBackend\Controladores\RespuestaEncuestaController.cl
 com\bonoperubackend\BonoPeruBackend\Modelos\Rol.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\BeneficiarioRepository.class
 com\bonoperubackend\BonoPeruBackend\db\Departamento.class
+com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\JwtUtils.class
 com\bonoperubackend\BonoPeruBackend\BonoPeruBackendApplication.class
 com\bonoperubackend\BonoPeruBackend\AlgoritmoGenético\Individual.class
 com\bonoperubackend\BonoPeruBackend\Controladores\TestController.class
 com\bonoperubackend\BonoPeruBackend\Modelos\ERole.class
-com\bonoperubackend\BonoPeruBackend\Seguridad\JWT\AuthEntryPointJwt.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Valores.class
 com\bonoperubackend\BonoPeruBackend\db\Beneficiario.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\PreguntasFrecuentesRepository.class
 com\bonoperubackend\BonoPeruBackend\Controladores\RespuestaEncuestaController$Respuestas.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Lugarentrega.class
-com\bonoperubackend\BonoPeruBackend\Seguridad\JWT\JwtUtils.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Cronograma.class
 com\bonoperubackend\BonoPeruBackend\Payload\Response\JwtResponse.class
 com\bonoperubackend\BonoPeruBackend\Modelos\RespuestaEncuesta.class

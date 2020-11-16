@@ -10,6 +10,7 @@ public class genético {
 
     public ArrayList<Individual> init_population(int pop_size, int chromosome_size, ArrayList<Item> items, Hashtable<String,ArrayList<Integer>> lugares) {
         //Inicializa una poblacion de pop_size individuos, cada cromosoma de individuo de tamaño chromosome_size.
+        // Cambio para probar con Joh
         ArrayList<Individual> population=new ArrayList<Individual>();
         Random rn=new Random();
         for (int i=0; i<pop_size; i++){
