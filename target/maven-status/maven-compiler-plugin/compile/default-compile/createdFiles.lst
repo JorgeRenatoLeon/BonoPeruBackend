@@ -34,7 +34,6 @@ com\bonoperubackend\BonoPeruBackend\Repositorios\BeneficiarioRepository.class
 com\bonoperubackend\BonoPeruBackend\db\Departamento.class
 com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\JwtUtils.class
 com\bonoperubackend\BonoPeruBackend\BonoPeruBackendApplication.class
-com\bonoperubackend\BonoPeruBackend\AlgoritmoGenético\Individual.class
 com\bonoperubackend\BonoPeruBackend\Controladores\TestController.class
 com\bonoperubackend\BonoPeruBackend\Modelos\ERole.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Valores.class
@@ -52,7 +51,6 @@ com\bonoperubackend\BonoPeruBackend\Payload\Request\SignupRequest.class
 com\bonoperubackend\BonoPeruBackend\Controladores\BeneficiarioController.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Quejas.class
 com\bonoperubackend\BonoPeruBackend\Controladores\DepartamentoController.class
-com\bonoperubackend\BonoPeruBackend\AlgoritmoGenético\Item.class
 com\bonoperubackend\BonoPeruBackend\db\Preguntasfrecuentes.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\PreguntaRepository.class
 com\bonoperubackend\BonoPeruBackend\Controladores\PersonaControlador.class
@@ -61,7 +59,6 @@ com\bonoperubackend\BonoPeruBackend\Controladores\PreguntaController.class
 com\bonoperubackend\BonoPeruBackend\db\Usuario.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Distrito.class
 com\bonoperubackend\BonoPeruBackend\Repositorios\DistritoRepository.class
-com\bonoperubackend\BonoPeruBackend\AlgoritmoGenético\genético.class
 com\bonoperubackend\BonoPeruBackend\Controladores\DistritoController.class
 com\bonoperubackend\BonoPeruBackend\Modelos\PreguntasFrecuentes.class
 com\bonoperubackend\BonoPeruBackend\Modelos\Departamento.class
