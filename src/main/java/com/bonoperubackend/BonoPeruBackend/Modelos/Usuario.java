@@ -17,7 +17,7 @@ import java.util.Set;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_usuario;
+    private Integer idusuario;
 
     @NotBlank
     @Size(max = 50)
@@ -33,17 +33,20 @@ public class Usuario {
     @Size(max = 200)
     private String apellidos;
 
+    @Size(max = 200)
+    private String correo;
+
     @Size(max = 3)
     private String estado;
 
-    private int usuario_creacion;
+    private int usuariocreacion;
 
-    private int usuario_actualizacion;
+    private int usuarioactualizacion;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "usuario_rol",
-            joinColumns = @JoinColumn(name = "fid_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "fid_rol"))
+    @JoinTable(	name = "usuariorol",
+            joinColumns = @JoinColumn(name = "fidusuario"),
+            inverseJoinColumns = @JoinColumn(name = "fidrol"))
     private Set<Rol> roles = new HashSet<>();
 
     public Usuario() {
@@ -58,11 +61,11 @@ public class Usuario {
     }
 
     public Integer getId() {
-        return id_usuario;
+        return idusuario;
     }
 
-    public void setId(Integer id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId(Integer idusuario) {
+        this.idusuario = idusuario;
     }
 
     public String getUsername() {
@@ -97,6 +100,14 @@ public class Usuario {
         this.apellidos = apellidos;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     public String getEstado() {
         return estado;
     }
@@ -106,19 +117,19 @@ public class Usuario {
     }
 
     public int getUsuarioActualizacion() {
-        return usuario_actualizacion;
+        return usuarioactualizacion;
     }
 
-    public void setUsuarioActualizacion(int usuario_actualizacion) {
-        this.usuario_actualizacion = usuario_actualizacion;
+    public void setUsuarioActualizacion(int usuarioactualizacion) {
+        this.usuarioactualizacion = usuarioactualizacion;
     }
 
     public int getUsuarioCreacion() {
-        return usuario_creacion;
+        return usuariocreacion;
     }
 
-    public void setUsuarioCreacion(int usuario_creacion) {
-        this.usuario_creacion = usuario_creacion;
+    public void setUsuarioCreacion(int usuariocreacion) {
+        this.usuariocreacion = usuariocreacion;
     }
 
     public Set<Rol> getRoles() {

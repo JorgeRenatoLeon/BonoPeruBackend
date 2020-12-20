@@ -66,18 +66,16 @@ public class RespuestaEncuestaController {
 
     @PostMapping("/{id}")
     public Respuestas respuestaEncuesta(@PathVariable Integer id) {
-        Optional<RespuestaEncuesta> resp = respuestaEncuestaRepository.findById(id);
-        if(resp.isPresent()){
-            return buscarRespuestas(resp.get());
-        }
-        return null;
+        Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
+        Optional<RespuestaEncuesta> resp = respuestaEncuestaRepository.findByBeneficiarioAndEstado(beneficiario.get(),"PEN");
+        return resp.map(this::buscarRespuestas).orElse(null);
     }
 
     @PostMapping("/usuario/{id}")
     public Respuestas respuestaUsuarioEncuesta(@PathVariable Integer id) {
         Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
         if(beneficiario.isPresent()){
-            Optional<RespuestaEncuesta> resp = respuestaEncuestaRepository.findById(beneficiario.get().getId_beneficiario());
+            Optional<RespuestaEncuesta> resp = respuestaEncuestaRepository.findById(beneficiario.get().getIdbeneficiario());
             if(resp.isPresent()){
                 return buscarRespuestas(resp.get());
             }

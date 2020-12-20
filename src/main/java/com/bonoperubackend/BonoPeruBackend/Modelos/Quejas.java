@@ -24,26 +24,26 @@ public class Quejas implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_quejas", unique=true, nullable=false, precision=10)
+    @Column(name="idquejas", unique=true, nullable=false, precision=10)
     private int idQuejas;
     @Column(nullable=false, length=500)
     private String descripcion;
-    @Column(name="tipo_queja", nullable=false, length=30)
+    @Column(name="tipoqueja", nullable=false, length=30)
     private String tipoQueja;
     @Column(nullable=false, length=3)
     private String estado;
-    @Column(name="fecha_creacion")
+    @Column(name="fechacreacion")
     private LocalDateTime fechaCreacion;
-    @Column(name="fecha_actualizacion")
+    @Column(name="fechaactualizacion")
     private LocalDateTime fechaActualizacion;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_beneficiario", nullable=false)
+    @JoinColumn(name="fidbeneficiario", nullable=false)
     private Beneficiario beneficiario;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_horario", nullable=false)
+    @JoinColumn(name="fidhorario", nullable=false)
     private Horario horario;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_lugarentrega", nullable=false)
+    @JoinColumn(name="fidlugarentrega", nullable=false)
     private Lugarentrega lugarentrega;
 
     /** Default constructor. */

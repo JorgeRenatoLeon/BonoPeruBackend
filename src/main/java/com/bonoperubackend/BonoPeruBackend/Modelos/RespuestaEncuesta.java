@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity(name="respuestaencuesta")
 @Table(	name = "respuestaencuesta",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "id_respuestaencuesta")
+                @UniqueConstraint(columnNames = "idrespuestaencuesta")
         })
 public class RespuestaEncuesta implements Serializable {
 
@@ -22,19 +22,19 @@ public class RespuestaEncuesta implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_respuestaencuesta", unique=true, nullable=false, precision=10)
+    @Column(name="idrespuestaencuesta", unique=true, nullable=false, precision=10)
     private Integer idRespuestaencuesta;
     @Column(nullable=false, length=3)
     private String estado;
-    @Column(name="fecha_creacion")
+    @Column(name="fechacreacion")
     private LocalDateTime fechaCreacion;
-    @Column(name="fecha_actualizacion")
+    @Column(name="fechaactualizacion")
     private LocalDateTime fechaActualizacion;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_beneficiario", nullable=false)
+    @JoinColumn(name="fidbeneficiario", nullable=false)
     private Beneficiario beneficiario;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_horario", nullable=false)
+    @JoinColumn(name="fidhorario", nullable=false)
     private Horario horario;
 //    @OneToMany(mappedBy="respuestaencuesta")
 //    private ArrayList<RespuestaIndividual> respuestaindividual;
@@ -42,6 +42,12 @@ public class RespuestaEncuesta implements Serializable {
     /** Default constructor. */
     public RespuestaEncuesta() {
         super();
+    }
+
+    public RespuestaEncuesta(String estado, Beneficiario beneficiario, Horario horario) {
+        this.estado = estado;
+        this.beneficiario = beneficiario;
+        this.horario = horario;
     }
 
     /**

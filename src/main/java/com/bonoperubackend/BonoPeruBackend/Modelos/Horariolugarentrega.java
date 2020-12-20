@@ -21,33 +21,36 @@ public class Horariolugarentrega implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_horariolugarentrega", unique=true, nullable=false, precision=10)
+    @Column(name="idhorariolugarentrega", unique=true, nullable=false, precision=10)
     private int idHorariolugarentrega;
-    @Column(name="hora_apertura_turno1", nullable=false)
-    private LocalTime horaAperturaTurno1;
-    @Column(name="hora_cierre_turno1", nullable=false)
-    private LocalTime horaCierreTurno1;
-    @Column(name="hora_apertura_turno2", nullable=false)
-    private LocalTime horaAperturaTurno2;
-    @Column(name="hora_cierre_turno2", nullable=false)
-    private LocalTime horaCierreTurno2;
-    @Column(nullable=false)
-    private LocalDate dia;
+    @Column(name="horaaperturaturnoma", nullable=false)
+    private LocalTime horaaperturaturnoma;
+    @Column(name="horacierreturnoma", nullable=false)
+    private LocalTime horacierreturnoma;
+    @Column(name="horaaperturaturnotar", nullable=false)
+    private LocalTime horaaperturaturnotar;
+    @Column(name="horacierreturnotar", nullable=false)
+    private LocalTime horacierreturnotar;
+    @Column(nullable=false, length=30)
+    private String dia;
     @Column(nullable=false, length=3)
     private String estado;
-    @Column(name="usuario_creacion", precision=10)
+    @Column(name="usuariocreacion", precision=10)
     private Integer usuarioCreacion;
-    @Column(name="usuario_actualizacion", precision=10)
+    @Column(name="usuarioactualizacion", precision=10)
     private Integer usuarioActualizacion;
-    @Column(name="fecha_creacion")
+    @Column(name="fechacreacion")
     private LocalDateTime fechaCreacion;
-    @Column(name="fecha_actualizacion")
+    @Column(name="fechaactualizacion")
     private LocalDateTime fechaActualizacion;
+    private Integer diabinario;
 //    @OneToMany(mappedBy="horariolugarentrega")
 //    private Set<Horario> horario;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_lugarentrega", nullable=false)
+    @JoinColumn(name="fidlugarentrega", nullable=false)
     private Lugarentrega lugarentrega;
+
+
 
     /** Default constructor. */
     public Horariolugarentrega() {
@@ -72,93 +75,54 @@ public class Horariolugarentrega implements Serializable {
         idHorariolugarentrega = aIdHorariolugarentrega;
     }
 
-    /**
-     * Access method for horaAperturaTurno1.
-     *
-     * @return the current value of horaAperturaTurno1
-     */
-    public LocalTime getHoraAperturaTurno1() {
-        return horaAperturaTurno1;
+    public LocalTime getHoraaperturaturnoma() {
+        return horaaperturaturnoma;
     }
 
-    /**
-     * Setter method for horaAperturaTurno1.
-     *
-     * @param aHoraAperturaTurno1 the new value for horaAperturaTurno1
-     */
-    public void setHoraAperturaTurno1(LocalTime aHoraAperturaTurno1) {
-        horaAperturaTurno1 = aHoraAperturaTurno1;
+    public void setHoraaperturaturnoma(LocalTime horaaperturaturnoma) {
+        this.horaaperturaturnoma = horaaperturaturnoma;
     }
 
-    /**
-     * Access method for horaCierreTurno1.
-     *
-     * @return the current value of horaCierreTurno1
-     */
-    public LocalTime getHoraCierreTurno1() {
-        return horaCierreTurno1;
+    public LocalTime getHoracierreturnoma() {
+        return horacierreturnoma;
     }
 
-    /**
-     * Setter method for horaCierreTurno1.
-     *
-     * @param aHoraCierreTurno1 the new value for horaCierreTurno1
-     */
-    public void setHoraCierreTurno1(LocalTime aHoraCierreTurno1) {
-        horaCierreTurno1 = aHoraCierreTurno1;
+    public void setHoracierreturnoma(LocalTime horacierreturnoma) {
+        this.horacierreturnoma = horacierreturnoma;
     }
 
-    /**
-     * Access method for horaAperturaTurno2.
-     *
-     * @return the current value of horaAperturaTurno2
-     */
-    public LocalTime getHoraAperturaTurno2() {
-        return horaAperturaTurno2;
+    public LocalTime getHoraaperturaturnotar() {
+        return horaaperturaturnotar;
     }
 
-    /**
-     * Setter method for horaAperturaTurno2.
-     *
-     * @param aHoraAperturaTurno2 the new value for horaAperturaTurno2
-     */
-    public void setHoraAperturaTurno2(LocalTime aHoraAperturaTurno2) {
-        horaAperturaTurno2 = aHoraAperturaTurno2;
+    public void setHoraaperturaturnotar(LocalTime horaaperturaturnotar) {
+        this.horaaperturaturnotar = horaaperturaturnotar;
     }
 
-    /**
-     * Access method for horaCierreTurno2.
-     *
-     * @return the current value of horaCierreTurno2
-     */
-    public LocalTime getHoraCierreTurno2() {
-        return horaCierreTurno2;
+    public LocalTime getHoracierreturnotar() {
+        return horacierreturnotar;
     }
 
-    /**
-     * Setter method for horaCierreTurno2.
-     *
-     * @param aHoraCierreTurno2 the new value for horaCierreTurno2
-     */
-    public void setHoraCierreTurno2(LocalTime aHoraCierreTurno2) {
-        horaCierreTurno2 = aHoraCierreTurno2;
+    public void setHoracierreturnotar(LocalTime horacierreturnotar) {
+        this.horacierreturnotar = horacierreturnotar;
     }
+
 
     /**
      * Access method for dia.
      *
      * @return the current value of dia
      */
-    public LocalDate getDia() {
+
+    public String getDia() {
         return dia;
     }
-
     /**
      * Setter method for dia.
      *
      * @param aDia the new value for dia
      */
-    public void setDia(LocalDate aDia) {
+    public void setDia(String aDia) {
         dia = aDia;
     }
 
@@ -358,4 +322,11 @@ public class Horariolugarentrega implements Serializable {
         return ret;
     }
 
+    public Integer getDiabinario() {
+        return diabinario;
+    }
+
+    public void setDiabinario(Integer diabinario) {
+        this.diabinario = diabinario;
+    }
 }

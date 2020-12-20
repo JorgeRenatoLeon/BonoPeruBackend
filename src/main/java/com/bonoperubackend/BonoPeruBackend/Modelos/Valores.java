@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 public class Valores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_valores;
+    private Integer idvalores;
 
     @NotBlank
     @Size(max = 100)
@@ -27,9 +27,9 @@ public class Valores {
     @Size(max = 500)
     private String descripcion;
 
-    private Timestamp fecha_creacion;
+    private Timestamp fechacreacion;
 
-    private Timestamp fecha_actualizacion;
+    private Timestamp fechaactualizacion;
 
     public Valores(@NotBlank @Size(max = 100) String tabla, @NotBlank @Size(max = 3) String abreviatura, @NotBlank @Size(max = 100) String nombre, @Size(max = 500) String descripcion) {
         this.tabla = tabla;
@@ -40,12 +40,12 @@ public class Valores {
 
     public Valores(){}
 
-    public Integer getId_valores() {
-        return id_valores;
+    public Integer getIdvalores() {
+        return idvalores;
     }
 
-    public void setId_valores(Integer id_valores) {
-        this.id_valores = id_valores;
+    public void setIdvalores(Integer idvalores) {
+        this.idvalores = idvalores;
     }
 
     public String getTabla() {
@@ -80,19 +80,19 @@ public class Valores {
         this.descripcion = descripcion;
     }
 
-    public Timestamp getFecha_creacion() {
-        return fecha_creacion;
+    public Timestamp getFechacreacion() {
+        return fechacreacion;
     }
 
-    public void setFecha_creacion(Timestamp fecha_creacion) {
-        this.fecha_creacion = fecha_creacion;
+    public void setFechacreacion(Timestamp fechacreacion) {
+        this.fechacreacion = fechacreacion;
     }
 
-    public Timestamp getFecha_actualizacion() {
-        return fecha_actualizacion;
+    public Timestamp getFechaactualizacion() {
+        return fechaactualizacion;
     }
 
-    public void setFecha_actualizacion(Timestamp fecha_actualizacion) {
-        this.fecha_actualizacion = fecha_actualizacion;
+    public void setFechaactualizacion(Timestamp fechaactualizacion) {
+        this.fechaactualizacion = fechaactualizacion;
     }
 }

@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 public class PreguntasFrecuentes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_preguntasfrecuentes;
+    private Integer idpreguntasfrecuentes;
 
     @NotBlank
     @Size(max = 500)
@@ -24,30 +24,29 @@ public class PreguntasFrecuentes {
     @Size(max = 3)
     private String estado;
 
-    private Integer usuario_creacion;
+    private Integer usuariocreacion;
 
-    @Null
-    private Integer usuario_actualizacion;
+    private Integer usuarioactualizacion;
 
-    private Timestamp fecha_creacion;
+    private Timestamp fechacreacion;
 
-    private Timestamp fecha_actualizacion;
+    private Timestamp fechaactualizacion;
 
-    public PreguntasFrecuentes(@NotBlank @Size(max = 500) String pregunta, @NotBlank @Size(max = 500) String respuesta, @NotBlank @Size(max = 3) String estado, Integer usuario_creacion) {
+    public PreguntasFrecuentes(@NotBlank @Size(max = 500) String pregunta, @NotBlank @Size(max = 500) String respuesta, @NotBlank @Size(max = 3) String estado, Integer usuariocreacion) {
         this.pregunta = pregunta;
         this.respuesta = respuesta;
         this.estado = estado;
-        this.usuario_creacion = usuario_creacion;
+        this.usuariocreacion = usuariocreacion;
     }
 
     public PreguntasFrecuentes(){}
 
-    public Integer getId_preguntasfrecuentes() {
-        return id_preguntasfrecuentes;
+    public Integer getIdpreguntasfrecuentes() {
+        return idpreguntasfrecuentes;
     }
 
-    public void setId_preguntasfrecuentes(Integer id_preguntasfrecuentes) {
-        this.id_preguntasfrecuentes = id_preguntasfrecuentes;
+    public void setIdpreguntasfrecuentes(Integer idpreguntasfrecuentes) {
+        this.idpreguntasfrecuentes = idpreguntasfrecuentes;
     }
 
     public String getPregunta() {
@@ -74,35 +73,35 @@ public class PreguntasFrecuentes {
         this.estado = estado;
     }
 
-    public Integer getUsuario_creacion() {
-        return usuario_creacion;
+    public Integer getUsuariocreacion() {
+        return usuariocreacion;
     }
 
-    public void setUsuario_creacion(Integer usuario_creacion) {
-        this.usuario_creacion = usuario_creacion;
+    public void setUsuariocreacion(Integer usuariocreacion) {
+        this.usuariocreacion = usuariocreacion;
     }
 
-    public Integer getUsuario_actualizacion() {
-        return usuario_actualizacion;
+    public Integer getUsuarioactualizacion() {
+        return usuarioactualizacion;
     }
 
-    public void setUsuario_actualizacion(Integer usuario_actualizacion) {
-        this.usuario_actualizacion = usuario_actualizacion;
+    public void setUsuarioactualizacion(Integer usuarioactualizacion) {
+        this.usuarioactualizacion = usuarioactualizacion;
     }
 
-    public Timestamp getFecha_creacion() {
-        return fecha_creacion;
+    public Timestamp getFechacreacion() {
+        return fechacreacion;
     }
 
-    public void setFecha_creacion(Timestamp fecha_creacion) {
-        this.fecha_creacion = fecha_creacion;
+    public void setFechacreacion(Timestamp fechacreacion) {
+        this.fechacreacion = fechacreacion;
     }
 
-    public Timestamp getFecha_actualizacion() {
-        return fecha_actualizacion;
+    public Timestamp getFechaactualizacion() {
+        return fechaactualizacion;
     }
 
-    public void setFecha_actualizacion(Timestamp fecha_actualizacion) {
-        this.fecha_actualizacion = fecha_actualizacion;
+    public void setFechaactualizacion(Timestamp fechaactualizacion) {
+        this.fechaactualizacion = fechaactualizacion;
     }
 }

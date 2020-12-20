@@ -21,32 +21,32 @@ public class Horario implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_horario", unique=true, nullable=false, precision=10)
+    @Column(name="idhorario", unique=true, nullable=false, precision=10)
     private int idHorario;
-    @Column(name="hora_inicio", nullable=false)
+    @Column(name="horainicio", nullable=false)
     private LocalTime horaInicio;
-    @Column(name="hora_fin", nullable=false)
+    @Column(name="horafin", nullable=false)
     private LocalTime horaFin;
     @Column(nullable=false)
     private LocalDate fecha;
     @Column(nullable=false, length=3)
     private String estado;
-    @Column(name="usuario_creacion", precision=10)
+    @Column(name="usuariocreacion", precision=10)
     private Integer usuarioCreacion;
-    @Column(name="usuario_actualizacion", precision=10)
+    @Column(name="usuarioactualizacion", precision=10)
     private Integer usuarioActualizacion;
-    @Column(name="fecha_creacion")
+    @Column(name="fechacreacion")
     private LocalDateTime fechaCreacion;
-    @Column(name="fecha_actualizacion")
+    @Column(name="fechaactualizacion")
     private LocalDateTime fechaActualizacion;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_cronograma", nullable=false)
+    @JoinColumn(name="fidcronograma", nullable=false)
     private Cronograma cronograma;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_beneficiario", nullable=false)
+    @JoinColumn(name="fidbeneficiario", nullable=false)
     private Beneficiario beneficiario;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_horariolugarentrega", nullable=false)
+    @JoinColumn(name="fidhorariolugarentrega", nullable=false)
     private Horariolugarentrega horariolugarentrega;
 //    @OneToMany(mappedBy="horario")
 //    private Set<Quejas> quejas;

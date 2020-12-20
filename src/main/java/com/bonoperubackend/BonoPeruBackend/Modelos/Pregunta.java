@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity(name="pregunta")
 @Table(	name = "pregunta",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "id_pregunta")
+                @UniqueConstraint(columnNames = "idpregunta")
         })
 public class Pregunta implements Serializable {
 
@@ -20,19 +20,19 @@ public class Pregunta implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_pregunta", unique=true, nullable=false, precision=10)
+    @Column(name="idpregunta", unique=true, nullable=false, precision=10)
     private int idPregunta;
     @Column(nullable=false, length=500)
     private String pregunta;
     @Column(nullable=false, length=3)
     private String estado;
-    @Column(name="usuario_creacion", precision=10)
+    @Column(name="usuariocreacion", precision=10)
     private Integer usuarioCreacion;
-    @Column(name="usuario_actualizacion", precision=10)
+    @Column(name="usuarioactualizacion", precision=10)
     private Integer usuarioActualizacion;
-    @Column(name="fecha_creacion")
+    @Column(name="fechacreacion")
     private LocalDateTime fechaCreacion;
-    @Column(name="fecha_actualizacion")
+    @Column(name="fechaactualizacion")
     private LocalDateTime fechaActualizacion;
 //    @OneToMany(mappedBy="pregunta")
 //    private Set<RespuestaIndividual> respuestaindividual;

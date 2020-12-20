@@ -17,10 +17,10 @@ public class DistritoController {
     @Autowired
     DistritoRepository distritoRepository;
 
-    @PostMapping("/listar")
-    public List<Distrito> listarDistrito() {
-        List<Distrito> val= new ArrayList<>();
-        distritoRepository.findAll().forEach(val::add);
+    @PostMapping("/listar/{fidprovincia}")
+    public List<Distrito> listarDistrito(@PathVariable Integer fidprovincia) {
+        List<Distrito> val;
+        val=distritoRepository.findAllByFidprovinciaAndEstado(fidprovincia, "ACT");
         return val;
     }
 

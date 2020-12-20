@@ -11,19 +11,19 @@ import java.sql.Timestamp;
 public class Beneficiario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_beneficiario;
+    private Integer idbeneficiario;
 
-    private Integer fid_distrito;
+    private Integer fiddistrito;
 
     @NotBlank
     @Size(max = 10)
-    private String codigo_familia;
+    private String codigofamilia;
 
-    @NotBlank
-    @Size(max = 1)
-    private String genero;
+    private Boolean femenino;
 
-    private Boolean es_discapacitado;
+    private Boolean masculino;
+
+    private Boolean esdiscapacitado;
 
     private float puntuacion;
 
@@ -33,65 +33,74 @@ public class Beneficiario {
     @Size(max = 3)
     private String estado;
 
-    private Integer usuario_creacion;
+    private Integer usuariocreacion;
 
-    private Integer usuario_actualizacion;
+    private Integer usuarioactualizacion;
 
-    private Timestamp fecha_creacion;
+    private Timestamp fechacreacion;
 
-    private Timestamp fecha_actualizacion;
+    private Timestamp fechaactualizacion;
 
-    public Beneficiario(Integer fid_distrito, @NotBlank @Size(max = 10) String codigo_familia, @NotBlank @Size(max = 1) String genero, Boolean es_discapacitado, float puntuacion, float penalidad, @NotBlank @Size(max = 3) String estado, Integer usuario_creacion) {
-        this.fid_distrito = fid_distrito;
-        this.codigo_familia = codigo_familia;
-        this.genero = genero;
-        this.es_discapacitado = es_discapacitado;
+    public Beneficiario(Integer fiddistrito, @NotBlank @Size(max = 10) String codigofamilia, Boolean femenino, Boolean masculino, Boolean esdiscapacitado, float puntuacion, float penalidad, @NotBlank @Size(max = 3) String estado, Integer usuariocreacion) {
+        this.fiddistrito = fiddistrito;
+        this.codigofamilia = codigofamilia;
+        this.femenino = femenino;
+        this.masculino = masculino;
+        this.esdiscapacitado = esdiscapacitado;
         this.puntuacion = puntuacion;
         this.penalidad = penalidad;
         this.estado = estado;
-        this.usuario_creacion = usuario_creacion;
+        this.usuariocreacion = usuariocreacion;
     }
 
     public Beneficiario(){}
 
-    public Integer getId_beneficiario() {
-        return id_beneficiario;
+    public Integer getIdbeneficiario() {
+        return idbeneficiario;
     }
 
-    public void setId_beneficiario(Integer id_beneficiario) {
-        this.id_beneficiario = id_beneficiario;
+    public void setIdbeneficiario(Integer idbeneficiario) {
+        this.idbeneficiario = idbeneficiario;
     }
 
-    public Integer getFid_distrito() {
-        return fid_distrito;
+    public Integer getFiddistrito() {
+        return fiddistrito;
     }
 
-    public void setFid_distrito(Integer fid_distrito) {
-        this.fid_distrito = fid_distrito;
+    public void setFiddistrito(Integer fiddistrito) {
+        this.fiddistrito = fiddistrito;
     }
 
-    public String getCodigo_familia() {
-        return codigo_familia;
+    public String getCodigofamilia() {
+        return codigofamilia;
     }
 
-    public void setCodigo_familia(String codigo_familia) {
-        this.codigo_familia = codigo_familia;
+    public void setCodigofamilia(String codigofamilia) {
+        this.codigofamilia = codigofamilia;
     }
 
-    public String getGenero() {
-        return genero;
+    public Boolean getFemenino() {
+        return femenino;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setFemenino(Boolean femenino) {
+        this.femenino = femenino;
     }
 
-    public Boolean getEs_discapacitado() {
-        return es_discapacitado;
+    public Boolean getMasculino() {
+        return masculino;
     }
 
-    public void setEs_discapacitado(Boolean es_discapacitado) {
-        this.es_discapacitado = es_discapacitado;
+    public void setMasculino(Boolean masculino) {
+        this.masculino = masculino;
+    }
+
+    public Boolean getEsdiscapacitado() {
+        return esdiscapacitado;
+    }
+
+    public void setEsdiscapacitado(Boolean esdiscapacitado) {
+        this.esdiscapacitado = esdiscapacitado;
     }
 
     public float getPuntuacion() {
@@ -118,35 +127,35 @@ public class Beneficiario {
         this.estado = estado;
     }
 
-    public Integer getUsuario_creacion() {
-        return usuario_creacion;
+    public Integer getUsuariocreacion() {
+        return usuariocreacion;
     }
 
-    public void setUsuario_creacion(Integer usuario_creacion) {
-        this.usuario_creacion = usuario_creacion;
+    public void setUsuariocreacion(Integer usuariocreacion) {
+        this.usuariocreacion = usuariocreacion;
     }
 
-    public Integer getUsuario_actualizacion() {
-        return usuario_actualizacion;
+    public Integer getUsuarioactualizacion() {
+        return usuarioactualizacion;
     }
 
-    public void setUsuario_actualizacion(Integer usuario_actualizacion) {
-        this.usuario_actualizacion = usuario_actualizacion;
+    public void setUsuarioactualizacion(Integer usuarioactualizacion) {
+        this.usuarioactualizacion = usuarioactualizacion;
     }
 
-    public Timestamp getFecha_creacion() {
-        return fecha_creacion;
+    public Timestamp getFechacreacion() {
+        return fechacreacion;
     }
 
-    public void setFecha_creacion(Timestamp fecha_creacion) {
-        this.fecha_creacion = fecha_creacion;
+    public void setFechacreacion(Timestamp fechacreacion) {
+        this.fechacreacion = fechacreacion;
     }
 
-    public Timestamp getFecha_actualizacion() {
-        return fecha_actualizacion;
+    public Timestamp getFechaactualizacion() {
+        return fechaactualizacion;
     }
 
-    public void setFecha_actualizacion(Timestamp fecha_actualizacion) {
-        this.fecha_actualizacion = fecha_actualizacion;
+    public void setFechaactualizacion(Timestamp fechaactualizacion) {
+        this.fechaactualizacion = fechaactualizacion;
     }
 }

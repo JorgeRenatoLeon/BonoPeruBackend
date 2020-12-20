@@ -24,32 +24,44 @@ public class Incidente implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_incidente", unique=true, nullable=false, precision=10)
+    @Column(name="idincidente", unique=true, nullable=false, precision=10)
     private int idIncidente;
     @Column(nullable=false)
     private LocalDate fecha;
-    @Column(name="tipo_incidente", nullable=false, length=30)
+    @Column(name="tipoincidente", nullable=false, length=30)
     private String tipoIncidente;
     @Column(nullable=false, length=3)
     private String estado;
-    @Column(name="usuario_creacion", precision=10)
+    @Column(name="usuariocreacion", precision=10)
     private Integer usuarioCreacion;
-    @Column(name="usuario_actualizacion", precision=10)
+    @Column(name="usuarioactualizacion", precision=10)
     private Integer usuarioActualizacion;
-    @Column(name="fecha_creacion")
+    @Column(name="fechacreacion")
     private LocalDateTime fechaCreacion;
-    @Column(name="fecha_actualizacion")
+    @Column(name="fechaactualizacion")
     private LocalDateTime fechaActualizacion;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_beneficiario", nullable=false)
+    @JoinColumn(name="fidbeneficiario", nullable=false)
     private Beneficiario beneficiario;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_lugarentrega", nullable=false)
+    @JoinColumn(name="fidlugarentrega", nullable=false)
     private Lugarentrega lugarentrega;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="fidcronograma", nullable=false)
+    private Cronograma cronograma;
 
     /** Default constructor. */
     public Incidente() {
         super();
+    }
+
+    public Incidente(LocalDate fecha, String tipoIncidente, String estado, Beneficiario beneficiario, Lugarentrega lugarentrega, Cronograma cronograma) {
+        this.fecha = fecha;
+        this.tipoIncidente = tipoIncidente;
+        this.estado = estado;
+        this.beneficiario = beneficiario;
+        this.lugarentrega = lugarentrega;
+        this.cronograma = cronograma;
     }
 
     /**
@@ -230,6 +242,14 @@ public class Incidente implements Serializable {
      */
     public void setLugarentrega(Lugarentrega aLugarentrega) {
         lugarentrega = aLugarentrega;
+    }
+
+    public Cronograma getCronograma() {
+        return cronograma;
+    }
+
+    public void setCronograma(Cronograma cronograma) {
+        this.cronograma = cronograma;
     }
 
     /**

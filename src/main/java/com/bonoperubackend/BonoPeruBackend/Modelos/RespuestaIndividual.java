@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity(name="respuestaindividual")
 @Table(	name = "respuestaindividual",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "id_respuestaindividual")
+                @UniqueConstraint(columnNames = "idrespuestaindividual")
         })
 public class RespuestaIndividual implements Serializable {
 
@@ -19,7 +19,7 @@ public class RespuestaIndividual implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_respuestaindividual", unique=true, nullable=false, precision=10)
+    @Column(name="idrespuestaindividual", unique=true, nullable=false, precision=10)
     private int idRespuestaindividual;
     @Column(length=500)
     private String respuesta;
@@ -27,20 +27,25 @@ public class RespuestaIndividual implements Serializable {
     private float puntaje;
     @Column(nullable=false, length=3)
     private String estado;
-    @Column(name="fecha_creacion")
+    @Column(name="fechacreacion")
     private LocalDateTime fechaCreacion;
-    @Column(name="fecha_actualizacion")
+    @Column(name="fechaactualizacion")
     private LocalDateTime fechaActualizacion;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_respuestaencuesta", nullable=false)
+    @JoinColumn(name="fidrespuestaencuesta", nullable=false)
     private RespuestaEncuesta respuestaencuesta;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_pregunta", nullable=false)
+    @JoinColumn(name="fidpregunta", nullable=false)
     private Pregunta pregunta;
 
     /** Default constructor. */
     public RespuestaIndividual() {
         super();
+    }
+
+    public RespuestaIndividual(RespuestaEncuesta respuestaencuesta, Pregunta pregunta) {
+        this.respuestaencuesta = respuestaencuesta;
+        this.pregunta = pregunta;
     }
 
     /**

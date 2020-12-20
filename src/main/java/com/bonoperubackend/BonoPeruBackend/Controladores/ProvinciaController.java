@@ -16,10 +16,10 @@ public class ProvinciaController {
     @Autowired
     ProvinciaRepository provinciaRepository;
 
-    @PostMapping("/listar")
-    public List<Provincia> listarProvincias() {
-        List<Provincia> val= new ArrayList<>();
-        provinciaRepository.findAll().forEach(val::add);
+    @PostMapping("/listar/{fiddepartamento}")
+    public List<Provincia> listarProvincias(@PathVariable Integer fiddepartamento) {
+        List<Provincia> val;
+        val = provinciaRepository.findAllByFiddepartamentoAndAndEstado(fiddepartamento, "ACT");
         return val;
     }
 

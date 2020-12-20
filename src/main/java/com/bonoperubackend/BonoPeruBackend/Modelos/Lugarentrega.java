@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity(name="lugarentrega")
 @Table(name = "lugarentrega")
@@ -19,7 +21,7 @@ public class Lugarentrega implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_lugarentrega", unique=true, nullable=false, precision=10)
+    @Column(name="idlugarentrega", unique=true, nullable=false, precision=10)
     private int idLugarentrega;
     @Column(nullable=false, length=200)
     private String direccion;
@@ -27,26 +29,28 @@ public class Lugarentrega implements Serializable {
     private String codigo;
     @Column(nullable=false, length=200)
     private String nombre;
-    @Column(name="ratio_atencion", precision=12)
+    @Column(name="ratioatencion", precision=12)
     private float ratioAtencion;
     @Column(nullable=false, precision=10)
     private int aforo;
     @Column(nullable=false, length=3)
+    private String tipo;
+    @Column(nullable=false, length=3)
     private String estado;
-    @Column(name="usuario_creacion", precision=10)
+    @Column(name="usuariocreacion", precision=10)
     private Integer usuarioCreacion;
-    @Column(name="usuario_actualizacion", precision=10)
+    @Column(name="usuarioactualizacion", precision=10)
     private Integer usuarioActualizacion;
-    @Column(name="fecha_creacion")
+    @Column(name="fechacreacion")
     private LocalDateTime fechaCreacion;
-    @Column(name="fecha_actualizacion")
+    @Column(name="fechaactualizacion")
     private LocalDateTime fechaActualizacion;
 //    @OneToMany(mappedBy="lugarentrega")
 //    private Set<Horariolugarentrega> horariolugarentrega;
 //    @OneToMany(mappedBy="lugarentrega")
 //    private Set<Incidente> incidente;
     @ManyToOne(optional=false)
-    @JoinColumn(name="fid_distrito", nullable=false)
+    @JoinColumn(name="fiddistrito", nullable=false)
     private Distrito distrito;
 //    @OneToMany(mappedBy="lugarentrega")
 //    private Set<Quejas> quejas;
@@ -56,6 +60,18 @@ public class Lugarentrega implements Serializable {
         super();
     }
 
+    public Lugarentrega( String nombre, String codigo, String direccion,Float ratioAtencion, Integer aforo, String tipo, Integer usuarioCreacion, @NotBlank @Size(max = 3) String estado, Distrito distrito) {
+        this.direccion = direccion;
+        this.estado = estado;
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.ratioAtencion = ratioAtencion;
+        this.aforo = aforo;
+        this.tipo = tipo;
+        this.estado = estado;
+        this.usuarioCreacion = usuarioCreacion;
+        this.distrito = distrito;
+    }
     /**
      * Access method for idLugarentrega.
      *
@@ -396,4 +412,11 @@ public class Lugarentrega implements Serializable {
         return ret;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 }

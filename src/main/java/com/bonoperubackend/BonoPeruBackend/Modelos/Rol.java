@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_rol;
+    private Integer idrol;
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -22,11 +22,11 @@ public class Rol {
     }
 
     public Integer getId() {
-        return id_rol;
+        return idrol;
     }
 
-    public void setId(Integer id_rol) {
-        this.id_rol = id_rol;
+    public void setId(Integer idrol) {
+        this.idrol = idrol;
     }
 
     public ERole getName() {

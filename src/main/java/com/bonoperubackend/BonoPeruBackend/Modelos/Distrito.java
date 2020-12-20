@@ -11,53 +11,64 @@ import java.sql.Timestamp;
 public class Distrito {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_distrito;
+    private Integer iddistrito;
 
-    private Integer fid_provincia;
+    private Integer fidprovincia;
+
+    private Integer ubigeo;
 
     @NotBlank
     @Size(max = 100)
     private String nombre;
 
-    private Integer zona_riesgo;
+    private Integer zonariesgo;
 
     @NotBlank
     @Size(max = 3)
     private String estado;
 
-    private Integer usuario_creacion;
+    private Integer usuariocreacion;
 
     @Null
-    private Integer usuario_actualizacion;
+    private Integer usuarioactualizacion;
 
-    private Timestamp fecha_creacion;
+    private Timestamp fechacreacion;
 
-    private Timestamp fecha_actualizacion;
+    private Timestamp fechaactualizacion;
 
-    public Distrito(Integer fid_provincia, @NotBlank @Size(max = 100) String nombre, Integer zona_riesgo, @NotBlank @Size(max = 3) String estado, Integer usuario_creacion) {
-        this.fid_provincia = fid_provincia;
+    public Distrito(Integer fidprovincia, Integer ubigeo, @NotBlank @Size(max = 100) String nombre, Integer zonariesgo, @NotBlank @Size(max = 3) String estado, Integer usuariocreacion) {
+        this.fidprovincia = fidprovincia;
+        this.ubigeo=ubigeo;
         this.nombre = nombre;
-        this.zona_riesgo = zona_riesgo;
+        this.zonariesgo = zonariesgo;
         this.estado = estado;
-        this.usuario_creacion = usuario_creacion;
+        this.usuariocreacion = usuariocreacion;
     }
 
     public Distrito(){}
 
-    public Integer getId_distrito() {
-        return id_distrito;
+    public Integer getIddistrito() {
+        return iddistrito;
     }
 
-    public void setId_distrito(Integer id_distrito) {
-        this.id_distrito = id_distrito;
+    public void setIddistrito(Integer iddistrito) {
+        this.iddistrito = iddistrito;
     }
 
-    public Integer getFid_provincia() {
-        return fid_provincia;
+    public Integer getFidprovincia() {
+        return fidprovincia;
     }
 
-    public void setFid_provincia(Integer fid_provincia) {
-        this.fid_provincia = fid_provincia;
+    public void setFidprovincia(Integer fidprovincia) {
+        this.fidprovincia = fidprovincia;
+    }
+
+    public Integer getUbigeo() {
+        return ubigeo;
+    }
+
+    public void setUbigeo(Integer ubigeo) {
+        this.ubigeo = ubigeo;
     }
 
     public String getNombre() {
@@ -68,12 +79,12 @@ public class Distrito {
         this.nombre = nombre;
     }
 
-    public Integer getZona_riesgo() {
-        return zona_riesgo;
+    public Integer getZonariesgo() {
+        return zonariesgo;
     }
 
-    public void setZona_riesgo(Integer zona_riesgo) {
-        this.zona_riesgo = zona_riesgo;
+    public void setZonariesgo(Integer zonariesgo) {
+        this.zonariesgo = zonariesgo;
     }
 
     public String getEstado() {
@@ -84,35 +95,35 @@ public class Distrito {
         this.estado = estado;
     }
 
-    public Integer getUsuario_creacion() {
-        return usuario_creacion;
+    public Integer getUsuariocreacion() {
+        return usuariocreacion;
     }
 
-    public void setUsuario_creacion(Integer usuario_creacion) {
-        this.usuario_creacion = usuario_creacion;
+    public void setUsuariocreacion(Integer usuariocreacion) {
+        this.usuariocreacion = usuariocreacion;
     }
 
-    public Integer getUsuario_actualizacion() {
-        return usuario_actualizacion;
+    public Integer getUsuarioactualizacion() {
+        return usuarioactualizacion;
     }
 
-    public void setUsuario_actualizacion(Integer usuario_actualizacion) {
-        this.usuario_actualizacion = usuario_actualizacion;
+    public void setUsuarioactualizacion(Integer usuarioactualizacion) {
+        this.usuarioactualizacion = usuarioactualizacion;
     }
 
-    public Timestamp getFecha_creacion() {
-        return fecha_creacion;
+    public Timestamp getFechacreacion() {
+        return fechacreacion;
     }
 
-    public void setFecha_creacion(Timestamp fecha_creacion) {
-        this.fecha_creacion = fecha_creacion;
+    public void setFechacreacion(Timestamp fechacreacion) {
+        this.fechacreacion = fechacreacion;
     }
 
-    public Timestamp getFecha_actualizacion() {
-        return fecha_actualizacion;
+    public Timestamp getFechaactualizacion() {
+        return fechaactualizacion;
     }
 
-    public void setFecha_actualizacion(Timestamp fecha_actualizacion) {
-        this.fecha_actualizacion = fecha_actualizacion;
+    public void setFechaactualizacion(Timestamp fechaactualizacion) {
+        this.fechaactualizacion = fechaactualizacion;
     }
 }

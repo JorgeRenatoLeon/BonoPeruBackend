@@ -20,23 +20,23 @@ public class Cronograma implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_cronograma", unique=true, nullable=false, precision=10)
+    @Column(name="idcronograma", unique=true, nullable=false, precision=10)
     private Integer idCronograma;
     @Column(length=100)
     private String nombre;
-    @Column(name="fecha_inicio", nullable=false)
+    @Column(name="fechainicio", nullable=false)
     private LocalDate fechaInicio;
-    @Column(name="fecha_fin", nullable=false)
+    @Column(name="fechafin", nullable=false)
     private LocalDate fechaFin;
     @Column(nullable=false, length=3)
     private String estado;
-    @Column(name="usuario_creacion", precision=10)
+    @Column(name="usuariocreacion", precision=10)
     private Integer usuarioCreacion;
-    @Column(name="usuario_actualizacion", precision=10)
+    @Column(name="usuarioactualizacion", precision=10)
     private Integer usuarioActualizacion;
-    @Column(name="fecha_creacion")
+    @Column(name="fechacreacion")
     private LocalDateTime fechaCreacion;
-    @Column(name="fecha_actualizacion")
+    @Column(name="fechaactualizacion")
     private LocalDateTime fechaActualizacion;
 //    @OneToMany(mappedBy="cronograma")
 //    private Set<Horario> horario;
