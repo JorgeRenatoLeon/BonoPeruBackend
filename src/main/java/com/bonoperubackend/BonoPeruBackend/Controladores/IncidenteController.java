@@ -6,6 +6,7 @@ import com.bonoperubackend.BonoPeruBackend.Repositorios.IncidenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -29,7 +30,7 @@ public class IncidenteController {
         private static Integer iddepartamento;
         private static Integer idprovincia;
         private static Integer iddistrito;
-        private static List<Integer> cronogramas;
+        private static List<String> cronogramas;
         public Datos() {
             super();
         }
@@ -74,11 +75,11 @@ public class IncidenteController {
             Datos.iddistrito = iddistrito;
         }
 
-        public List<Integer> getCronogramas() {
+        public List<String> getCronogramas() {
             return cronogramas;
         }
 
-        public void setCronogramas(List<Integer> cronogramas) {
+        public void setCronogramas(List<String> cronogramas) {
             Datos.cronogramas = cronogramas;
         }
     }
@@ -110,38 +111,52 @@ public class IncidenteController {
         ArrayList<Object> listalugares = new ArrayList<>();
         ArrayList<Object> listahorarios = new ArrayList<>();
         ArrayList<Object> listadias = new ArrayList<>();
-        ArrayList<Object> listaids = new ArrayList<>();
 
         ArrayList<ArrayList<Object>> respuesta=new ArrayList<ArrayList<Object>>();
 
-        if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()!=null){
-            respuesta=incidenteRepository.reporteIncidentesCronograma(dato.getFechaini(),dato.getFechafin(),
-                    dato.getIddepartamento(),dato.getIdprovincia(),dato.getIddistrito(),dato.getCronogramas());
-        }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()==null){
-            respuesta=incidenteRepository.reporteIncidentesCronograma1(dato.getFechaini(),dato.getFechafin(),
-                    dato.getIddepartamento(),dato.getIdprovincia(),dato.getCronogramas());
-        }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()==null && dato.getIddistrito()==null){
-            respuesta=incidenteRepository.reporteIncidentesCronograma2(dato.getFechaini(),dato.getFechafin(),
-                    dato.getIddepartamento(),dato.getCronogramas());
-        }else if(dato.getIddepartamento()==null && dato.getIdprovincia()==null && dato.getIddistrito()==null){
+        if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()!=null && !dato.getCronogramas().isEmpty()){
+            respuesta=incidenteRepository.reporteIncidentesCronograma(dato.getFechaini(),dato.getFechafin(),dato.getIddepartamento(),dato.getIdprovincia(),dato.getIddistrito(),dato.getCronogramas());
+        }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()==null && !dato.getCronogramas().isEmpty()){
+            respuesta=incidenteRepository.reporteIncidentesCronograma1(dato.getFechaini(),dato.getFechafin(),dato.getIddepartamento(),dato.getIdprovincia(),dato.getCronogramas());
+        }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()==null && dato.getIddistrito()==null && !dato.getCronogramas().isEmpty()){
+            respuesta=incidenteRepository.reporteIncidentesCronograma2(dato.getFechaini(),dato.getFechafin(),dato.getIddepartamento(),dato.getCronogramas());
+        }else if(dato.getIddepartamento()==null && dato.getIdprovincia()==null && dato.getIddistrito()==null && !dato.getCronogramas().isEmpty()){
             respuesta=incidenteRepository.reporteIncidentesCronograma3(dato.getFechaini(),dato.getFechafin(),dato.getCronogramas());
+        }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()!=null && dato.getCronogramas().isEmpty()){//listaids, con all cronogramas
+            respuesta=incidenteRepository.reporteIncidentesCronograma4(dato.getFechaini(),dato.getFechafin(),dato.getIddepartamento(),dato.getIdprovincia(),dato.getIddistrito());
+        }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()==null && dato.getCronogramas().isEmpty()){//listaids, con all cronogramas
+            respuesta=incidenteRepository.reporteIncidentesCronograma5(dato.getFechaini(),dato.getFechafin(),dato.getIddepartamento(),dato.getIdprovincia());
+        }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()==null && dato.getIddistrito()==null && dato.getCronogramas().isEmpty()){//listaids, con all cronogramas
+            respuesta=incidenteRepository.reporteIncidentesCronograma6(dato.getFechaini(),dato.getFechafin(),dato.getIddepartamento());
+        }else if(dato.getIddepartamento()==null && dato.getIdprovincia()==null && dato.getIddistrito()==null && dato.getCronogramas().isEmpty()){
+            respuesta=incidenteRepository.reporteIncidentesCronograma7(dato.getFechaini(),dato.getFechafin());
         }
 
         for(int i =0; i< respuesta.size(); i++){
-            listaids.add(respuesta.get(i).get(0));
             listacronogramas.add(respuesta.get(i).get(1));
             listalugares.add(respuesta.get(i).get(2));
             listahorarios.add(respuesta.get(i).get(3));
             listadias.add(respuesta.get(i).get(4));
         }
-        for(int i=0;i< dato.getCronogramas().size(); i++){
-            if(!listaids.contains(dato.getCronogramas().get(i))){
-                //buscar el nombre
-                Integer id= (Integer) dato.getCronogramas().get(i);
-                Optional<Cronograma> cg=cronogramaRepository.findById(id);
-                if(cg.isPresent()){
+
+        if(dato.getCronogramas().isEmpty()){
+            ArrayList<String> cronogra=cronogramaRepository.cronogramas();
+            for(int i=0;i< cronogra.size(); i++){
+                if(!listacronogramas.contains(cronogra.get(i))){
+                    String nombre= (String) cronogra.get(i);
                     //agregar 0's
-                    listacronogramas.add(cg.get().getNombre());
+                    listacronogramas.add(nombre);
+                    listalugares.add(0);
+                    listahorarios.add(0);
+                    listadias.add(0);
+                }
+            }
+        }else{
+            for(int i=0;i< dato.getCronogramas().size(); i++){
+                if(!listacronogramas.contains(dato.getCronogramas().get(i))){
+                    String nombre= (String) dato.getCronogramas().get(i);
+                    //agregar 0's
+                    listacronogramas.add(nombre);
                     listalugares.add(0);
                     listahorarios.add(0);
                     listadias.add(0);

@@ -10,123 +10,211 @@ import java.time.LocalTime;
 @Entity(name="listacronograma")
 public class ListaCronograma implements Serializable {
     @Id
-    private Integer idlugarentrega;
+    private Integer idbeneficiario;
     @Column(nullable=false, length=200)
-    private String nombre;
+    private String codigofamilia;
     @Column(nullable=false, length=200)
-    private String locacion;
-    private LocalDate fecha;
-    private LocalTime horainicio;
-    private LocalTime horafin;
-    private Integer aforo;
-    private Integer mujeres;
-    private Integer discapacitados;
-    private Integer riesgo;
-    private Integer beneficiarios;
+    private String departamento;
+    @Column(nullable=false, length=200)
+    private String provincia;
+    @Column(nullable=false, length=200)
+    private String distrito;
+    @Column(nullable=false, length=10)
+    private String sexo;
+    @Column(nullable=false, length=10)
+    private String discapacitado;
+    private Integer numhorarios;
+    @Column(nullable=false, length=10)
+    private String codigo1;
+    private LocalDate fecha1;
+    private LocalTime horainicio1;
+    private LocalTime horafin1;
+    @Column(nullable=false, length=10)
+    private String estado1;
+    @Column(nullable=false, length=10)
+    private String codigo2;
+    private LocalDate fecha2;
+    private LocalTime horainicio2;
+    private LocalTime horafin2;
+    @Column(nullable=false, length=10)
+    private String estado2;
+    private Integer incidentes;
 
     public ListaCronograma() {
         super();
     }
 
-    public ListaCronograma(Integer idlugarentrega, String nombre, String locacion, LocalDate fecha, LocalTime horainicio, LocalTime horafin, Integer aforo, Integer mujeres, Integer discapacitados, Integer riesgo, Integer beneficiarios) {
-        this.idlugarentrega = idlugarentrega;
-        this.nombre = nombre;
-        this.locacion = locacion;
-        this.fecha = fecha;
-        this.horainicio = horainicio;
-        this.horafin = horafin;
-        this.aforo = aforo;
-        this.mujeres = mujeres;
-        this.discapacitados = discapacitados;
-        this.riesgo = riesgo;
-        this.beneficiarios=beneficiarios;
+    public ListaCronograma(Integer idbeneficiario, String codigofamilia, String departamento, String provincia, String distrito, String sexo, String discapacitado, Integer numhorarios, String codigo1, LocalDate fecha1, LocalTime horainicio1, LocalTime horafin1, String estado1, String codigo2, LocalDate fecha2, LocalTime horainicio2, LocalTime horafin2, String estado2, Integer incidentes) {
+        this.idbeneficiario = idbeneficiario;
+        this.codigofamilia = codigofamilia;
+        this.departamento = departamento;
+        this.provincia = provincia;
+        this.distrito = distrito;
+        this.sexo = sexo;
+        this.discapacitado = discapacitado;
+        this.numhorarios = numhorarios;
+        this.codigo1 = codigo1;
+        this.fecha1 = fecha1;
+        this.horainicio1 = horainicio1;
+        this.horafin1 = horafin1;
+        this.estado1 = estado1;
+        this.codigo2 = codigo2;
+        this.fecha2 = fecha2;
+        this.horainicio2 = horainicio2;
+        this.horafin2 = horafin2;
+        this.estado2 = estado2;
+        this.incidentes = incidentes;
     }
 
-    public Integer getIdlugarentrega() {
-        return idlugarentrega;
+    public String getDepartamento() {
+        return departamento;
     }
 
-    public void setIdlugarentrega(Integer idlugarentrega) {
-        this.idlugarentrega = idlugarentrega;
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getProvincia() {
+        return provincia;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 
-    public String getLocacion() {
-        return locacion;
+    public String getDistrito() {
+        return distrito;
     }
 
-    public void setLocacion(String locacion) {
-        this.locacion = locacion;
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
     }
 
-    public LocalDate getFecha() {
-        return fecha;
+    public Integer getIdbeneficiario() {
+        return idbeneficiario;
     }
 
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
+    public void setIdbeneficiario(Integer idbeneficiario) {
+        this.idbeneficiario = idbeneficiario;
     }
 
-    public LocalTime getHorainicio() {
-        return horainicio;
+    public String getCodigofamilia() {
+        return codigofamilia;
     }
 
-    public void setHorainicio(LocalTime horainicio) {
-        this.horainicio = horainicio;
+    public void setCodigofamilia(String codigofamilia) {
+        this.codigofamilia = codigofamilia;
     }
 
-    public LocalTime getHorafin() {
-        return horafin;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setHorafin(LocalTime horafin) {
-        this.horafin = horafin;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
-    public Integer getAforo() {
-        return aforo;
+    public String getDiscapacitado() {
+        return discapacitado;
     }
 
-    public void setAforo(Integer aforo) {
-        this.aforo = aforo;
+    public void setDiscapacitado(String discapacitado) {
+        this.discapacitado = discapacitado;
     }
 
-    public Integer getMujeres() {
-        return mujeres;
+    public Integer getNumhorarios() {
+        return numhorarios;
     }
 
-    public void setMujeres(Integer mujeres) {
-        this.mujeres = mujeres;
+    public void setNumhorarios(Integer numhorarios) {
+        this.numhorarios = numhorarios;
     }
 
-    public Integer getDiscapacitados() {
-        return discapacitados;
+    public String getCodigo1() {
+        return codigo1;
     }
 
-    public void setDiscapacitados(Integer discapacitados) {
-        this.discapacitados = discapacitados;
+    public void setCodigo1(String codigo1) {
+        this.codigo1 = codigo1;
     }
 
-    public Integer getRiesgo() {
-        return riesgo;
+    public LocalDate getFecha1() {
+        return fecha1;
     }
 
-    public void setRiesgo(Integer riesgo) {
-        this.riesgo = riesgo;
+    public void setFecha1(LocalDate fecha1) {
+        this.fecha1 = fecha1;
     }
 
-    public Integer getBeneficiarios() {
-        return beneficiarios;
+    public LocalTime getHorainicio1() {
+        return horainicio1;
     }
 
-    public void setBeneficiarios(Integer beneficiarios) {
-        this.beneficiarios = beneficiarios;
+    public void setHorainicio1(LocalTime horainicio1) {
+        this.horainicio1 = horainicio1;
+    }
+
+    public LocalTime getHorafin1() {
+        return horafin1;
+    }
+
+    public void setHorafin1(LocalTime horafin1) {
+        this.horafin1 = horafin1;
+    }
+
+    public String getEstado1() {
+        return estado1;
+    }
+
+    public void setEstado1(String estado1) {
+        this.estado1 = estado1;
+    }
+
+    public String getCodigo2() {
+        return codigo2;
+    }
+
+    public void setCodigo2(String codigo2) {
+        this.codigo2 = codigo2;
+    }
+
+    public LocalDate getFecha2() {
+        return fecha2;
+    }
+
+    public void setFecha2(LocalDate fecha2) {
+        this.fecha2 = fecha2;
+    }
+
+    public LocalTime getHorainicio2() {
+        return horainicio2;
+    }
+
+    public void setHorainicio2(LocalTime horainicio2) {
+        this.horainicio2 = horainicio2;
+    }
+
+    public LocalTime getHorafin2() {
+        return horafin2;
+    }
+
+    public void setHorafin2(LocalTime horafin2) {
+        this.horafin2 = horafin2;
+    }
+
+    public String getEstado2() {
+        return estado2;
+    }
+
+    public void setEstado2(String estado2) {
+        this.estado2 = estado2;
+    }
+
+    public Integer getIncidentes() {
+        return incidentes;
+    }
+
+    public void setIncidentes(Integer incidentes) {
+        this.incidentes = incidentes;
     }
 }

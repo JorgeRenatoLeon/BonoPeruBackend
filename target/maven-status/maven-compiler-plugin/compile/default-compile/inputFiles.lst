@@ -35,6 +35,7 @@ D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonope
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\AlgoritmoGenetico\Individual.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\RespuestaEncuesta.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\IncidenteRepository.java
+D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\Historico.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Seguridad\Jwt\AuthEntryPointJwt.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\LugarEntregaAlgoritmo.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Controladores\PreguntasFrecuentesController.java
@@ -62,6 +63,7 @@ D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonope
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\DistritoRepository.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\ListaCronograma.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\QuejasRepository.java
+D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Repositorios\HistoricoRepository.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Modelos\ListaLugarEntrega.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Response\MessageResponse.java
 D:\Documentos\PUCP\DP1\Proyecto\Backend\BonoPeruBackend\src\main\java\com\bonoperubackend\BonoPeruBackend\Payload\Request\LoginRequest.java

@@ -30,6 +30,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import sun.security.krb5.internal.crypto.Des;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,6 +44,9 @@ public class CronogramaController {
 
     @Autowired
     LugarEntregaRepository lugarEntregaRepository;
+
+    @Autowired
+    DistritoRepository distritoRepository;
 
     @Autowired
     ProvinciaRepository provinciaRepository;
@@ -72,6 +76,12 @@ public class CronogramaController {
     CronogramaRepository cronogramaRepository;
 
     @Autowired
+    IncidenteRepository incidenteRepository;
+
+    @Autowired
+    HistoricoRepository historicoRepository;
+
+    @Autowired
     HorarioLugarEntregaAlgoritmoRepository horarioLugarEntregaAlgoritmoRepository;
 
     private Path fileStorageLocation;
@@ -88,6 +98,12 @@ public class CronogramaController {
         private static List<LocalDate> fechas;
         private static List<LocalTime> horainicio;
         private static List<LocalTime> horafin;
+        private static List<Integer> listaDepartamentos;
+        private static List<Integer> listaProvincias;
+        private static List<Integer> listaDistritos;
+        private static LocalDate fechaactual;
+
+
         public Datos() {
             super();
         }
@@ -139,41 +155,135 @@ public class CronogramaController {
         public void setNumeros(List<Integer> numeros) {
             Datos.numeros = numeros;
         }
-
         public Integer getUsuariocreacion() {
             return usuariocreacion;
         }
-
         public void setUsuariocreacion(Integer usuariocreacion) {
             Datos.usuariocreacion = usuariocreacion;
         }
-
         public List<LocalDate> getFechas() {
             return fechas;
         }
-
         public void setFechas(List<LocalDate> fechas) {
             Datos.fechas = fechas;
         }
-
         public List<LocalTime> getHorainicio() {
             return horainicio;
         }
-
         public void setHorainicio(List<LocalTime> horainicio) {
             Datos.horainicio = horainicio;
         }
-
         public List<LocalTime> getHorafin() {
             return horafin;
         }
-
         public void setHorafin(List<LocalTime> horafin) {
             Datos.horafin = horafin;
         }
+        public List<Integer> getListaDepartamentos() {
+            return listaDepartamentos;
+        }
+        public void setListaDepartamentos(List<Integer> listaDepartamentos) {
+            Datos.listaDepartamentos = listaDepartamentos;
+        }
+        public List<Integer> getListaProvincias() {
+            return listaProvincias;
+        }
+        public void setListaProvincias(List<Integer> listaProvincias) {
+            Datos.listaProvincias = listaProvincias;
+        }
+        public List<Integer> getListaDistritos() {
+            return listaDistritos;
+        }
+        public void setListaDistritos(List<Integer> listaDistritos) {
+            Datos.listaDistritos = listaDistritos;
+        }
+
+        public LocalDate getFechaactual() {
+            return fechaactual;
+        }
+
+        public void setFechaactual(LocalDate fechaactual) {
+            Datos.fechaactual = fechaactual;
+        }
     }
 
-    @PostMapping("/listarhorariocronograma")
+    @PostMapping("/listarbeneficiarioscronograma")
+    public ArrayList<Object> listarbeneficiarioscronograma(@RequestBody Datos dato) {
+        //listar los horarios de ese cronograma
+        ArrayList<Object> reporte=new ArrayList<>();
+        ArrayList<ArrayList<Object>> horarios=new ArrayList<>();
+
+        if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()!=null){
+            horarios=horarioRepository.listarhorariosXDistrito(dato.getIdcronograma(),dato.getFechaini(),dato.getFechafin(),
+                    dato.getNombre(),dato.getIddepartamento(),dato.getIdprovincia(),dato.getIddistrito());
+        }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()==null){
+            horarios=horarioRepository.listarhorariosXProvincia(dato.getIdcronograma(),dato.getFechaini(),dato.getFechafin(),
+                    dato.getNombre(),dato.getIddepartamento(),dato.getIdprovincia());
+        }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()==null && dato.getIddistrito()==null){
+            horarios=horarioRepository.listarhorariosXDepartamento(dato.getIdcronograma(),dato.getFechaini(),dato.getFechafin(),
+                    dato.getNombre(),dato.getIddepartamento());
+        }else if(dato.getIddepartamento()==null && dato.getIdprovincia()==null && dato.getIddistrito()==null){
+            horarios=horarioRepository.listarhorarios(dato.getIdcronograma(),dato.getFechaini(),dato.getFechafin(),dato.getNombre());
+        }
+
+        //horarios=horarioRepository.listarhorarios(dato.getIdcronograma(),dato.getFechaini(),dato.getFechafin(),dato.getNombre());
+
+        ///realizar las diviciones
+        LocalDate fechaactual=dato.getFechaactual();
+
+        for(int i=0; i<horarios.size(); i++){
+            ArrayList<Object> hor=horarios.get(i);
+            Hashtable<String,Object> lug=new Hashtable<>();
+
+            lug.put("idbeneficiario",hor.get(0));
+            lug.put("nombre",hor.get(1));
+            lug.put("locacion",hor.get(2));
+            //lug.put("horarios",l.getNumhorarios());
+            String fecha=hor.get(3).toString();
+            lug.put("horario1",fecha.substring(8,10)+"/"+fecha.substring(5,7)+"/"+fecha.substring(0,4) + " - "+hor.get(4).toString().substring(0,5)+ "-" + hor.get(5).toString().substring(0,5));
+            lug.put("lugar1",hor.get(6)+" - "+hor.get(7));
+
+
+            if(hor.get(8).toString().contains("ENT")){
+                lug.put("estado1","Entregado");
+            }else if(hor.get(8).toString().contains("NOE") && ( fecha.compareTo(fechaactual.toString())<=0 )){
+                lug.put("estado1","No entregado");
+            }else{
+                lug.put("estado1","Programado");
+            }
+
+            if(i<horarios.size()-1){
+                ArrayList<Object> hor2=horarios.get(i+1);
+                //Verificamos si es el segundo horario
+                if(hor2.get(0).toString().equals(hor.get(0).toString())){
+                    String fecha2=hor2.get(3).toString();
+                    lug.put("horario2",fecha2.substring(8,10)+"/"+fecha2.substring(5,7)+"/"+fecha2.substring(0,4) + " - "+hor2.get(4).toString().substring(0,5)+ "-" + hor2.get(5).toString().substring(0,5));
+                    lug.put("lugar2",hor2.get(6)+" - "+hor2.get(7));
+
+                    if(hor2.get(8).toString().contains("ENT")){
+                        lug.put("estado2","Entregado");
+                    }else if(hor2.get(8).toString().contains("NOE") && ( hor2.get(3).toString().compareTo(fechaactual.toString())<=0 )){
+                        lug.put("estado2","No entregado");
+                    }else{
+                        lug.put("estado2","Programado");
+                    }
+
+                    i++;
+                }else{
+                    lug.put("horario2","-");
+                    lug.put("lugar2","-");
+                    lug.put("estado2","-");
+                }
+
+
+            }
+
+            reporte.add(lug);
+        }
+        return reporte;
+    }
+
+    /*@PostMapping("/listarhorariocronograma")
     public ArrayList<Object> listarhorariocronograma(@RequestBody Datos dato) {
         //listar los horarios de ese cronograma
         ArrayList<Horario> horarios=horarioRepository.findAllByCronograma_IdCronogramaAndFechaGreaterThanEqualAndFechaLessThanEqual(dato.getIdcronograma(),dato.getFechaini(),dato.getFechafin());
@@ -285,7 +395,7 @@ public class CronogramaController {
         }
 
         return reporte;
-    }
+    }*/
     //descargar cronograma dependiendo del ID de lugar de entrega que pasa,
     // imprimir todos sus atributos de los beneficiarios
     @PostMapping("/descargar")
@@ -297,69 +407,78 @@ public class CronogramaController {
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
                 .body(file);
     }
-    public ArrayList<DescargaCronograma> funcion(Datos dato){
+
+    public ArrayList<ListaCronograma> funcion(Datos dato){
         //listar los horarios de ese cronograma
-        ArrayList<Horario> horarios=horarioRepository.descargarConTodosLosFiltros(dato.getIdcronograma(),dato.getFechas(),dato.getHorainicio(),dato.getHorafin());
-        ArrayList<DescargaCronograma> lugares= new ArrayList<>();
-        for(Horario horario: horarios) {
-            Optional<Provincia> pro = provinciaRepository.findById(horario.getHorariolugarentrega().getLugarentrega().getDistrito().getFidprovincia());
-            Optional<Departamento> dep = departamentoRepository.findById(pro.get().getFiddepartamento());
-            if(dato.getIddepartamento()==null && dato.getIdprovincia()==null && dato.getIddistrito()==null) {
-                DescargaCronograma cronograma = new DescargaCronograma(horario.getHorariolugarentrega().getLugarentrega().getIdLugarentrega(),
-                        dep.get().getNombre(),pro.get().getNombre(),
-                        horario.getHorariolugarentrega().getLugarentrega().getDistrito().getNombre(),
-                        horario.getHorariolugarentrega().getLugarentrega().getNombre(),
-                        horario.getFecha(), horario.getHoraInicio(), horario.getHoraFin(),
-                        horario.getBeneficiario().getCodigofamilia());
-                lugares.add(cronograma);
-            }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()==null &&
-                    dep.get().getIddepartamento()==dato.getIddepartamento() && pro.get().getIdprovincia()==dato.getIdprovincia()){
-                DescargaCronograma cronograma = new DescargaCronograma(horario.getHorariolugarentrega().getLugarentrega().getIdLugarentrega(),
-                        dep.get().getNombre(),pro.get().getNombre(),
-                        horario.getHorariolugarentrega().getLugarentrega().getDistrito().getNombre(),
-                        horario.getHorariolugarentrega().getLugarentrega().getNombre(),
-                        horario.getFecha(), horario.getHoraInicio(), horario.getHoraFin(),
-                        horario.getBeneficiario().getCodigofamilia());
-                lugares.add(cronograma);
-            }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()==null && dato.getIddistrito()==null &&
-                    dep.get().getIddepartamento()==dato.getIddepartamento()){
-                DescargaCronograma cronograma = new DescargaCronograma(horario.getHorariolugarentrega().getLugarentrega().getIdLugarentrega(),
-                        dep.get().getNombre(),pro.get().getNombre(),
-                        horario.getHorariolugarentrega().getLugarentrega().getDistrito().getNombre(),
-                        horario.getHorariolugarentrega().getLugarentrega().getNombre(),
-                        horario.getFecha(), horario.getHoraInicio(), horario.getHoraFin(),
-                        horario.getBeneficiario().getCodigofamilia());
-                lugares.add(cronograma);
-            }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()!=null &&
-                    horario.getHorariolugarentrega().getLugarentrega().getDistrito().getIddistrito()==dato.getIddistrito()){
-                DescargaCronograma cronograma = new DescargaCronograma(horario.getHorariolugarentrega().getLugarentrega().getIdLugarentrega(),
-                        dep.get().getNombre(),pro.get().getNombre(),
-                        horario.getHorariolugarentrega().getLugarentrega().getDistrito().getNombre(),
-                        horario.getHorariolugarentrega().getLugarentrega().getNombre(),
-                        horario.getFecha(), horario.getHoraInicio(), horario.getHoraFin(),
-                        horario.getBeneficiario().getCodigofamilia());
-                lugares.add(cronograma);
-            }else{
-                return lugares;
-            }
+        ArrayList<Horario> horarios=new ArrayList<>();
+        if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()!=null){
+            horarios=horarioRepository.listarhorariosbeneficiarios1(dato.getIdcronograma(),dato.getFechaini(),dato.getFechafin(),
+                    dato.getIddepartamento(),dato.getIdprovincia(),dato.getIddistrito(),dato.getNombre());
+        }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()!=null && dato.getIddistrito()==null){
+            horarios=horarioRepository.listarhorariosbeneficiarios2(dato.getIdcronograma(),dato.getFechaini(),dato.getFechafin(),
+                    dato.getIddepartamento(),dato.getIdprovincia(),dato.getNombre());
+        }else if(dato.getIddepartamento()!=null && dato.getIdprovincia()==null && dato.getIddistrito()==null){
+            horarios=horarioRepository.listarhorariosbeneficiarios3(dato.getIdcronograma(),dato.getFechaini(),dato.getFechafin(),
+                    dato.getIddepartamento(),dato.getNombre());
+        }else if(dato.getIddepartamento()==null && dato.getIdprovincia()==null && dato.getIddistrito()==null){
+            horarios=horarioRepository.listarhorariosbeneficiarios4(dato.getIdcronograma(),dato.getFechaini(),dato.getFechafin(),dato.getNombre());
         }
-        ArrayList<DescargaCronograma> fin= new ArrayList<>();
-        List<Integer> numeros=dato.getNumeros();//id de los lugares de entrega
-        List<LocalDate> fechas  =dato.getFechas(); //todas las fecha
-        List<LocalTime> horainicio  =dato.getHorainicio();
-        List<LocalTime> horafin  =dato.getHorafin();
-        for(DescargaCronograma l: lugares){
-            for(int i=0;i<numeros.size();i++){
-                if(numeros.get(i).intValue()==l.getIdlugarentrega().intValue() && fechas.get(i).isEqual(l.getFecha())
-                        && horainicio.get(i).equals(l.getHorainicio()) && horafin.get(i).equals(l.getHorafin())
-                        && l.getLugar().contains(dato.getNombre())){
-                    fin.add(l);
+        String sexo="";
+        String disca="";
+        ArrayList<ListaCronograma> lugares= new ArrayList<>();
+        for(Horario horario: horarios) {
+            if(horario.getBeneficiario().getFemenino()){
+                sexo="F";
+            }else{
+                sexo="M";
+            }
+            if(horario.getBeneficiario().getEsdiscapacitado()){
+                disca="Si";
+            }else{
+                disca="No";
+            }
+            Optional<Distrito> dis = distritoRepository.findById(horario.getBeneficiario().getFiddistrito());
+            Optional<Provincia> pro = provinciaRepository.findById(dis.get().getFidprovincia());
+            Optional<Departamento> dep = departamentoRepository.findById(pro.get().getFiddepartamento());
+            ListaCronograma cronograma = new ListaCronograma(horario.getBeneficiario().getIdbeneficiario(),horario.getBeneficiario().getCodigofamilia(),
+                    dep.get().getNombre() , pro.get().getNombre(),dis.get().getNombre(),
+                    sexo,disca,1,horario.getHorariolugarentrega().getLugarentrega().getNombre() + " - " +horario.getHorariolugarentrega().getLugarentrega().getDireccion(),
+                    horario.getFecha(),horario.getHoraInicio(),
+                    horario.getHoraFin(),horario.getEstado(),"-",null,null,null,"-",0);
+            lugares.add(cronograma);
+        }
+        ArrayList<ListaCronograma> fin=new ArrayList<>();
+        //ya se tiene all ahora toca agrupar
+        for(ListaCronograma lc: lugares){
+            if(fin.isEmpty()==true){//si esta vacio se añade el primero
+                fin.add(lc);
+            }else{//si no esta vacio, se comprueba si ya existe
+                int bandera=0;
+                for(int i=0; i< fin.size(); i++){
+                    if(fin.get(i).getCodigofamilia().equals(lc.getCodigofamilia())){
+                        //no se añade, solo se actualiza los valores
+                        Integer a = fin.get(i).getNumhorarios() + lc.getNumhorarios();
+                        fin.get(i).setNumhorarios(a);
+                        fin.get(i).setCodigo2(lc.getCodigo1());
+                        fin.get(i).setFecha2(lc.getFecha1());
+                        fin.get(i).setHorainicio2(lc.getHorainicio1());
+                        fin.get(i).setHorafin2(lc.getHorafin1());
+                        fin.get(i).setEstado2(lc.getEstado1());
+                        ///se termina
+                        bandera=0;
+                        break;
+                    }else{//se añade
+                        bandera=1;
+                    }
+                }
+                if(bandera==1){
+                    fin.add(lc);
                 }
             }
         }
-
         return fin;
     }
+    
     public InputStreamResource generarExcel (Datos dato) throws IOException{
         Logger LOGGER = Logger.getLogger("mx.com.hash.newexcel.ExcelOOXML");
         File archivo = new File("cronograma.xlsx");
@@ -370,10 +489,11 @@ public class CronogramaController {
         // Creamos el estilo paga las celdas del encabezado
         CellStyle style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.AQUA.getIndex());
-        String[] titulos = {"Departamento","Provincia","Distrito","Nombre Lugar de Entrega",
-                "Fecha","Hora Inicio", "Hora Fin","Codigo familia del Beneficiario"};
+        String[] titulos = {"Beneficiario","Departamento","Provincia","Distrito","Sexo",
+                "Discapacitado","Números de Horarios", "Fecha 1","Horario 1","Lugar de entrega 1",
+                "Estado 1","Fecha 2","Horario 2","Lugar de entrega 2","Estado 2"};
         //Llamar a función
-        ArrayList<DescargaCronograma> lista=funcion(dato);
+        ArrayList<ListaCronograma> lista=funcion(dato);
         ////lista
         Row fila = pagina.createRow(0);
         // Creamos el encabezado
@@ -385,21 +505,56 @@ public class CronogramaController {
         for (int i = 0; i < lista.size(); i++) {
             fila = pagina.createRow(i+1);
             Cell celda = fila.createCell(0);
-            celda.setCellValue(lista.get(i).getDepartamento());
+            celda.setCellValue(lista.get(i).getCodigofamilia());
             Cell celda1 = fila.createCell(1);
-            celda1.setCellValue(lista.get(i).getProvincia());
+            celda1.setCellValue(lista.get(i).getDepartamento());
             Cell celda2 = fila.createCell(2);
-            celda2.setCellValue(lista.get(i).getDistrito());
+            celda2.setCellValue(lista.get(i).getProvincia());
             Cell celda3 = fila.createCell(3);
-            celda3.setCellValue(lista.get(i).getLugar());
+            celda3.setCellValue(lista.get(i).getDistrito());
             Cell celda4 = fila.createCell(4);
-            celda4.setCellValue(lista.get(i).getFecha().toString());
+            celda4.setCellValue(lista.get(i).getSexo());
             Cell celda5 = fila.createCell(5);
-            celda5.setCellValue(lista.get(i).getHorainicio().toString());
+            celda5.setCellValue(lista.get(i).getDiscapacitado());
             Cell celda6 = fila.createCell(6);
-            celda6.setCellValue(lista.get(i).getHorafin().toString());
+            celda6.setCellValue(lista.get(i).getNumhorarios());
             Cell celda7 = fila.createCell(7);
-            celda7.setCellValue(lista.get(i).getCodigofamilia());
+            celda7.setCellValue(lista.get(i).getFecha1().toString());
+            Cell celda8 = fila.createCell(8);
+            celda8.setCellValue(lista.get(i).getHorainicio1()+" - "+lista.get(i).getHorafin1());
+            Cell celda9 = fila.createCell(9);
+            celda9.setCellValue(lista.get(i).getCodigo1());
+            Cell celda10 = fila.createCell(10);
+            if(lista.get(i).getEstado1().contains("ENT")){
+                celda10.setCellValue("Entregado");
+            }else if(lista.get(i).getEstado1().contains("NOE") && (Boolean.valueOf(lista.get(i).getFecha1().isBefore(dato.getFechaactual())) ||
+                    Boolean.valueOf(lista.get(i).getFecha1().isEqual(dato.getFechaactual())))){
+                celda10.setCellValue("No entregado");
+            }else{
+                celda10.setCellValue("Programado");
+            }
+            Cell celda11 = fila.createCell(11);
+            Cell celda12 = fila.createCell(12);
+            Cell celda13 = fila.createCell(13);
+            Cell celda14 = fila.createCell(14);
+            if(lista.get(i).getFecha2()==null){
+                celda11.setCellValue("-");
+                celda12.setCellValue("-");
+                celda13.setCellValue("-");
+                celda14.setCellValue("-");
+            }else{
+                celda11.setCellValue(lista.get(i).getFecha2().toString());
+                celda12.setCellValue(lista.get(i).getHorainicio2()+" - "+lista.get(i).getHorafin2());
+                celda13.setCellValue(lista.get(i).getCodigo2());
+                if(lista.get(i).getEstado2().contains("ENT")){
+                    celda14.setCellValue("Entregado");
+                }else if(lista.get(i).getEstado2().contains("NOE") && (Boolean.valueOf(lista.get(i).getFecha2().isBefore(dato.getFechaactual())) ||
+                        Boolean.valueOf(lista.get(i).getFecha2().isEqual(dato.getFechaactual())))){
+                    celda14.setCellValue("No entregado");
+                }else{
+                    celda14.setCellValue("Programado");
+                }
+            }
         }
         // Ahora guardaremos el archivo
         //try {
@@ -447,37 +602,42 @@ public class CronogramaController {
         cronograma.setFechaFin(dato.getFechaini()); //posteriormente actualizaremos la fecha fin
         cronograma.setUsuarioCreacion(dato.getUsuariocreacion());
         cronograma.setEstado("GEN");
-        Cronograma croGen = cronogramaRepository.save(cronograma);
+
 
         //Establecemos el día y fecha de inicio
         //Se recorre día por día
         //Nota: Enero-Diciembre (0-11)
         //Lunes es 1 - Jueves es 4
         //Nos ubicamos en el día anterior
-        Calendar c = new GregorianCalendar(croGen.getFechaInicio().getYear(),
-                croGen.getFechaInicio().getMonthValue()-1,
-                croGen.getFechaInicio().getDayOfMonth()-1);
+        Calendar c = new GregorianCalendar(cronograma.getFechaInicio().getYear(),
+                cronograma.getFechaInicio().getMonthValue()-1,
+                cronograma.getFechaInicio().getDayOfMonth()-1);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         int diaSemana = c.get(Calendar.DAY_OF_WEEK);
         System.out.println(c.getTime().toString());
         System.out.println(diaSemana);
-        Hashtable<Calendar,Hashtable<String,ArrayList<Item>>> horarios = algoritmoGenetico.generarCronograma(lugarentregas,beneficiarios, lugaresXdia, c);
+        Hashtable<String,Hashtable<String,ArrayList<Item>>> horarios = algoritmoGenetico.generarCronograma(lugarentregas,beneficiarios, lugaresXdia, c);
         System.out.println(c.getTime().toString());
         System.out.println(diaSemana);
         //new java.sql.Date(c.getTime().getTime()).toLocalDate()
         //Insertamos el cronograma
 
-        Set<Calendar> clHorarios = horarios.keySet();
+        Cronograma croGen = cronogramaRepository.save(cronograma);
+        Set<String> clHorarios = horarios.keySet();
 
 
 
         //Recorremos cada día
-        for (Calendar llaveDia : clHorarios) {
+        for (String llaveDia : clHorarios) {
+
             Hashtable<String,ArrayList<Item>> horGen =horarios.get(llaveDia);
 
+            Calendar c2 = new GregorianCalendar(Integer.parseInt(llaveDia.substring(0,4)),
+                    Integer.parseInt(llaveDia.substring(5,7))-1,Integer.parseInt(llaveDia.substring(8)));
+
             //Conseguir los lugares de entrega de la fecha seleccionada
-            int diaLlaveDia = llaveDia.get(Calendar.DAY_OF_WEEK);
-            System.out.println(llaveDia.getTime().toString());
+            int diaLlaveDia = c2.get(Calendar.DAY_OF_WEEK);
+            System.out.println(c2.getTime().toString());
             ArrayList<HorarioLugarEntregaAlgoritmo> lugaresLlaveDia = lugaresXdia.get(diaLlaveDia-1);
 
             //Recorremos todos los lugares de entrega de un día
@@ -501,7 +661,7 @@ public class CronogramaController {
                         horario1.setHorariolugarentrega(horariolugarentrega);
 
                         horario1.setEstado("NOE");
-                        horario1.setFecha(new java.sql.Date(llaveDia.getTime().getTime()).toLocalDate());
+                        horario1.setFecha(new java.sql.Date(c2.getTime().getTime()).toLocalDate());
 
                         horario1.setHoraInicio(lugaresLlaveDia.get(j).getHoraaperturaturnoma());
                         horario1.setHoraFin(lugaresLlaveDia.get(j).getHoracierreturnoma());
@@ -530,7 +690,7 @@ public class CronogramaController {
                         horario2.setHorariolugarentrega(horariolugarentrega);
 
                         horario2.setEstado("NOE");
-                        horario2.setFecha(new java.sql.Date(llaveDia.getTime().getTime()).toLocalDate());
+                        horario2.setFecha(new java.sql.Date(c2.getTime().getTime()).toLocalDate());
 
                         horario2.setHoraInicio(lugaresLlaveDia.get(j).getHoraaperturaturnotar());
                         horario2.setHoraFin(lugaresLlaveDia.get(j).getHoracierreturnotar());
@@ -580,10 +740,18 @@ public class CronogramaController {
     }
 
     @PostMapping("/monitoreoentregabono")
-    public Hashtable<String,ArrayList<Object>> monitoreoentregabono() {
+    public Hashtable<String,ArrayList<Object>> monitoreoentregabono(@RequestBody Datos dato) {
         ArrayList<ArrayList<Object>> listaBonosEntregados;
         Hashtable<String,ArrayList<Object>> grafico =new Hashtable<>();
-        listaBonosEntregados=horarioRepository.monitoreoEntrega();
+
+        if(dato.getListaDepartamentos().size()>0 && dato.getListaProvincias().size()>0 && dato.getListaDistritos().size()>0)
+            listaBonosEntregados=horarioRepository.monitoreoEntregaXDistrito(dato.getListaDistritos(),dato.getFechaini(), dato.getFechafin());
+        else if (dato.getListaDepartamentos().size()>0 && dato.getListaProvincias().size()>0)
+            listaBonosEntregados=horarioRepository.monitoreoEntregaXProvincia(dato.getListaProvincias(),dato.getFechaini(), dato.getFechafin());
+        else if (dato.getListaDepartamentos().size()>0)
+            listaBonosEntregados=horarioRepository.monitoreoEntregaXDepartamento(dato.getListaDepartamentos(),dato.getFechaini(), dato.getFechafin());
+        else
+            listaBonosEntregados=horarioRepository.monitoreoEntrega(dato.getFechaini(), dato.getFechafin());
 
         ArrayList<Object> listaFechas =new ArrayList<>();
         ArrayList<Object> listaCantidades = new ArrayList<>();
@@ -598,6 +766,59 @@ public class CronogramaController {
         grafico.put("listaFechas", listaFechas);
         grafico.put("listaCantidades", listaCantidades);
 
+        return grafico;
+    }
+
+    @PostMapping("/monitoreotoplugares")
+    public Hashtable<String,ArrayList<Object>> monitoreotoplugares(@RequestBody Datos dato){
+        Hashtable<String,ArrayList<Object>> grafico =new Hashtable<>();
+        ArrayList<ArrayList<Object>> listaPeoresLugares;
+
+        if(dato.getListaDepartamentos().size()>0)
+            listaPeoresLugares=lugarEntregaRepository.topPeoresLugaresXDepartamento(dato.getListaDepartamentos(),dato.getFechaini(), dato.getFechafin().plusDays(1));
+        else if (dato.getListaProvincias().size()>0)
+            listaPeoresLugares=lugarEntregaRepository.topPeoresLugaresXProvincia(dato.getListaProvincias(),dato.getFechaini(), dato.getFechafin().plusDays(1));
+        else if (dato.getListaDistritos().size()>0)
+            listaPeoresLugares=lugarEntregaRepository.topPeoresLugaresXDistrito(dato.getListaDistritos(),dato.getFechaini(), dato.getFechafin().plusDays(1));
+        else
+            listaPeoresLugares=lugarEntregaRepository.topPeoresLugares(dato.getFechaini(), dato.getFechafin().plusDays(1));
+
+
+        ArrayList<Object> listaLugares =new ArrayList<>();
+        ArrayList<Object> listaCantidades = new ArrayList<>();
+
+        for(int i =0; i< listaPeoresLugares.size(); i++){
+            listaLugares.add(listaPeoresLugares.get(i).get(0));
+            listaCantidades.add(listaPeoresLugares.get(i).get(1));
+        }
+
+        grafico.put("listaLugares", listaLugares);
+        grafico.put("listaCantidades", listaCantidades);
+        return grafico;
+    }
+
+    @PostMapping("/monitoreoavanceentrega")
+    public Hashtable<String,ArrayList<Object>> monitoreoavanceentrega(@RequestBody Datos dato){
+        Hashtable<String,ArrayList<Object>> grafico =new Hashtable<>();
+        ArrayList<Object> listanombres =new ArrayList<>();
+        ArrayList<Object> listacantidades = new ArrayList<>();
+        Integer cantnoentre = 0;
+        Integer cantentre= 0;
+        Integer cantpend= 0;
+        ArrayList<Horario> hor,horpend =new ArrayList<>();
+
+        ArrayList<ArrayList<Integer>> cantidades = horarioRepository.avanceentregamonitoreo(dato.getFechaini(), dato.getFechafin(), dato.getFechaactual());
+
+
+
+        listanombres.add("entregados");
+        listanombres.add("noentregados");
+        listanombres.add("pendientes");
+        listacantidades.add(cantidades.get(0).get(0));
+        listacantidades.add(cantidades.get(0).get(1));
+        listacantidades.add(cantidades.get(0).get(2));
+        grafico.put("listanombres",listanombres);
+        grafico.put("listacantidades",listacantidades);
         return grafico;
     }
 
@@ -621,6 +842,7 @@ public class CronogramaController {
             respuesta.put("nombre",crog.get().getNombre());
             respuesta.put("fechaini",crog.get().getFechaInicio());
             respuesta.put("fechafin",crog.get().getFechaFin());
+            respuesta.put("fechaactualizacion", crog.get().getFechaActualizacion());
             respuesta.put("beneficiarios",bene.size());
             respuesta.put("lugares",lugares.size());
             respuesta.put("estado",crog.get().getEstado());
@@ -629,6 +851,7 @@ public class CronogramaController {
             respuesta.put("nombre","");
             respuesta.put("fechaini","");
             respuesta.put("fechafin","");
+            respuesta.put("fechaactualizacion", "");
             respuesta.put("beneficiarios",bene.size());
             List<Lugarentrega> lug=lugarEntregaRepository.findAllByEstado("ACT");
             respuesta.put("lugares",lug.size());
@@ -638,40 +861,11 @@ public class CronogramaController {
     }
 
     @PostMapping("/historico")
-    public ArrayList<Hashtable<String, Object>> historico() {
-        ArrayList<Hashtable<String, Object>> lista=new ArrayList<>();
-        ArrayList<Cronograma> crog=cronogramaRepository.findAll();
-        for (Cronograma c:crog) {
-            Integer totalBeneficiarios = 0;
-            Integer bonos= 0;
-            Integer lugar=0;
-            Integer id=0;
-            Hashtable<String, Object> respuesta=new Hashtable<>();
-            ArrayList<Integer> idB=new ArrayList<>();
-            ArrayList<Horario> hor=horarioRepository.findAllByCronograma_IdCronograma(c.getIdCronograma());
-            ArrayList<Integer> lugares=new ArrayList<>();
-            for(Horario h: hor){
-                //h.getBeneficiario();//se tiene el beneficiario de cada horario
-                if(!idB.contains(h.getBeneficiario().getIdbeneficiario())){//si no lo contiene lo agrega
-                    idB.add(h.getBeneficiario().getIdbeneficiario());
-                    totalBeneficiarios = totalBeneficiarios + 1;
-                }
-                id=h.getHorariolugarentrega().getLugarentrega().getIdLugarentrega();
-                if(!lugares.contains(id)){
-                    lugares.add(id);
-                    lugar=lugar+1;
-                }
-            }
-            respuesta.put("id",c.getIdCronograma());
-            respuesta.put("nombre",c.getNombre());
-            respuesta.put("fechaini",c.getFechaInicio());
-            respuesta.put("fechafin",c.getFechaFin());
-            respuesta.put("beneficiarios",totalBeneficiarios);
-            respuesta.put("lugares",lugar);
-            lista.add(respuesta);
-        }
-        return lista;
+    public ArrayList<Historico> historico() {
+        ArrayList<Historico> resp=historicoRepository.monitoreo();
+        return resp;
     }
+
     @PostMapping("/publicar/{idcronograma}")
     public Cronograma listarDistrito(@PathVariable Integer idcronograma) {
         Cronograma  croD=new Cronograma();
@@ -684,4 +878,18 @@ public class CronogramaController {
         }
         return croD;
     }
+
+    @PostMapping("/cronograma_publicado")
+    public Optional<Cronograma> cronogramaPublicado() {
+        Optional<Cronograma> crog = cronogramaRepository.findCronogramaByEstadoOrEstado("PUB","GEN");
+        return crog;
+    }
+
+    @PostMapping("/listar_cronogramas")
+    public ArrayList<Cronograma> listarCronogramas() {
+        ArrayList<Cronograma> cronogramas;
+        cronogramas = cronogramaRepository.findCronogramasByEstadoIsNot("ELI");
+        return cronogramas;
+    }
+
 }

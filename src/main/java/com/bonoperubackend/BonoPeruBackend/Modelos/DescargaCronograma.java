@@ -10,38 +10,72 @@ import java.time.LocalTime;
 @Entity(name="descargarcronograma")
 public class DescargaCronograma implements Serializable {
     @Id
-    private Integer idlugarentrega;
+    private Integer idbeneficiario;
+    private String codigofamilia;
     private String departamento;
     private String provincia;
     private String distrito;
-    private String lugar;
-    private LocalDate fecha;
-    private LocalTime horainicio;
-    private LocalTime horafin;
-    private String codigofamilia;
+    private String sexo;
+    private String discapacitado;
+    private Integer numhorarios;
+    private String codigo1;
+    private LocalDate fecha1;
+    private LocalTime horainicio1;
+    private LocalTime horafin1;
+    private String codigo2;
+    private LocalDate fecha2;
+    private LocalTime horainicio2;
+    private LocalTime horafin2;
+    private String estado;
+    private Integer incidentes;
 
     public DescargaCronograma() {
         super();
     }
 
-    public DescargaCronograma(Integer idlugarentrega, String departamento, String provincia, String distrito, String lugar, LocalDate fecha, LocalTime horainicio, LocalTime horafin, String codigofamilia) {
-        this.idlugarentrega = idlugarentrega;
+    public DescargaCronograma(Integer idbeneficiario, String codigofamilia, String departamento, String provincia, String distrito, String sexo, String discapacitado, Integer numhorarios, String codigo1, LocalDate fecha1, LocalTime horainicio1, LocalTime horafin1, String codigo2, LocalDate fecha2, LocalTime horainicio2, LocalTime horafin2, String estado, Integer incidentes) {
+        this.idbeneficiario = idbeneficiario;
+        this.codigofamilia = codigofamilia;
         this.departamento = departamento;
         this.provincia = provincia;
         this.distrito = distrito;
-        this.lugar = lugar;
-        this.fecha = fecha;
-        this.horainicio = horainicio;
-        this.horafin = horafin;
+        this.sexo = sexo;
+        this.discapacitado = discapacitado;
+        this.numhorarios = numhorarios;
+        this.codigo1 = codigo1;
+        this.fecha1 = fecha1;
+        this.horainicio1 = horainicio1;
+        this.horafin1 = horafin1;
+        this.codigo2 = codigo2;
+        this.fecha2 = fecha2;
+        this.horainicio2 = horainicio2;
+        this.horafin2 = horafin2;
+        this.estado = estado;
+        this.incidentes = incidentes;
+    }
+
+    public String getCodigo2() {
+        return codigo2;
+    }
+
+    public void setCodigo2(String codigo2) {
+        this.codigo2 = codigo2;
+    }
+
+    public Integer getIdbeneficiario() {
+        return idbeneficiario;
+    }
+
+    public void setIdbeneficiario(Integer idbeneficiario) {
+        this.idbeneficiario = idbeneficiario;
+    }
+
+    public String getCodigofamilia() {
+        return codigofamilia;
+    }
+
+    public void setCodigofamilia(String codigofamilia) {
         this.codigofamilia = codigofamilia;
-    }
-
-    public Integer getIdlugarentrega() {
-        return idlugarentrega;
-    }
-
-    public void setIdlugarentrega(Integer idlugarentrega) {
-        this.idlugarentrega = idlugarentrega;
     }
 
     public String getDepartamento() {
@@ -68,43 +102,99 @@ public class DescargaCronograma implements Serializable {
         this.distrito = distrito;
     }
 
-    public String getLugar() {
-        return lugar;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
-    public LocalDate getFecha() {
-        return fecha;
+    public String getDiscapacitado() {
+        return discapacitado;
     }
 
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
+    public void setDiscapacitado(String discapacitado) {
+        this.discapacitado = discapacitado;
     }
 
-    public LocalTime getHorainicio() {
-        return horainicio;
+    public Integer getNumhorarios() {
+        return numhorarios;
     }
 
-    public void setHorainicio(LocalTime horainicio) {
-        this.horainicio = horainicio;
+    public void setNumhorarios(Integer numhorarios) {
+        this.numhorarios = numhorarios;
     }
 
-    public LocalTime getHorafin() {
-        return horafin;
+    public String getCodigo1() {
+        return codigo1;
     }
 
-    public void setHorafin(LocalTime horafin) {
-        this.horafin = horafin;
+    public void setCodigo1(String codigo1) {
+        this.codigo1 = codigo1;
     }
 
-    public String getCodigofamilia() {
-        return codigofamilia;
+    public LocalDate getFecha1() {
+        return fecha1;
     }
 
-    public void setCodigofamilia(String codigofamilia) {
-        this.codigofamilia = codigofamilia;
+    public void setFecha1(LocalDate fecha1) {
+        this.fecha1 = fecha1;
+    }
+
+    public LocalTime getHorainicio1() {
+        return horainicio1;
+    }
+
+    public void setHorainicio1(LocalTime horainicio1) {
+        this.horainicio1 = horainicio1;
+    }
+
+    public LocalTime getHorafin1() {
+        return horafin1;
+    }
+
+    public void setHorafin1(LocalTime horafin1) {
+        this.horafin1 = horafin1;
+    }
+
+    public LocalDate getFecha2() {
+        return fecha2;
+    }
+
+    public void setFecha2(LocalDate fecha2) {
+        this.fecha2 = fecha2;
+    }
+
+    public LocalTime getHorainicio2() {
+        return horainicio2;
+    }
+
+    public void setHorainicio2(LocalTime horainicio2) {
+        this.horainicio2 = horainicio2;
+    }
+
+    public LocalTime getHorafin2() {
+        return horafin2;
+    }
+
+    public void setHorafin2(LocalTime horafin2) {
+        this.horafin2 = horafin2;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Integer getIncidentes() {
+        return incidentes;
+    }
+
+    public void setIncidentes(Integer incidentes) {
+        this.incidentes = incidentes;
     }
 }

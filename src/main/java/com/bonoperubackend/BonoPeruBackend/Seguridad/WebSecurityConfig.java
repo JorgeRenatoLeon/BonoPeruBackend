@@ -58,9 +58,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**","/api/departamento/**"
                 ,"/api/provincia/**","/api/distrito/**","/api/preguntasfrecuentes/**","/api/valores/**"
-                ,"/api/encuesta/**","/api/lugarentrega/**","/api/horario/**","/api/cronograma/**"
+                ,"/api/encuesta/**","/api/lugarentrega/**","/api/horario/**","/api/cronograma/**","/api/pregunta/**"
                 ,"/api/beneficiario/**","/api/usuarios/**","/api/quejas/**","/", "/hello","/api/incidente/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/upload","/.well-known/pki-validation/55C94ABE6EEBAC4BFAF57F64BF05E3D7.txt").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

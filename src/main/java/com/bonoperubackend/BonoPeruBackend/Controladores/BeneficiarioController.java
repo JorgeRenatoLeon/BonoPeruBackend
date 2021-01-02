@@ -177,7 +177,7 @@ public class BeneficiarioController {
                 boolean femenino=false;
                 try {
                     int fem = Integer.parseInt(csvRecord.get("DE_GENERO"));
-                    femenino = fem==0;
+                    femenino = fem==2;
                 }
                 catch (Exception exception){
                     if(array.size()==0) array.add(Integer.toString(row));
@@ -194,36 +194,53 @@ public class BeneficiarioController {
                     array.add("Error en el campo de Discapacidad");
                 }
 
-                Optional<Distrito> distrito = distritoRepository.findByUbigeo(ubigeo);
-                if (distrito.isPresent()) {
-                    Integer codigoDistrito = distrito.get().getIddistrito();
+                Optional<Departamento> departamentoAux = departamentoRepository.findByUbigeo(ubigeo/10000);
+                if(departamentoAux.isPresent()){
+                    Optional<Provincia> provinciaAux = provinciaRepository.findByUbigeoAndFiddepartamento((ubigeo/100)%100,departamentoAux.get().getIddepartamento());
+                    if(provinciaAux.isPresent()){
+                        Optional<Distrito> distritoAux = distritoRepository.findByUbigeoAndFidprovincia(ubigeo%100,provinciaAux.get().getIdprovincia());
+                        if (distritoAux.isPresent()) {
+                            Integer codigoDistrito = distritoAux.get().getIddistrito();
 
-                    if(array.size()==0) {
-                        Optional<Beneficiario> beneficiarioExistente = beneficiarioRepository.findByCodigofamilia(codigo);
-                        if(beneficiarioExistente.isPresent()){
-                            beneficiarioExistente.get().setFiddistrito(codigoDistrito);
-                            beneficiarioExistente.get().setEsdiscapacitado(discapacidad);
-                            beneficiarioExistente.get().setMasculino(masculino);
-                            beneficiarioExistente.get().setFemenino(femenino);
-                            beneficiarioExistente.get().setUsuarioactualizacion(idCreacion);
-                            beneficiarios.add(beneficiarioExistente.get());
+                            if(array.size()==0) {
+                                Optional<Beneficiario> beneficiarioExistente = beneficiarioRepository.findByCodigofamilia(codigo);
+                                if(beneficiarioExistente.isPresent()){
+                                    beneficiarioExistente.get().setFiddistrito(codigoDistrito);
+                                    beneficiarioExistente.get().setEsdiscapacitado(discapacidad);
+                                    beneficiarioExistente.get().setMasculino(masculino);
+                                    beneficiarioExistente.get().setFemenino(femenino);
+                                    beneficiarioExistente.get().setUsuarioactualizacion(idCreacion);
+                                    beneficiarioExistente.get().setEstado("ACT");
+                                    beneficiarios.add(beneficiarioExistente.get());
+                                }
+                                else{
+                                    Beneficiario beneficiario = new Beneficiario(
+                                            codigoDistrito,
+                                            csvRecord.get("CO_HOGAR"),
+                                            femenino,
+                                            masculino,
+                                            discapacidad,
+                                            0,
+                                            0,
+                                            "ACT",
+                                            idCreacion
+                                    );
+                                    beneficiarios.add(beneficiario);
+                                }
+                            }
+                            else{
+                                errores.add(array);
+                            }
                         }
                         else{
-                            Beneficiario beneficiario = new Beneficiario(
-                                    codigoDistrito,
-                                    csvRecord.get("CO_HOGAR"),
-                                    femenino,
-                                    masculino,
-                                    discapacidad,
-                                    0,
-                                    0,
-                                    "ACT",
-                                    idCreacion
-                            );
-                            beneficiarios.add(beneficiario);
+                            if(array.size()==0) array.add(Integer.toString(row));
+                            if (array.size()==1 || !array.get(1).equals("Error en el Ubigeo")) array.add("Error en el Ubigeo: Codigo Incorrecto");
+                            errores.add(array);
                         }
                     }
                     else{
+                        if(array.size()==0) array.add(Integer.toString(row));
+                        if (array.size()==1 || !array.get(1).equals("Error en el Ubigeo")) array.add("Error en el Ubigeo: Codigo Incorrecto");
                         errores.add(array);
                     }
                 }

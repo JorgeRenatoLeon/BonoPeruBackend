@@ -1,7 +1,6 @@
 package com.bonoperubackend.BonoPeruBackend.AlgoritmoGenetico;
 
-public class Item
-{
+public class Item {
     //Atributos de la clase
     private String id;
     private Integer idbd;
@@ -11,18 +10,20 @@ public class Item
     private int ubigeo1;
     private int ubigeo2;
     private int ubigeo3;
+    private int cantAsignado;
 
     //Constructor con el mismo nombre de la clase
-    public Item(Integer idbd, String nuevo_id, float penal, int disc, int sex, int ubi1, int ubi2, int ubi3){
+    public Item(Integer idbd, String nuevo_id, float penal, int disc, int sex, int ubi1, int ubi2, int ubi3, int cantAsignado) {
 
         this.id = nuevo_id;
-        this.idbd=idbd;
+        this.idbd = idbd;
         this.penalidad = penal;
         this.es_disc = disc;
         this.sexo = sex;
         this.ubigeo1 = ubi1;
         this.ubigeo2 = ubi2;
         this.ubigeo3 = ubi3;
+        this.cantAsignado = cantAsignado;
     }
 
     //Métodos de la clase
@@ -90,5 +91,13 @@ public class Item
 
     public void setUbigeo3(int ubigeo3) {
         this.ubigeo3 = ubigeo3;
+    }
+
+    public int getCantAsignado() {
+        return cantAsignado;
+    }
+
+    public void setCantAsignado(int cantAsignado) {
+        this.cantAsignado = cantAsignado;
     }
 }

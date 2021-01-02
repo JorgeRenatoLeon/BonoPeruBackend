@@ -5,6 +5,8 @@ import com.bonoperubackend.BonoPeruBackend.Repositorios.LugarEntregaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -30,7 +32,7 @@ public class Genetic {
                 capacidadU.put(lk,new ArrayList<>(lugares.get(lk)));
             }
             //capacidadU.putAll(lugares);
-            System.out.println("sz4: "+capacidadU.size());
+            //System.out.println("sz4: "+capacidadU.size());
             int j=0;
             while (j<chromosome_size){
 
@@ -38,16 +40,17 @@ public class Genetic {
                 int p=rn.nextInt(lugarXdia.size());
                 int p2=rn.nextInt(2);
                 String k=lugarXdia.get(p).getCodigo();
+                //Escoger entre turno mañana y turno tarde
                 if (p2==1) k=k+"T";
                 else if (p2==0) k=k+"M";
-
-                System.out.println(k);
-                System.out.println(capacidadU.get(k).get(0));
+                //Minimo que pertenezca al mismo departamento
+                //System.out.println(k);
+                //System.out.println(capacidadU.get(k).get(0));
                 if(capacidadU.get(k).get(0)>0 && items.get(j).getUbigeo1()==lugares.get(k).get(1)){
                     capacidadU.get(k).set(0,capacidadU.get(k).get(0)-1);
                     new_chromosome.add(k);
-                }else if(capacidadU.get(k).get(0)>0){
-                    j-=1;
+                //}else if(capacidadU.get(k).get(0)>0){
+                //    j-=1;
                 }else{
                     new_chromosome.add("0");
                 }
@@ -70,12 +73,13 @@ public class Genetic {
 
         Hashtable<String,ArrayList<Integer>> locales_copia=new Hashtable();
         //Ver si modifica el original
-        locales_copia.putAll(lugares);
-        /*
+        //locales_copia.putAll(lugares);
+
         Set<String> lkeys=lugares.keySet();
         for(String lk: lkeys){
             locales_copia.put(lk,new ArrayList<>(lugares.get(lk)));
-        }*/
+            locales_copia.get(lk).set(0,0);
+        }
 
         int sum_abue = 0, sum_man=0, sum_woman=0, sum_diferente=0, sum_penalidad=0, sum_ubicacion=0;
         int cant_personas=0;
@@ -157,6 +161,7 @@ public class Genetic {
         for (int i=0; i< pop_size; i++){
             if(population.get(i).getFitness().isEmpty()){
                 population.get(i).setFitness(get_fitness(population.get(i).getChromosome(), items, lugares));
+
             }
         }
     }
@@ -332,7 +337,10 @@ public class Genetic {
         //    y se selecciona el mejor segun la distancia crowding. Se repite hasta obtener num_individuals individuos
         ArrayList<Individual>  population1 = new ArrayList<Individual>();
         population1.addAll(paretofront_population);
-
+        /*System.out.println("Antes del select by crowding: "+paretofront_population.size());
+        for(int i=0; i<paretofront_population.size(); i++){
+            System.out.println(paretofront_population.get(i).getChromosome());
+        }*/
         int pop_size = population1.size();
         int num_objectives = (population1.get(0).getFitness()).size();
 
@@ -357,13 +365,20 @@ public class Genetic {
                 population_selected.add( population1.remove(ind1_id) );
                 //remueve la distancia crowding del individuo seleccionado
                 crowding_distances.remove(ind1_id);
+
             }else{//Si ind2_id es el mejor
                 //traslada el individuo ind2 de population a la lista de individuos seleccionados
                 population_selected.add( population1.remove(ind2_id) );
                 //remueve la distancia crowding del individuo seleccionado
                 crowding_distances.remove(ind2_id);
+
             }
         }
+        /*System.out.println("Despues del select by crowding: "+paretofront_population.size());
+        System.out.println("Despues del select by crowding2: "+population1.size());
+        for(int i=0; i<population1.size(); i++){
+            System.out.println(population1.get(i).getChromosome());
+        }*/
         return population_selected;
     }
 
@@ -465,7 +480,7 @@ public class Genetic {
     }
 
 
-    public Hashtable<Calendar,Hashtable<String,ArrayList<Item>>> generarCronograma(ArrayList<LugarEntregaAlgoritmo> lugarentregas,
+    public Hashtable<String,Hashtable<String,ArrayList<Item>>> generarCronograma(ArrayList<LugarEntregaAlgoritmo> lugarentregas,
                                                                                     ArrayList<BeneficiarioAlgoritmo> beneficiarios,
                                                                                    ArrayList<ArrayList<HorarioLugarEntregaAlgoritmo>> lugaresXdia,
                                                                                     Calendar c){
@@ -481,11 +496,15 @@ public class Genetic {
         ArrayList<Item> itempool;
         Hashtable<String,ArrayList<Integer>> lugares;
         ArrayList<Individual> P, Q, pareto_front_population;
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         int diaSemana = c.get(Calendar.DAY_OF_WEEK);
 
         itempool=procesarBeneficiarios(beneficiarios);
         lugares=procesarLugares(lugarentregas);
-
+        Set<String> lkeys=lugares.keySet();
+        for(String lk: lkeys){
+            System.out.println(lk + " " +lugares.get(lk));
+        }
         int NUM_ITEMS = beneficiarios.size(); // numero de beneficiarios
         int MIN_POP_SIZE = 50;
         int MAX_POP_SIZE = 50;
@@ -494,18 +513,19 @@ public class Genetic {
         double PMUT = 0.5;  // tasa de mutacion
 
 
-        Hashtable<Calendar,Hashtable<String,ArrayList<Item>>> cronograma=new Hashtable<>();
+        Hashtable<String,Hashtable<String,ArrayList<Item>>> cronograma=new Hashtable<>();
 
 
         while(itempool.size()!=0){
             //Nos ubicamos en el día de entrega, hay lugares que también atienden domingo
             c.add(Calendar.DATE, 1);
-            System.out.println(c.getTime().toString());
+            diaSemana = c.get(Calendar.DAY_OF_WEEK);
+            //System.out.println(c.getTime().toString());
             //Seleccionamos la lista según el día de la semana que tenga lugares de entrega
             while(lugaresXdia.get(diaSemana-1).size()==0){
                 c.add(Calendar.DATE, 1);
                 diaSemana = c.get(Calendar.DAY_OF_WEEK);
-                System.out.println(c.getTime().toString() + " "+ diaSemana);
+                //System.out.println(c.getTime().toString() + " "+ diaSemana);
             }
 
             ArrayList<HorarioLugarEntregaAlgoritmo> lugarXdia = lugaresXdia.get(diaSemana-1);
@@ -513,23 +533,23 @@ public class Genetic {
             //De lugarXdia se obtienen las llaves y de lugares los datos del lugar de entrega
             P=init_population(MAX_POP_SIZE,itempool.size(),itempool,lugares,lugarXdia);
             evaluate_population(P,itempool,lugares);
-            System.out.println("P.size: "+P.size());
-            System.out.println("P.fitness: "+P.get(0).getFitness());
+            //System.out.println("P.size: "+P.size());
+            //System.out.println("P.fitness: "+P.get(0).getFitness());
 
             for(int i=0; i<GENERATIONS; i++){
                 // genera y evalua la poblacion hija
                 Q=build_offspring_population(P,"uniform", "flip",PMUT, lugares, lugarXdia);
                 evaluate_population(Q,itempool,lugares);
 
-                System.out.println("Q.size: "+Q.size());
-                System.out.println("Q.fitness: "+Q.get(0).getFitness());
+                //System.out.println("Q.size: "+Q.size());
+                //System.out.println("Q.fitness: "+Q.get(0).getFitness());
 
                 // une la poblacion padre y la poblacion hija
                 P.addAll(Q);
                 // Construye la poblacion de la siguiente generacion
                 P=build_next_population(P,MIN_POP_SIZE,MAX_POP_SIZE);
-                System.out.println("Pi.size: "+P.size());
-                System.out.println("Pi.fitness: "+P.get(0).getFitness());
+                //System.out.println("Pi.size: "+P.size());
+                //System.out.println("Pi.fitness: "+P.get(0).getFitness());
             }
 
             // Obtiene la poblacion de la frontera de pareto final
@@ -546,20 +566,40 @@ public class Genetic {
             }
 
             int i=0;
-            System.out.println("pf: " +pareto_front_population.get(0).getChromosome());
+            //System.out.println("pf: " +pareto_front_population.get(0).getChromosome());
             for (int j=0; j<pareto_front_population.get(0).getChromosome().size(); j++){
                 if(pareto_front_population.get(0).getChromosome().get(j)!="0"){
                     beneficiariosAsignados.get(pareto_front_population.get(0).getChromosome().get(j)).add(itempool.get(i));
-                    itempool.remove(itempool.get(i));
-                    i-=1;
+                    itempool.get(i).setCantAsignado(itempool.get(i).getCantAsignado()+1);
+                    if(itempool.get(i).getPenalidad()>4 || itempool.get(i).getCantAsignado()>1){
+                        itempool.remove(itempool.get(i));
+                        i-=1;
+                    }
+
                 }
                 i+=1;
             }
-            cronograma.put(c,beneficiariosAsignados);
+            cronograma.put(df.format(c.getTime()),beneficiariosAsignados);
             //cronograma.add(beneficiariosAsignados);
         }
+        /*
+        Set<String> lkeys2=lugares.keySet();
+        for(String lk: lkeys2){
+            System.out.println(lk + " " +lugares.get(lk));
+        }*/
+        //Hashtable<Calendar,Hashtable<String,ArrayList<Item>>>
+        Set<String>  lCro=cronograma.keySet();
+        for(String lck: lCro){
+            System.out.println(lck);
+            Set<String> lCroS = cronograma.get(lck).keySet();
+            for(String key: lCroS){
+                System.out.println("lugar: "+ key + " item: "+cronograma.get(lck).get(key));
+            }
 
-
+        }
+        for(String lk: lkeys){
+            System.out.println(lk + " " +lugares.get(lk));
+        }
         return cronograma;
     }
 
@@ -581,7 +621,8 @@ public class Genetic {
                 varDisc=1;
 
             //Creamos el item según las condiciones
-            Item item = new Item(beneficiario.getIdbeneficiario(), beneficiario.getCodigofamilia(),beneficiario.getPenalidad(), varDisc,  varSexo, beneficiario.getUbigeodepartamento(), beneficiario.getUbigeoprovincia(), beneficiario.getUbigeodistrito());
+            Item item = new Item(beneficiario.getIdbeneficiario(), beneficiario.getCodigofamilia(),beneficiario.getPenalidad(), varDisc,  varSexo, beneficiario.getUbigeodepartamento(), beneficiario.getUbigeoprovincia(), beneficiario.getUbigeodistrito(),0);
+            System.out.println(item.getPenalidad());
             itempool.add(item);
 
         }
@@ -592,7 +633,7 @@ public class Genetic {
         Hashtable<String,ArrayList<Integer>> lugares=new Hashtable<>();
         LugarEntregaAlgoritmo lugar;
         int capacidad=0;
-        System.out.println("sz2: "+lugarentregas.size());
+        //System.out.println("sz2: "+lugarentregas.size());
         for(int i=0; i<lugarentregas.size();i++){
             lugar=lugarentregas.get(i);
             ArrayList<Integer> valorM=new ArrayList<>();
@@ -609,7 +650,7 @@ public class Genetic {
             lugares.put(lugar.getCodigo()+'M',valorM); //Turno mañana
             lugares.put(lugar.getCodigo()+'T',valorT); //Turno tarde
         }
-        System.out.println("sz3: "+lugares.size());
+        //System.out.println("sz3: "+lugares.size());
         return  lugares;
     }
 
@@ -648,7 +689,7 @@ public class Genetic {
             capacidad-=0.3*capacidad;
         else if( penalidad>80)
             capacidad-=0.4*capacidad;
-
+        //System.out.println("cap: "+capacidad);
         return capacidad;
     }
 

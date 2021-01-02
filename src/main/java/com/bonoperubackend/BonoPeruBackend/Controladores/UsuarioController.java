@@ -50,7 +50,7 @@ public class UsuarioController {
     };
 
     @PostMapping("/modificar")
-    public void modificarUsuario(@RequestBody Usuario usuario) {
+    public Usuario modificarUsuario(@RequestBody Usuario usuario) {
         Optional<Usuario> user = userRepository.findById(usuario.getId());
         if (user.isPresent()) {
             if (usuario.getNombres() != null) {
@@ -62,11 +62,15 @@ public class UsuarioController {
             if(usuario.getUsername() != null){
                 user.get().setUsername(usuario.getUsername());
             }
+            if(usuario.getCorreo() != null){
+                user.get().setCorreo(usuario.getCorreo());
+            }
             if(usuario.getUsuarioActualizacion() != 0){
                 user.get().setUsuarioActualizacion(usuario.getUsuarioActualizacion());
             }
             userRepository.save(user.get());
         }
+        return usuario;
     }
 
     @PostMapping("/eliminar")

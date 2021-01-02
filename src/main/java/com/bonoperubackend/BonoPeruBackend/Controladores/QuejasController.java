@@ -39,54 +39,42 @@ public class QuejasController {
         private static Integer iddepartamento;
         private static Integer idprovincia;
         private static Integer iddistrito;
-        private static List<Integer> cronogramas;
+        private static List<String> cronogramas;
         public Entrada() {}
-
         public LocalDate getFechaini() {
             return fechaini;
         }
-
         public void setFechaini(LocalDate fechaini) {
             Entrada.fechaini = fechaini;
         }
-
         public LocalDate getFechafi() {
             return fechafi;
         }
-
         public void setFechafi(LocalDate fechafi) {
             Entrada.fechafi = fechafi;
         }
-
         public Integer getIddepartamento() {
             return iddepartamento;
         }
-
         public void setIddepartamento(Integer iddepartamento) {
             Entrada.iddepartamento = iddepartamento;
         }
-
         public Integer getIdprovincia() {
             return idprovincia;
         }
-
         public void setIdprovincia(Integer idprovincia) {
             Entrada.idprovincia = idprovincia;
         }
-
         public Integer getIddistrito() {
             return iddistrito;
         }
-
         public void setIddistrito(Integer iddistrito) {
             Entrada.iddistrito = iddistrito;
         }
-
-        public List<Integer> getCronogramas() {
+        public List<String> getCronogramas() {
             return cronogramas;
         }
-
-        public void setCronogramas(List<Integer> cronogramas) {
+        public void setCronogramas(List<String> cronogramas) {
             Entrada.cronogramas = cronogramas;
         }
     }
@@ -94,28 +82,16 @@ public class QuejasController {
     @PostMapping("/reportequejas")
     public Hashtable<String,ArrayList<Object>> quejas(@RequestBody Entrada data) {
         Hashtable<String,ArrayList<Object>> grafico =new Hashtable<>();
+        ArrayList<ArrayList<Integer>> cantidades=quejasRepository.reporteQuejas(data.getFechaini(),data.getFechafi());
+
         ArrayList<Object> listanombres =new ArrayList<>();
+        listanombres.add("lugares");
+        listanombres.add("horarios");
+
         ArrayList<Object> listacantidades = new ArrayList<>();
-        Integer cantLugar = 0;
-        Integer cantHorario= 0;
-        ArrayList<Cronograma> crog=cronogramaRepository.findAll();
-        for (Cronograma c:crog) {
-            ArrayList<Horario> hor=horarioRepository.findAllByCronograma_IdCronogramaAndFechaGreaterThanEqualAndFechaLessThanEqual(c.getIdCronograma(),data.getFechaini(),data.getFechafi());
-            for(Horario h: hor){
-                ArrayList<Quejas> quejas= quejasRepository.findAllByHorario_IdHorarioAndBeneficiario_IdbeneficiarioAndLugarentrega_IdLugarentrega(h.getIdHorario(),h.getBeneficiario().getIdbeneficiario(),h.getHorariolugarentrega().getLugarentrega().getIdLugarentrega());
-                for(Quejas q:quejas){
-                    if(q.getTipoQueja().equals("lugar")){
-                        cantLugar=cantLugar+1;
-                    }else if(q.getTipoQueja().equals("horario")){
-                        cantHorario=cantHorario+1;
-                    }
-                }
-            }
-        }
-        listanombres.add("Lugares");
-        listanombres.add("Horarios");
-        listacantidades.add(cantLugar);
-        listacantidades.add(cantHorario);
+        listacantidades.add(cantidades.get(0).get(0));
+        listacantidades.add(cantidades.get(0).get(1));
+
         grafico.put("listanombres",listanombres);
         grafico.put("listacantidades",listacantidades);
         return grafico;
@@ -127,31 +103,50 @@ public class QuejasController {
         ArrayList<Object> listacronogramas =new ArrayList<>();
         ArrayList<Object> listalugares = new ArrayList<>();
         ArrayList<Object> listahorarios = new ArrayList<>();
-        ArrayList<Object> listaids = new ArrayList<>();
         ArrayList<ArrayList<Object>> respuesta= new ArrayList<ArrayList<Object>>();
-        if(data.getIddepartamento()!=null && data.getIdprovincia()!=null && data.getIddistrito()!=null){
+
+        if(data.getIddepartamento()!=null && data.getIdprovincia()!=null && data.getIddistrito()!=null && !data.getCronogramas().isEmpty()){
             respuesta=quejasRepository.reportequejas(data.getFechaini(),data.getFechafi(),data.getIddepartamento(),data.getIdprovincia(),data.getIddistrito(),data.getCronogramas());
-        }else if(data.getIddepartamento()!=null && data.getIdprovincia()!=null && data.getIddistrito()==null){
+        }else if(data.getIddepartamento()!=null && data.getIdprovincia()!=null && data.getIddistrito()==null && !data.getCronogramas().isEmpty()){
             respuesta=quejasRepository.reportequejas1(data.getFechaini(),data.getFechafi(),data.getIddepartamento(),data.getIdprovincia(),data.getCronogramas());
-        }else if(data.getIddepartamento()!=null && data.getIdprovincia()==null && data.getIddistrito()==null){
+        }else if(data.getIddepartamento()!=null && data.getIdprovincia()==null && data.getIddistrito()==null && !data.getCronogramas().isEmpty()){
             respuesta=quejasRepository.reportequejas2(data.getFechaini(),data.getFechafi(),data.getIddepartamento(),data.getCronogramas());
-        }else if(data.getIddepartamento()==null && data.getIdprovincia()==null && data.getIddistrito()==null){
+        }else if(data.getIddepartamento()==null && data.getIdprovincia()==null && data.getIddistrito()==null && !data.getCronogramas().isEmpty()){
             respuesta=quejasRepository.reportequejas3(data.getFechaini(),data.getFechafi(),data.getCronogramas());
+        }else if(data.getIddepartamento()!=null && data.getIdprovincia()!=null && data.getIddistrito()!=null && data.getCronogramas().isEmpty()){//listaids, con all cronogramas
+            respuesta=quejasRepository.reportequejas4(data.getFechaini(),data.getFechafi(),data.getIddepartamento(),data.getIdprovincia(),data.getIddistrito());
+        }else if(data.getIddepartamento()!=null && data.getIdprovincia()!=null && data.getIddistrito()==null && data.getCronogramas().isEmpty()){//listaids, con all cronogramas
+            respuesta=quejasRepository.reportequejas5(data.getFechaini(),data.getFechafi(),data.getIddepartamento(),data.getIdprovincia());
+        }else if(data.getIddepartamento()!=null && data.getIdprovincia()==null && data.getIddistrito()==null && data.getCronogramas().isEmpty()){//listaids, con all cronogramas
+            respuesta=quejasRepository.reportequejas6(data.getFechaini(),data.getFechafi(),data.getIddepartamento());
+        }else if(data.getIddepartamento()==null && data.getIdprovincia()==null && data.getIddistrito()==null && data.getCronogramas().isEmpty()){
+            respuesta=quejasRepository.reportequejas7(data.getFechaini(),data.getFechafi());
         }
+
+
         for(int i =0; i< respuesta.size(); i++){
-            listaids.add(respuesta.get(i).get(0));
             listacronogramas.add(respuesta.get(i).get(1));
             listalugares.add(respuesta.get(i).get(2));
             listahorarios.add(respuesta.get(i).get(3));
         }
-        for(int i=0;i< data.getCronogramas().size(); i++){
-            if(!listaids.contains(data.getCronogramas().get(i))){
-                //buscar el nombre
-                Integer id= (Integer) data.getCronogramas().get(i);
-                Optional<Cronograma> cg=cronogramaRepository.findById(id);
-                if(cg.isPresent()){
+
+        if(data.getCronogramas().isEmpty()){
+            ArrayList<String> cronogra=cronogramaRepository.cronogramas();
+            for(int i=0;i< cronogra.size(); i++){
+                if(!listacronogramas.contains(cronogra.get(i))){
+                    String nombre= (String) cronogra.get(i);
                     //agregar 0's
-                    listacronogramas.add(cg.get().getNombre());
+                    listacronogramas.add(nombre);
+                    listalugares.add(0);
+                    listahorarios.add(0);
+                }
+            }
+        }else {
+            for (int i = 0; i < data.getCronogramas().size(); i++) {
+                if (!listacronogramas.contains(data.getCronogramas().get(i))) {
+                    String nombre = (String) data.getCronogramas().get(i);
+                    //agregar 0's
+                    listacronogramas.add(nombre);
                     listalugares.add(0);
                     listahorarios.add(0);
                 }

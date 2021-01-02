@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface DistritoRepository extends JpaRepository<Distrito,Integer> {
         ArrayList<Distrito> findAllByFidprovinciaAndEstado(Integer fidprovincia, String estado);
-        Optional<Distrito> findByUbigeo(Integer ubigeo);
+        Optional<Distrito> findByUbigeoAndFidprovincia(Integer ubigeo, Integer fidProvincia);
 }

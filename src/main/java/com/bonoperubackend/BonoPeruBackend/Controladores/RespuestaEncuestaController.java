@@ -84,7 +84,6 @@ public class RespuestaEncuestaController {
     }
 
     public Respuestas buscarRespuestas(RespuestaEncuesta encuesta){
-
             Respuestas respuesta = new Respuestas();
             respuesta.setBeneficiario(encuesta.getBeneficiario());
             respuesta.setEstado(encuesta.getEstado());
@@ -94,7 +93,42 @@ public class RespuestaEncuestaController {
             respuesta.setIdRespuestaencuesta(encuesta.getIdRespuestaencuesta());
             List<RespuestaIndividual> respuestas = respuestaRep.findAllByRespuestaencuesta(encuesta);
             respuesta.setRespuestas(respuestas);
-
             return  respuesta;
     }
+
+    @PostMapping("/listar_resp1")
+    public List<Object> listarRespuestas1(@RequestParam int id) {
+        List<Object> resp;
+        resp = respuestaEncuestaRepository.findRespuestas1(id);
+        return resp;
+    }
+
+    @PostMapping("/listar_resp2")
+    public List<Object> listarRespuestas2(@RequestParam int id) {
+        List<Object> resp;
+        resp = respuestaEncuestaRepository.findRespuestas2(id);
+        return resp;
+    }
+
+    @PostMapping("/listar_resp3")
+    public List<Object> listarRespuestas3(@RequestParam int id) {
+        List<Object> resp;
+        resp = respuestaEncuestaRepository.findRespuestas3(id);
+        return resp;
+    }
+
+    @PostMapping("/listar_resp4")
+    public List<Object> listarRespuestas4(@RequestParam int id) {
+        List<Object> resp;
+        resp = respuestaEncuestaRepository.findRespuestas4(id);
+        return resp;
+    }
+
+    @PostMapping("/listar_resp5")
+    public List<Object> listarRespuestas5(@RequestParam int id) {
+        List<Object> resp;
+        resp = respuestaEncuestaRepository.findRespuestas5(id);
+        return resp;
+    }
+
 }
